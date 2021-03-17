@@ -1,3 +1,5 @@
+#include "minishell.h"
+
 int    check_quote(char *str, char *str2)
 {
     int     i;
@@ -24,7 +26,7 @@ int    check_quote(char *str, char *str2)
         {
             while (!ft_isspace(str[i + j]) && str[i + j] != '\"')
                 j++;
-            ft_strjoin(str2, chrenv(test = ft_strndup(&str[i + 1], j - 1)));
+            ft_strjoin(str2, (char *)chrenv(test = ft_strndup(&str[i + 1], j - 1)));
             free(test);
         }
     }

@@ -14,7 +14,7 @@ int     len_value(char *str)
         if (verif == 1)// on incremente après avoir passer le premier =
             j++;
         if (str[i] == '=' && verif == 0)
-            verif == 1;
+            verif = 1;
         i++;
     }
     return (j);
@@ -39,13 +39,13 @@ char    *fill_with_env_value(int i, char *str)
             j++;
         }
         if (str[i] == '=' && verif == 0)
-            verif == 1;
+            verif = 1;
         i++;
     }
     return (tmp);
 }
 
-char    *chrenv(char *str, t_struct_all *g_all)
+char    *chrenv(char *str)
 {
     int i;
     char *dest;
