@@ -10,6 +10,7 @@
 # include <sys/wait.h>
 # include <signal.h>
 # include <unistd.h>
+# include "libft.h"
 
 typedef struct elem_cmd elem_cmd;
 struct elem_cmd
@@ -37,6 +38,7 @@ struct struct_all
 
 struct_all g_all;
 
+int         ft_isspace(int c);
 int         get_next_line(char **line);
 void        initialisation_struct(struct_all *all);
 void        ft_putstr(char *str);

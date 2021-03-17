@@ -2,6 +2,8 @@ NAME = Minishell
 
 DIR = ./srcs/
 
+LIBFT = ./include/libft.a
+
 SRCS = *.c
 
 HEAD = -I include/
@@ -12,7 +14,7 @@ all: ${NAME}
 
 $(NAME):
 	@echo "Création de l'executable..."
-	@gcc $(FLAGS) $(HEAD) $(DIR)/$(SRCS) -o $(NAME)
+	@gcc $(FLAGS) $(HEAD) $(DIR)/$(SRCS) $(LIBFT) -o $(NAME)
 	@echo "Compilation terminée !"
 
 clean:

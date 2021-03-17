@@ -8,7 +8,7 @@ int main(int ac, char **av, char **envp)
        write(1, "$> ", 3); //printf est trop lent
        while (get_next_line(&buff) > 0)
        {
-              printf("%s\n", buff); //remplacer cette ligne par la suite du code
+              start_parsing(buff);
               write(1, "$> ", 3);
               free(buff);
        }
