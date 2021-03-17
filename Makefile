@@ -1,41 +1,34 @@
-NAME = minishell
+NAME = Minishell
 
-all: ${NAME}
+DIR = ./srcs/
 
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address
-
-CC = gcc
-
-RM = rm -rf
+SRCS = *.c
 
 HEAD = -I include/
 
+FLAGS = #-Wall -Werror -Wextra -g3 -fsanitize=address
 
-SRCS_PATH = srcs/
+all: ${NAME}
 
-OBJS_PATH = objs/
-
-SRCS_NAME = main.c \
-
-OBJS_NAME = $(SRCS_NAME:.c=.o)
-
-SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
-
-OBJS = $(addprefix $(OBJS_PATH), $(OBJS_NAME))
-
-$(OBJS_PATH)%.o: $(SRCS_PATH)%.c
-	mkdir $(OBJS_PATH) 2> /dev/null || true
-	gcc -c $(FLAGS) $(HEAD) -o $@ -c $<
-
-$(NAME):  ${OBJS}
-		${CC} ${CFLAGS} ${SRCS} ${HEAD} -o ${NAME}
+$(NAME):
+	@echo "Création de l'executable..."
+	@gcc $(FLAGS) $(HEAD) $(DIR)/$(SRCS) -o $(NAME)
+	@echo "Compilation terminée !"
 
 clean:
-	$(RM) $(OBJS)
+	@echo "Clean..."
+	@rm -rf $(NAME)
+	@echo "Clean !"
 
-fclean: clean
-	$(RM) $(NAME)
+fclean:
+	@echo "Full clean..."
+	@rm -rf $(NAME) $(SRCS)
+	@echo "Fclean !"
 
-re :	fclean all
+re:	clean all
 
-.PHONY: all clean fclean re
+run: re
+	@(clear)
+	@(./$(NAME))
+
+.PHONY:	all clean fclean re

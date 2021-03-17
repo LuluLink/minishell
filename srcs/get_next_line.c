@@ -6,9 +6,11 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/03/17 12:04:28 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/03/17 12:42:30 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "minishell.h"
 
 char    *recurs(int index, int *ret, int fd)
 {
@@ -40,6 +42,6 @@ int        get_next_line(char **line)
 {
     int ret;
     ret = 1;
-    *line = recurs(0, &ret);
+    *line = recurs(0, &ret, 0);
     return (ret);
 }
