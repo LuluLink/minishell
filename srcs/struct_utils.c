@@ -1,7 +1,7 @@
 #include "minishell.h"
 
-void    initialisation_struct(struct_all *g_all)
+void    initialisation_struct(t_struct_all *g_all)
 {
-    elem_cmd *first_cmd = NULL;
-    elem_env *first_env = NULL;
+    t_elem_cmd *first_cmd = NULL;
+    t_elem_env *first_env = NULL;
 }
