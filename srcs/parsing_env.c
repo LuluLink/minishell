@@ -48,7 +48,7 @@ char    *fill_with_env_value(int i, char *str)
 char    *chrenv(char *str, t_struct_all *g_all)
 {
     int i;
-    char *tmp;
+    char *dest;
     t_elem_env *tmp;
 
     i = 0;
@@ -58,8 +58,8 @@ char    *chrenv(char *str, t_struct_all *g_all)
         if (ft_strcmp(tmp->env, str) == 0)
         {
             i = len_value(tmp->env);
-            tmp = fill_with_env_value(i, str);
-            return (tmp);
+            dest = fill_with_env_value(i, str);
+            return (dest);
         }
         tmp->next = tmp->next->next;
     }
