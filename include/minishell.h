@@ -41,5 +41,6 @@ void        ft_putstr(char *str);
 void        initialisation_env(char *str, t_struct_all *g_all);
 void        print_liste_env(t_struct_all *g_all);
 void        init_liste_env(char **envp, t_struct_all *g_all);
+int         ft_strcmp(char *s1, char *s2);
 
 #endif
