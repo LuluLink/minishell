@@ -10,7 +10,7 @@ void    print_liste_env()
     }
 }
 
-void    insertion_end_env(, char *str)
+void    insertion_end_env(char *str)
 {
     t_elem_env *nouveau = malloc(sizeof(*nouveau));
     t_elem_env *tmp = g_all.first_env;
@@ -47,10 +47,10 @@ void    init_liste_env(char **envp)
     int i;
 
 	i = 1;
-    initialisation_env(envp[0], g_all); //init du pointeur sur le premier élément de la liste env
+    initialisation_env(envp[0]); //init du pointeur sur le premier élément de la liste env
 	while (envp[i] != NULL)
 	{
-		insertion_end_env(g_all, envp[i]); //ajout nouvelle élément a la fin de la liste env
+		insertion_end_env(envp[i]); //ajout nouvelle élément a la fin de la liste env
 		i++;
 	}
 }

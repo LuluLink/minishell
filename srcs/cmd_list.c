@@ -1,4 +1,4 @@
-#include "minishell.h"
+/*#include "minishell.h"
 
 
 void    insertion_end_cmd(char *str)
@@ -47,13 +47,13 @@ void    cmd_list(char *line)
             if (init == 0)
             {
                 str = line_cut(line);
-                initialisation_cmd(str, g_all);
+                initialisation_cmd(str);
                 init = 1;
             }
             else
             {
-                insertion_end_cmd(str, g_all);
+                insertion_end_cmd(str);
             }
         }
     }
-}
+}*/
