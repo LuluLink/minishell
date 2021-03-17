@@ -12,35 +12,37 @@
 # include <unistd.h>
 # include "libft.h"
 
-typedef struct elem_cmd elem_cmd;
-struct elem_cmd
+typedef struct s_elem_cmd
 {
     char *cmd;
     int  token;
-    elem_cmd *next;
-    elem_cmd *prev;
-};
+    struct  s_elem_cmd *next;
+    struct  s_elem_cmd *prev;
+}       t_elem_cmd;
 
-typedef struct elem_env elem_env;
-struct elem_env
+
+typedef struct s_elem_env
 {
     char *env;
-    elem_env *next;
-    elem_env *prev;
-};
+    struct  s_elem_env *next;
+    struct  s_elem_env *prev;
+}      t_elem_env;
 
-typedef struct struct_all struct_all;
-struct struct_all
+typedef struct s_struct_all
 {
-    elem_env *first_env;
-    elem_cmd *first_cmd;
-};
+    t_elem_env *first_env;
+    t_elem_cmd *first_cmd;
+}   t_struct_all;
 
-struct_all g_all;
+t_struct_all g_all;
 
 int         ft_isspace(int c);
 int         get_next_line(char **line);
-void        initialisation_struct(struct_all *all);
+void        initialisation_struct(t_struct_all *all);
 void        ft_putstr(char *str);
+void        initialisation_env(char *str, t_struct_all *g_all);
+void        print_liste_env(t_struct_all *g_all);
+void        init_liste_env(char **envp, t_struct_all *g_all);
+int         ft_strcmp(char *s1, char *s2);
 
 #endif
