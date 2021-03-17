@@ -2,11 +2,15 @@
 
 int main(int ac, char **av, char **envp)
 {
-       initialisation_struct(&g_all);
+       char    *buff;
 
-       while(42)
+       initialisation_struct(&g_all);
+       write(1, "$> ", 3); //printf est trop lent
+       while (get_next_line(&buff) > 0)
        {
-              ft_putstr("$>");
-              get_next_line(0);
+              printf("%s\n", buff); //remplacer cette ligne par la suite du code
+              write(1, "$> ", 3);
+              free(buff);
        }
+       free(buff);
 }
