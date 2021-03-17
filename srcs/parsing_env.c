@@ -8,7 +8,7 @@ int     len_value(char *str)
 
     i = 0;
     j = 0;
-    verif = 0:
+    verif = 0;
     while (str[i] != '\0')
     {
         if (verif == 1)// on incremente après avoir passer le premier =
