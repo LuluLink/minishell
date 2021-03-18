@@ -11,6 +11,13 @@
 # include <signal.h>
 # include <unistd.h>
 # include "libft.h"
+# define RIGHT 1
+# define DOUBLERIGHT 2
+# define LEFT 3
+# define PIPE 4
+# define ARG 5
+# define CMD 6
+# define SEMICOLON 7
 
 typedef struct s_elem_cmd
 {
