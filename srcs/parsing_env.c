@@ -52,7 +52,7 @@ char    *chrenv(char *str)
     t_elem_env *tmp;
 
     i = 0;
-    tmp->next = g_all.first_env;
+    tmp = g_all.first_env;
     while (tmp->next != NULL)
     {
         if (ft_strcmp(tmp->env, str) == 0)
