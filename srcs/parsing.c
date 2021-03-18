@@ -9,8 +9,10 @@ int    check_quote(char *str, char *str2)
 
     i = 0;
     j = 0;
+    printf("str  : |%s|\nstr2 : |%s|\n", str, str2);
     if (str[i] == '\'')
     {
+        printf("im in\n");
         while (str[i] && str[i] != '\'')
             i++;
         if (!str[i])
@@ -19,6 +21,7 @@ int    check_quote(char *str, char *str2)
     }
     else if (str[i] == '\"')
     {
+        printf("im in2\n");
         while (str[i] && str[i] != '$')
             i++;
         ft_strnjoin(str2, str, i);
@@ -49,7 +52,7 @@ int     check_token(char *str)
 void    start_parsing(char *buff)
 {
     int i;
-    char *test;
+    char *test = ft_strdup("");
 
     i = 0;
     while (buff[i])
@@ -57,4 +60,5 @@ void    start_parsing(char *buff)
         check_quote(&buff[i], test);
         i++;
     }
+    printf("test : \"%s\"\n", test);
 }
