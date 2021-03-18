@@ -3,7 +3,6 @@
 int    check_quote(char *str, char *str2)
 {
     int     i;
-    char    a;
     int     j;
     char *test;
 

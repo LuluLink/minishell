@@ -3,6 +3,9 @@
 int main(int ac, char **av, char **envp)
 {
        char    *buff;
+       (void)ac;
+       (void)av;
+       (void)envp;
 
        initialisation_struct();
        init_liste_env(envp); //initialisation de la liste chaine env

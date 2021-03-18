@@ -8,7 +8,7 @@ SRCS = *.c
 
 HEAD = -I include/
 
-FLAGS = #-Wall -Werror -Wextra -g3 -fsanitize=address
+FLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
 
 all: ${NAME}
 
