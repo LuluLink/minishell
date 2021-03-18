@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 14:19:31 by lusokol           #+#    #+#             */
-/*   Updated: 2021/03/17 14:32:54 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/03/17 16:16:27 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-char				*ft_strnjoin(char const *s1, char const *s2, int n);
+char				*ft_strnjoin(char *s1, char *s2, int n);
 void				*ft_memset(void *s, int c, size_t n);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
@@ -52,7 +52,7 @@ void				*ft_calloc(size_t count, size_t size);
 char				*ft_strdup(const char *src);
 
 char				*ft_substr(char const *s, unsigned int start, size_t len);
-char				*ft_strjoin(char const *s1, char const *s2);
+char				*ft_strjoin(char *s1, char *s2);
 char				*ft_strtrim(char const *s1, char const *set);
 char				**ft_split(char const *s, char c);
 char				*ft_itoa(int nbr);
