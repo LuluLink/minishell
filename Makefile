@@ -1,6 +1,6 @@
 NAME = Minishell
 
-DIR = ./srcs/
+DIR = ./srcs
 
 LIBFT = ./include/libft.a
 
