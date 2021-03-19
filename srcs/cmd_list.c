@@ -1,10 +1,26 @@
 #include "minishell.h"
 
 
+void print_liste_cmd()
+{
+    t_elem_cmd *actuel = g_all.first_cmd;
+
+    while (actuel != NULL)
+    {
+        printf("liste :%s\ntoken :%d\n", actuel->cmd, actuel->token);
+        actuel = actuel->next;
+    }
+}
+
 void    insertion_end_cmd(char *str)
 {
     t_elem_cmd *nouveau = malloc(sizeof(*nouveau));
     t_elem_cmd *tmp = g_all.first_cmd;
+    if (tmp == NULL)
+    {
+        initialisation_cmd(str);
+        return ;
+    }
     nouveau->cmd = str;
     if (tmp->next == NULL)
     {
@@ -21,6 +37,8 @@ void    insertion_end_cmd(char *str)
     nouveau->prev = tmp->prev->next;
 }
 
+//initialise la liste cmd en lui passant le premier mot
+
 void    initialisation_cmd(char *str)
 {
     g_all.first_cmd = malloc(sizeof(char*));
@@ -32,13 +50,21 @@ void    initialisation_cmd(char *str)
     g_all.first_cmd = cmd;
 }
 
+/*
+ but de la fct : découper les mots de la ligne de commande
+ action de la fct : créer un char * qui va contenir le mot sans espace
+ line = ligne de commandes
+ i = position dans la ligne de commande.
+
+*/
+
 char    *line_cut(char  *line, int i)
 {
     char    *dest;
     int     j;
 
     j = 0;
-    while ((ft_isspace(line[i]) == 0))
+    while ((ft_isspace(line[i]) == 0) && line[i] != '\0' && i > 0)
     {
         if (line[i] == '\"' || line[i] == '\'')
         {
@@ -53,11 +79,14 @@ char    *line_cut(char  *line, int i)
         i--;
         j++;
     }
+    if (i == 0 && (ft_isspace(line[i]) == 0))
+        j++;
     dest = malloc(sizeof(char) * (j + 1));
     dest[j] = '\0';
-    i = i + 1;
+    if (i != 0)
+        i = i + 1;
     j = 0;
-    while (dest[j] != '\0')
+    while (dest[j] != '\0' && line[i] != '\0')
     {
         dest[j] = line[i];
         j++;
@@ -65,6 +94,17 @@ char    *line_cut(char  *line, int i)
     }
     return (dest);
 }
+
+/*
+ but de la fct: mettre la ligne de commandes dans une liste chaines et attribuer des tokens
+
+ action de la fct : parcourt line et s'arrete au premier espace/whitespace
+
+ line : pointeur sur la ligne de commande entré par l'utilisateurs
+
+ return : void
+
+*/
 
 void    cmd_list(char *line)
 {
@@ -86,7 +126,7 @@ void    cmd_list(char *line)
         {
             if (init == 1)
             {
-                str = line_cut(line, i- 1);
+                str = line_cut(line, i - 1);
                 insertion_end_cmd(str);
             }
             if (init == 0)
@@ -96,6 +136,7 @@ void    cmd_list(char *line)
                 init = 1;
             }
         }
+        i++;
     }
-    //give_list_token();
+    give_list_token();
 }
