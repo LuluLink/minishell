@@ -48,20 +48,22 @@ char    *fill_with_env_value(int i, char *str)
 char    *chrenv(char *str)
 {
     int i;
+    int size;
     char *dest;
     t_elem_env *tmp;
 
     i = 0;
     tmp = g_all.first_env;
-    while (tmp->next != NULL)
+    while (tmp != NULL)
     {
-        if (ft_strcmp(tmp->env, str) == 0)
+        size = ft_strlen(str);
+        if ((ft_strncmp(tmp->env, str, size) == 0))
         {
             i = len_value(tmp->env);
-            dest = fill_with_env_value(i, str);
+            dest = fill_with_env_value(i, tmp->env);
             return (dest);
         }
-        tmp->next = tmp->next->next;
+        tmp = tmp->next;
     }
     return (NULL);
 }

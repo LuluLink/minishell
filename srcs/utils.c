@@ -11,6 +11,11 @@ void	ft_putstr(char *str)
 	}
 }
 
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
 int		ft_isspace(int c)
 {
 	c = (unsigned char)c;
@@ -30,6 +35,16 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
+int	ft_strlen(const char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
+}
+
 char	*ft_strndup(const char *src, int n)
 {
 	int		i;
@@ -39,6 +54,67 @@ char	*ft_strndup(const char *src, int n)
 	if (!(dest = (char *)malloc(sizeof(char) * (((ft_strlen(src) > n) ? n : ft_strlen(src)) + 1))))
 		return (0);
 	while (src[i] && i < n)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+int ft_strncmp(char *s1, char *s2, unsigned int n)
+{
+	unsigned int i;
+
+	i = 0;
+	if (n == 0)
+		return (0);
+	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0' && i < n - 1)
+		i++;
+	return (s1[i] - s2[i]);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	int		i;
+	int		i2;
+	int		j;
+	char	*str;
+
+	i = 0;
+	i2 = 0;
+	j = 0;
+	if (!s1)
+		return (NULL);
+	while (s1[i])
+		i++;
+	while (s2[i2])
+		i2++;
+	if (!(str = malloc(sizeof(char) * (i + i2 + 1))))
+		return (NULL);
+	i = 0;
+	while (s1[i])
+		str[j++] = s1[i++];
+	i = 0;
+	while (s2[i])
+		str[j++] = s2[i++];
+	str[j] = '\0';
+	return (str);
+}
+
+char	*ft_strdup(const char *src)
+{
+	char	*dest;
+	int		i;
+
+	i = 0;
+	while (src[i])
+		i++;
+	dest = malloc(sizeof(*dest) * i + 1);
+	i = 0;
+	if (dest == NULL)
+		return (0);
+	while (src[i])
 	{
 		dest[i] = src[i];
 		i++;
