@@ -87,15 +87,15 @@ void    cmd_list(char *line)
             if (init == 1)
             {
                 str = line_cut(line, i- 1);
-                insertion_end_cmd(str, g_all);
+                insertion_end_cmd(str);
             }
             if (init == 0)
             {
                 str = line_cut(line, i - 1);
-                initialisation_cmd(str, g_all);
+                initialisation_cmd(str);
                 init = 1;
             }
         }
     }
-    give_list_token();
+    //give_list_token();
 }
