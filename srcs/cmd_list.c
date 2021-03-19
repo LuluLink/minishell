@@ -133,5 +133,5 @@ void    cmd_list(char *line)
         }
         i++;
     }
-    //give_list_token();
+    give_list_token();
 }
