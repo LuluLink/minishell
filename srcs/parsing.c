@@ -1,63 +1,68 @@
 #include "minishell.h"
 
-int    check_quote(char *str, char *str2)
-{
-    int     i;
-    int     j;
-    char *test;
-
-    i = 0;
-    j = 0;
-    printf("str  : |%s|\nstr2 : |%s|\n", str, str2);
-    if (str[i] == '\'')
-    {
-        printf("im in\n");
-        while (str[i] && str[i] != '\'')
-            i++;
-        if (!str[i])
-            return (-1);
-        ft_strnjoin(str2, str, i);
-    }
-    else if (str[i] == '\"')
-    {
-        printf("im in2\n");
-        while (str[i] && str[i] != '$')
-            i++;
-        ft_strnjoin(str2, str, i);
-        if (str[i] == '$')
-        {
-            while (!ft_isspace(str[i + j]) && str[i + j] != '\"')
-                j++;
-            ft_strjoin(str2, (char *)chrenv(test = ft_strndup(&str[i + 1], j - 1)));
-            free(test);
-        }
-    }
-    return (i + j);
-}
-
-int     check_token(char *str)
+char    *ft_quote(char *str, int *k, char a)
 {
     int i;
 
-    i = 0;
-    if (str[i] == '<' || str[i] == '>' || str[i] == '|')
+    i = 1;
+    if (a == '\'')
     {
-        if (str[i] == '>' && str[i + 1] && str[i + 1] == '>')
+        while (str[i] && (str[i] != '\'' || str[i - 1] == '\\'))
             i++;
+        *k += (str[i]) ? i += 1 : i;
+        printf("str : |%s|\n", ft_strndup(str, i));
+        return (ft_strndup(str, i));
     }
-    return 0;
+    return (NULL);
+}
+
+/*
+
+** check_token check si le char envoyé est un tocken " ' | < > $
+** si i vaut 0 il check tous les tokens
+** si i vaut 1 il ne check que les separateurs
+
+*/
+
+int     check_token(char str, int i)
+{
+    if (i == 0)
+        if (str == '<' || str == '>' || str == '|' || str == '\'' || str == '\"' || str == '$' || str == ';')
+            return (1);
+    if (i == 1)
+        if (str == '<' || str == '>' || str == '|' || str == ';')
+            return (1);
+    return (0);
 }
 
 void    start_parsing(char *buff)
 {
     int i;
-    char *test = ft_strdup("");
+    char *str = ft_strdup("");
 
     i = 0;
     while (buff[i])
     {
-        check_quote(&buff[i], test);
-        i++;
+        if (!check_token(buff[i], 0))
+        {
+            str = ft_strjoinchar(str, buff[i]);
+            while (ft_isspace(buff[i + 1]) && ft_isspace(buff[i]))
+                i++;
+        }
+        else 
+        {
+            str = (i > 0 && !ft_isspace(buff[i - 1] && check_token(buff[i], 1)) ? ft_strjoinchar(str, ' ') : str);
+            if (buff[i] == '\'' || buff[i] == '\"')
+                str = ft_strjoin(str, ft_quote(&buff[i], &i, buff[i]));
+            else 
+                str = ft_strjoinchar(str, buff[i]);
+            str = (buff[i] && !ft_isspace(buff[i + 1] && check_token(buff[i], 1)) ? ft_strjoinchar(str, ' ') : str);
+        }
+        //if (ft_isspace(buff[i]))
+        //    while (ft_isspace(buff[i]))
+        //        i++;
+        if (buff[i])
+          i++;
     }
-    printf("test : \"%s\"\n", test);
+    printf("test : \"%s\"\n", str);
 }

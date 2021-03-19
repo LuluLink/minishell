@@ -74,23 +74,17 @@ int ft_strncmp(char *s1, char *s2, unsigned int n)
 	return (s1[i] - s2[i]);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
-	int		i2;
 	int		j;
 	char	*str;
 
-	i = 0;
-	i2 = 0;
 	j = 0;
-	if (!s1)
+	if (!s1 || !s2)
 		return (NULL);
-	while (s1[i])
-		i++;
-	while (s2[i2])
-		i2++;
-	if (!(str = malloc(sizeof(char) * (i + i2 + 1))))
+	i = ft_strlen(s1) + ft_strlen(s2) + 1;
+	if (!(str = malloc(sizeof(char) * i)))
 		return (NULL);
 	i = 0;
 	while (s1[i])
@@ -99,6 +93,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[i])
 		str[j++] = s2[i++];
 	str[j] = '\0';
+	free(s1);
+	free(s2);
 	return (str);
 }
 
@@ -121,4 +117,47 @@ char	*ft_strdup(const char *src)
 	}
 	dest[i] = '\0';
 	return (dest);
+}
+
+char	*ft_strnjoin(char *s1, char *s2, int n)
+{
+	int		i;
+	int		j;
+	char	*str;
+
+	j = 0;
+	if (!s1 || !s2)
+		return (NULL);
+	i = ft_strlen(s1) + ((ft_strlen(s2) > n) ? n : ft_strlen(s2)) + 1;
+	if (!(str = malloc(sizeof(char) * i)))
+		return (NULL);
+	i = 0;
+	while (s1[i])
+		str[j++] = s1[i++];
+	i = 0;
+	while (s2[i] && n-- > 0)
+		str[j++] = s2[i++];
+	str[j] = '\0';
+	return (str);
+}
+
+char	*ft_strjoinchar(char *s1, char s2)
+{
+	int		i;
+	int		j;
+	char	*str;
+
+	j = 0;
+	if (!s1 || !s2)
+		return (NULL);
+	i = ft_strlen(s1) + 2;
+	if (!(str = malloc(sizeof(char) * i)))
+		return (NULL);
+	i = 0;
+	while (s1[i])
+		str[j++] = s1[i++];
+	str[j++] = s2;
+	str[j] = '\0';
+	free(s1);
+	return (str);
 }
