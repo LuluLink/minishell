@@ -16,6 +16,11 @@ void    insertion_end_cmd(char *str)
 {
     t_elem_cmd *nouveau = malloc(sizeof(*nouveau));
     t_elem_cmd *tmp = g_all.first_cmd;
+    if (tmp == NULL)
+    {
+        initialisation_cmd(str);
+        return ;
+    }
     nouveau->cmd = str;
     if (tmp->next == NULL)
     {
