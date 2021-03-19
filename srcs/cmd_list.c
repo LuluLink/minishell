@@ -7,9 +7,22 @@ void print_liste_cmd()
 
     while (actuel != NULL)
     {
-        printf("liste :%s\ntoken :%d\n", actuel->cmd, actuel->token);
+        printf("token :%d, liste :%s\n", actuel->token, actuel->cmd);
         actuel = actuel->next;
     }
+}
+
+//initialise la liste cmd en lui passant le premier mot
+
+void    initialisation_cmd(char *str)
+{
+    g_all.first_cmd = malloc(sizeof(char*));
+    t_elem_cmd *cmd = malloc(sizeof(*cmd));
+
+    cmd->cmd = str;
+    cmd->next = NULL;
+    cmd->prev = NULL;
+    g_all.first_cmd = cmd;
 }
 
 void    insertion_end_cmd(char *str)
@@ -35,19 +48,6 @@ void    insertion_end_cmd(char *str)
     tmp->next = nouveau;
     nouveau->next = NULL;
     nouveau->prev = tmp->prev->next;
-}
-
-//initialise la liste cmd en lui passant le premier mot
-
-void    initialisation_cmd(char *str)
-{
-    g_all.first_cmd = malloc(sizeof(char*));
-    t_elem_cmd *cmd = malloc(sizeof(*cmd));
-
-    cmd->cmd = str;
-    cmd->next = NULL;
-    cmd->prev = NULL;
-    g_all.first_cmd = cmd;
 }
 
 /*

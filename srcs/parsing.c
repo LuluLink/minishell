@@ -35,34 +35,38 @@ int     check_token(char str, int i)
     return (0);
 }
 
+// void    insertion_end_cmd(char *str)
+
+int     ft_skipspaces(char *str)
+{
+    int i;
+
+    i = 0;
+    while (str[i] && ft_isspace(str[i]))
+        i++;
+    return (i);
+}
+
 void    start_parsing(char *buff)
 {
     int i;
-    char *str = ft_strdup("");
+    int j;
 
     i = 0;
     while (buff[i])
     {
-        if (!check_token(buff[i], 0))
-        {
-            str = ft_strjoinchar(str, buff[i]);
-            while (ft_isspace(buff[i + 1]) && ft_isspace(buff[i]))
-                i++;
-        }
-        else 
-        {
-            str = (i > 0 && !ft_isspace(buff[i - 1] && check_token(buff[i], 1)) ? ft_strjoinchar(str, ' ') : str);
-            if (buff[i] == '\'' || buff[i] == '\"')
-                str = ft_strjoin(str, ft_quote(&buff[i], &i, buff[i]));
-            else 
-                str = ft_strjoinchar(str, buff[i]);
-            str = (buff[i] && !ft_isspace(buff[i + 1] && check_token(buff[i], 1)) ? ft_strjoinchar(str, ' ') : str);
-        }
-        //if (ft_isspace(buff[i]))
-        //    while (ft_isspace(buff[i]))
-        //        i++;
-        if (buff[i])
-          i++;
+        j = 0;
+        while (buff[i + j] && !check_token(buff[i + j], 1) && !ft_isspace(buff[i + j]))
+            j++;
+        if (j > 0)
+            insertion_end_cmd(ft_strndup(&buff[i], j));
+        i += j + ft_skipspaces(&buff[i + j]);    
+        j = 0;
+        while (buff[i + j] && check_token(buff[i + j], 1) && !ft_isspace(buff[i + j]))
+            j++;
+        if (j > 0)
+            insertion_end_cmd(ft_strndup(&buff[i], j));        
+        i += j + ft_skipspaces(&buff[i + j]);
     }
-    printf("test : \"%s\"\n", str);
+    print_liste_cmd();
 }
