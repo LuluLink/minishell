@@ -10,7 +10,6 @@
 # include <sys/wait.h>
 # include <signal.h>
 # include <unistd.h>
-# include "libft.h"
 # define RIGHT 1
 # define DOUBLERIGHT 2
 # define LEFT 3
@@ -54,6 +53,12 @@ int         ft_strcmp(char *s1, char *s2);
 char        *chrenv(char *str);
 void        start_parsing(char *buff);
 char        *ft_strndup(const char *src, int n);
+void        give_list_token();
+void        ft_putchar(char c);
+int         ft_strlen(const char *str);
+int         ft_strncmp(char *s1, char *s2, unsigned int n);
+char        *ft_strdup(const char *src);
+char        *ft_strjoin(char const *s1, char const *s2);
 
 
 #endif
