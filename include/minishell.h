@@ -59,6 +59,7 @@ int         ft_strlen(const char *str);
 int         ft_strncmp(char *s1, char *s2, unsigned int n);
 char        *ft_strdup(const char *src);
 char        *ft_strjoin(char const *s1, char const *s2);
+void        cmd_list(char *line);
 
 
 #endif

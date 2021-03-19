@@ -1,5 +1,12 @@
 #include "minishell.h"
 
+/*
+but de la fonction : trouver le bon token
+action de la fonction : trouve le bon token pour str
+str : le mot qui va obtenir un token
+tmp : element tampon de la liste chaine cmd
+*/
+
 void    search_token(char *str, t_elem_cmd *tmp)
 {
     if (str[0] == '|')
@@ -35,6 +42,11 @@ void    search_token(char *str, t_elem_cmd *tmp)
     tmp->token = ARG;
     return ;
 }
+
+/*
+but de la fct: attribuer un token a chaque mot
+action : parcourt la liste chainés et appelle search token
+*/
 
 void    give_list_token()
 {
