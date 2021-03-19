@@ -1,21 +1,5 @@
 #include "minishell.h"
 
-char    *ft_quote(char *str, int *k, char a)
-{
-    int i;
-
-    i = 1;
-    if (a == '\'')
-    {
-        while (str[i] && (str[i] != '\'' || str[i - 1] == '\\'))
-            i++;
-        *k += (str[i]) ? i += 1 : i;
-        printf("str : |%s|\n", ft_strndup(str, i));
-        return (ft_strndup(str, i));
-    }
-    return (NULL);
-}
-
 /*
 
 ** check_token check si le char envoyé est un tocken " ' | < > $
@@ -47,6 +31,24 @@ int     ft_skipspaces(char *str)
     return (i);
 }
 
+int     pass_quote(char *str)
+{
+    int i;
+    char a;
+
+    i = 0;
+    if (str[i] && (str[i] == '\'' || str[i] == '\"'))
+    {
+        a = str[i];
+        i++;
+        while (str[i] && str[i] != a)
+            i++;
+        return (i + 1);
+    }
+    else 
+        return (1);
+}
+
 void    start_parsing(char *buff)
 {
     int i;
@@ -57,7 +59,7 @@ void    start_parsing(char *buff)
     {
         j = 0;
         while (buff[i + j] && !check_token(buff[i + j], 1) && !ft_isspace(buff[i + j]))
-            j++;
+            j += pass_quote(&buff[i + j]);
         if (j > 0)
             insertion_end_cmd(ft_strndup(&buff[i], j));
         i += j + ft_skipspaces(&buff[i + j]);    
