@@ -12,7 +12,10 @@ int main(int ac, char **av, char **envp)
        write(1, "$> ", 3); //printf est trop lent
        while (get_next_line(&buff) > 0)
        {
-              start_parsing(buff);
+              if ((verif_quote(buff) == 0))
+                     start_parsing(buff);
+              else
+                     ft_putstr_fd("Error : quote not closed\n", 2);
               write(1, "$> ", 3);
               free(buff);
        }

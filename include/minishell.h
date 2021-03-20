@@ -36,6 +36,8 @@ typedef struct s_elem_env
 
 typedef struct s_struct_all
 {
+    int         quote;
+    int         d_quote;
     t_elem_env *first_env;
     t_elem_cmd *first_cmd;
 }   t_struct_all;
@@ -64,6 +66,8 @@ char	    *ft_strjoinchar(char *s1, char s2);
 void        cmd_list(char *line);
 void        print_liste_cmd();
 void        insertion_end_cmd(char *str);
+int         verif_quote(char *line);
+void	    ft_putstr_fd(char *s, int fd);
 
 
 #endif
