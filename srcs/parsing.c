@@ -8,18 +8,33 @@
 
 */
 
-int     check_token(char str, int i)
+int     check_backslash(char *str, int i)
 {
-    if (i == 0)
-        if (str == '<' || str == '>' || str == '|' || str == '\'' || str == '\"' || str == '$' || str == ';')
-            return (1);
-    if (i == 1)
-        if (str == '<' || str == '>' || str == '|' || str == ';')
-            return (1);
-    return (0);
+    int ischar;
+    ischar = 1;
+    while (--i >= 0 && str[i] == '\\')
+    {
+        if (ischar == 0)
+            ischar = 1;
+        else
+            ischar = 0;
+    }
+    return (ischar);
 }
 
-// void    insertion_end_cmd(char *str)
+int     check_token(char *str, int k, int i)
+{
+    int j;
+
+    j = 0;
+    if (i == 0)
+        if (str[k] == '<' || str[k] == '>' || str[k] == '|' || str[k] == '\'' || str[k] == '\"' || str[k] == '$' || str[k] == ';')
+            j = check_backslash(str, k);
+    if (i == 1)
+        if (str[k] == '<' || str[k] == '>' || str[k] == '|' || str[k] == ';')
+            j = check_backslash(str, k);
+    return (j);
+}
 
 int     ft_skipspaces(char *str)
 {
@@ -41,8 +56,13 @@ int     pass_quote(char *str)
     {
         a = str[i];
         i++;
-        while (str[i] && str[i] != a)
+        while (str[i])
+        {
+            if (str[i] == a)
+                if (check_backslash(str, i))
+                    break ;
             i++;
+        }
         return (i + 1);
     }
     else 
@@ -58,16 +78,16 @@ void    start_parsing(char *buff)
     while (buff[i])
     {
         j = 0;
-        while (buff[i + j] && !check_token(buff[i + j], 1) && !ft_isspace(buff[i + j]))
+        while (buff[i + j] && !check_token(buff, i + j, 1) && !ft_isspace(buff[i + j]))
             j += pass_quote(&buff[i + j]);
         if (j > 0)
-            insertion_end_cmd(ft_strndup(&buff[i], j));
+            insertion_end_cmd(ft_strndup(&buff[i], j)); //ICI C EST DU TEXT
         i += j + ft_skipspaces(&buff[i + j]);    
         j = 0;
-        while (buff[i + j] && check_token(buff[i + j], 1) && !ft_isspace(buff[i + j]))
+        while (buff[i + j] && check_token(buff, i + j, 1) && !ft_isspace(buff[i + j]))
             j++;
         if (j > 0)
-            insertion_end_cmd(ft_strndup(&buff[i], j));        
+            insertion_end_cmd(ft_strndup(&buff[i], j)); //ICI C EST UN TOKEN       
         i += j + ft_skipspaces(&buff[i + j]);
     }
     print_liste_cmd();
