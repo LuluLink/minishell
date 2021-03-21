@@ -1,6 +1,5 @@
 #include "minishell.h"
 
-
 void print_liste_cmd()
 {
     t_elem_cmd *actuel = g_all.first_cmd;
