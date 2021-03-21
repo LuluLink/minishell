@@ -3,11 +3,11 @@
 char *insert_backslash(char * line, int i)
 {
     int j;
-    char *dst;
+    char *dest;
 
     j = ft_strlen(line);
-    dst = malloc(sizeof(char) * (j + 2));
-    dst[j + 1] = '\0';
+    dest = malloc(sizeof(char) * (j + 2));
+    dest[j + 1] = '\0';
     j = 0;
     while (j > i)
     {
