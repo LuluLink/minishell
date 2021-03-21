@@ -1,5 +1,29 @@
 #include "minishell.h"
 
+
+int     verif_end_backslash(char *line)
+{
+    int i;
+    int verif;
+
+    i = 0;
+    verif = 0;
+    while (line[i] != '\0')
+        i++;
+    if (line[i - 1] == '\\')
+    {
+        while (line[i - 1] == '\\')
+        {
+            verif++;
+            i--;
+        }
+    }
+    verif = verif % 2;
+    if (verif == 1)
+        return (-1);
+    return (0);
+}
+
 void    verif_backslash_quote(char *line, int i)
 {
     int backslash;
