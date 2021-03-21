@@ -7,40 +7,22 @@ str : le mot qui va obtenir un token
 tmp : element tampon de la liste chaine cmd
 */
 
-void    search_token(char *str, t_elem_cmd *tmp)
+void    search_token(char *str, t_elem_cmd *tmp, t_elem_cmd *prev)
 {
-    if (str[0] == '|')
-    {
+    if (strcmp(str, "|") == 0)
         tmp->token = PIPE;
-        return ;
-    }
-    if (str[0] == '>' && str[1] == '>')
-    {
+    else if (strcmp(str, ">>") == 0)
         tmp->token = DOUBLERIGHT;
-        return ;
-    }
-    if (str[0] == '>' && str[1] == '\0')
-    {
+    else if (strcmp(str, ">") == 0)
         tmp->token = RIGHT;
-        return ;
-    }
-    if (str[0] == '<' && str[1] == '\0')
-    {
+    else if (strcmp(str, "<") == 0)
         tmp->token = LEFT;
-        return ;
-    }
-    if (str[0] == ';')
-    {
+    else if (strcmp(str, ";") == 0)
         tmp->token = SEMICOLON;
-        return ;
-    }
-    if (tmp->prev == NULL || tmp->prev->token == SEMICOLON || tmp->prev->token == PIPE)
-    {
+    else if (prev == NULL || prev->token == SEMICOLON || prev->token == PIPE)
         tmp->token = CMD;
-        return ;
-    }
-    tmp->token = ARG;
-    return ;
+    else 
+        tmp->token = ARG;
 }
 
 /*
@@ -51,11 +33,14 @@ action : parcourt la liste chainés et appelle search token
 void    give_list_token()
 {
     t_elem_cmd *tmp;
+    t_elem_cmd *prev;
 
+    prev = NULL;
     tmp = g_all.first_cmd;
     while (tmp != NULL)
     {
-        search_token(tmp->cmd, tmp);
+        search_token(tmp->cmd, tmp, prev);
+        prev = tmp;
         tmp = tmp->next;
     }
 }

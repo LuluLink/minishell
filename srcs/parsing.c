@@ -81,14 +81,15 @@ void    start_parsing(char *buff)
         while (buff[i + j] && !check_token(buff, i + j, 1) && !ft_isspace(buff[i + j]))
             j += pass_quote(&buff[i + j]);
         if (j > 0)
-            insertion_end_cmd(ft_strndup(&buff[i], j)); //ICI C EST DU TEXT
+            insertion_end_cmd(ft_strndup(&buff[i], j), 0); //ICI C EST DU TEXT
         i += j + ft_skipspaces(&buff[i + j]);    
         j = 0;
         while (buff[i + j] && check_token(buff, i + j, 1) && !ft_isspace(buff[i + j]))
             j++;
         if (j > 0)
-            insertion_end_cmd(ft_strndup(&buff[i], j)); //ICI C EST UN TOKEN       
+            insertion_end_cmd(ft_strndup(&buff[i], j), 0); //ICI C EST UN TOKEN       
         i += j + ft_skipspaces(&buff[i + j]);
     }
+    give_list_token();
     print_liste_cmd();
 }
