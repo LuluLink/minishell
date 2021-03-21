@@ -65,9 +65,10 @@ char    	*ft_strnjoin(char *s1, char *s2, int n);
 char	    *ft_strjoinchar(char *s1, char s2);
 void        cmd_list(char *line);
 void        print_liste_cmd();
-void        insertion_end_cmd(char *str);
+void        insertion_end_cmd(char *str, int token);
 int         verif_quote(char *line);
 void	    ft_putstr_fd(char *s, int fd);
+int         verif_end_backslash(char *line);
 
 
 #endif

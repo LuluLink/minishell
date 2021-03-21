@@ -14,27 +14,29 @@ void print_liste_cmd()
 
 //initialise la liste cmd en lui passant le premier mot
 
-void    initialisation_cmd(char *str)
+void    initialisation_cmd(char *str, int token)
 {
     g_all.first_cmd = malloc(sizeof(char*));
     t_elem_cmd *cmd = malloc(sizeof(*cmd));
 
     cmd->cmd = str;
+    cmd->token = token;
     cmd->next = NULL;
     cmd->prev = NULL;
     g_all.first_cmd = cmd;
 }
 
-void    insertion_end_cmd(char *str)
+void    insertion_end_cmd(char *str, int token)
 {
     t_elem_cmd *nouveau = malloc(sizeof(*nouveau));
     t_elem_cmd *tmp = g_all.first_cmd;
     if (tmp == NULL)
     {
-        initialisation_cmd(str);
+        initialisation_cmd(str, token);
         return ;
     }
     nouveau->cmd = str;
+    nouveau->token = token;
     if (tmp->next == NULL)
     {
         tmp->next = nouveau;
@@ -106,11 +108,11 @@ char    *line_cut(char  *line, int i)
 
 */
 
-void    cmd_list(char *line)
+/*void    cmd_list(char *line)
 {
     int     i;
     int     init;
-    char    *str;
+    //char    *str;
 
     i = 0;
     init = 0;
@@ -127,16 +129,16 @@ void    cmd_list(char *line)
             if (init == 1)
             {
                 str = line_cut(line, i - 1);
-                insertion_end_cmd(str);
+               // insertion_end_cmd(str);
             }
             if (init == 0)
             {
                 str = line_cut(line, i - 1);
-                initialisation_cmd(str);
+               // initialisation_cmd(str);
                 init = 1;
             }
         }
         i++;
     }
     give_list_token();
-}
+}*/
