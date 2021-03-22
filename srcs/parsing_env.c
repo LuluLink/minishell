@@ -45,6 +45,26 @@ char    *fill_with_env_value(int i, char *str)
     return (tmp);
 }
 
+char *first_is_nbr(char *str)
+{
+    int i;
+    int j;
+    char *dest;
+
+    j = 1;
+    i = ft_strlen(str) - 1;
+    dest = malloc(sizeof(char) *i + 1);
+    dest[i] = '\0';
+    i = 0;
+    while (dest[i] != '\0')
+    {
+        dest[i] = str[j];
+        i++;
+        j++;
+    }
+    return (dest);
+}
+
 char    *chrenv(char *str)
 {
     int i;
@@ -54,6 +74,7 @@ char    *chrenv(char *str)
 
     i = 0;
     tmp = g_all.first_env;
+    dest = NULL;
     while (tmp != NULL)
     {
         size = ft_strlen(str);
@@ -66,6 +87,10 @@ char    *chrenv(char *str)
         }
         tmp = tmp->next;
     }
+    if (str[0] >= '0' && str[0] <= '9')
+    {
+        dest = first_is_nbr(str);
+    }
     free(str);
-    return (NULL);
+    return (dest);
 }
