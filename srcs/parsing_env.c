@@ -61,9 +61,11 @@ char    *chrenv(char *str)
         {
             i = len_value(tmp->env);
             dest = fill_with_env_value(i, tmp->env);
+            free(str);
             return (dest);
         }
         tmp = tmp->next;
     }
+    free(str);
     return (NULL);
 }

@@ -71,5 +71,6 @@ void	    ft_putstr_fd(char *s, int fd);
 int         verif_end_backslash(char *line);
 void        free_list_cmd();
 void        free_list_env();
+int         ft_isalnum(int c);
 
 #endif

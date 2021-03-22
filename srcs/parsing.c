@@ -88,6 +88,65 @@ int    check_last()
     return (0);
 }
 
+int     check_dollar(char *str, t_elem_cmd  *tmp)
+{
+    int i;
+    int j;
+    int quote;
+    char *str2;
+
+    i = 0;
+    quote = 0;
+    str2 = ft_strdup("");
+    while (str[i])
+    {
+        j = 0;
+        while (str[i + j] && (str[i + j] != '$' || quote == 1))
+        {
+            if (str[i + j] == '\'')
+                if (check_backslash(str, i + j))
+                    quote = (quote == 1) ? 0 : 1;
+            j++;
+        }
+        str2 = ft_strjoin(str2, ft_strndup(&str[i], j));
+        //printf("quote : %d, str1 : |%.*s|\n", quote, j, &str[i]);
+        i += j;
+        j = 1;
+        if (str[i] == '$' && quote == 0 && check_backslash(str, i))
+        {
+            //j = 1;
+            while (str[i + j] && (ft_isalnum(str[i + j]) || str[i + j] == '_')) ///////// ICI MODIFIER LA CONDITION DU NOM DE LA VAR D ENV
+                j++;
+            str2 = ft_strjoin(str2, chrenv(ft_strndup(&str[i + 1], j - 1)));
+            //printf("str2 : |%.*s|\n", j - 1, &str[i + 1]);
+            i += j;
+            //if (i > 0)
+                //str2 = ft_strjoin(str2, );
+        }
+    }
+    //printf("str final : |%s|\n", str2);
+    free(tmp->cmd);
+    tmp->cmd = str2;
+    return 0;
+}
+
+void    check_env()
+{
+    t_elem_cmd  *tmp;
+    int         i;
+
+    tmp = g_all.first_cmd;
+    while (tmp)
+    {
+        if (tmp->token == ARG || tmp->token == CMD)
+        {
+            i = 0;
+            check_dollar(tmp->cmd, tmp);
+        }
+        tmp = tmp->next;
+    }
+}
+
 void    start_parsing(char *buff)
 {
     int i;
@@ -113,5 +172,6 @@ void    start_parsing(char *buff)
         }
         i += j + ft_skipspaces(&buff[i + j]);
     }
+    check_env();
     print_liste_cmd();
 }

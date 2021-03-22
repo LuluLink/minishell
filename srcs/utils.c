@@ -180,3 +180,9 @@ void	ft_putstr_fd(char *s, int fd)
 		i++;
 	}
 }
+
+int		ft_isalnum(int c)
+{
+	return ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') ||
+			(c >= 'A' && c <= 'Z'));
+}
