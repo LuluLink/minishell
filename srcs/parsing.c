@@ -103,28 +103,23 @@ int     check_dollar(char *str, t_elem_cmd  *tmp)
         j = 0;
         while (str[i + j] && (str[i + j] != '$' || quote == 1))
         {
-            if (str[i + j] == '\'')
-                if (check_backslash(str, i + j))
-                    quote = (quote == 1) ? 0 : 1;
+            if (str[i + j] == '\'' && check_backslash(str, i + j) && quote != 2)
+                    quote = (quote == 0) ? 1 : 0;
+            if (str[i + j] == '\"' && check_backslash(str, i + j) && quote != 1)
+                    quote = (quote == 0) ? 2 : 0;
             j++;
         }
         str2 = ft_strjoin(str2, ft_strndup(&str[i], j));
-        //printf("quote : %d, str1 : |%.*s|\n", quote, j, &str[i]);
         i += j;
         j = 1;
-        if (str[i] == '$' && quote == 0 && check_backslash(str, i))
+        if (str[i] == '$' && quote != 1 && check_backslash(str, i))
         {
-            //j = 1;
-            while (str[i + j] && (ft_isalnum(str[i + j]) || str[i + j] == '_')) ///////// ICI MODIFIER LA CONDITION DU NOM DE LA VAR D ENV
+            while (str[i + j] && (ft_isalnum(str[i + j]) || str[i + j] == '_'))
                 j++;
             str2 = ft_strjoin(str2, chrenv(ft_strndup(&str[i + 1], j - 1)));
-            //printf("str2 : |%.*s|\n", j - 1, &str[i + 1]);
             i += j;
-            //if (i > 0)
-                //str2 = ft_strjoin(str2, );
         }
     }
-    //printf("str final : |%s|\n", str2);
     free(tmp->cmd);
     tmp->cmd = str2;
     return 0;
