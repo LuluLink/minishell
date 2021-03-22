@@ -133,14 +133,12 @@ int     check_dollar(char *str, t_elem_cmd  *tmp)
 void    check_env()
 {
     t_elem_cmd  *tmp;
-    int         i;
 
     tmp = g_all.first_cmd;
     while (tmp)
     {
         if (tmp->token == ARG || tmp->token == CMD)
         {
-            i = 0;
             check_dollar(tmp->cmd, tmp);
         }
         tmp = tmp->next;
