@@ -19,8 +19,10 @@ int main(int ac, char **av, char **envp)
               else if ((verif_end_backslash(buff) == -1))
                      ft_putstr_fd("Error : multiligne with '\\' \n", 2);
               write(1, "$> ", 3);
+              free_list_cmd();
               free(buff);
        }
+       free_list_cmd();
        free(buff);
        return(0);
 }

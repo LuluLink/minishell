@@ -69,5 +69,6 @@ void        insertion_end_cmd(char *str, int token);
 int         verif_quote(char *line);
 void	    ft_putstr_fd(char *s, int fd);
 int         verif_end_backslash(char *line);
+void        free_list_cmd();
 
 #endif

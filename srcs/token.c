@@ -37,10 +37,10 @@ void    give_list_token()
 
     prev = NULL;
     tmp = g_all.first_cmd;
-    while (tmp != NULL)
+    while (tmp && tmp->next)
     {
-        search_token(tmp->cmd, tmp, prev);
         prev = tmp;
         tmp = tmp->next;
     }
+    search_token(tmp->cmd, tmp, prev);
 }

@@ -69,6 +69,25 @@ int     pass_quote(char *str)
         return (1);
 }
 
+int    check_last()
+{
+    t_elem_cmd *tmp;
+
+    tmp = g_all.first_cmd;
+    while (tmp && tmp->next)
+        tmp = tmp->next;
+    if (tmp)
+    {
+        if (tmp->token == ARG)
+        {
+            printf("Syntax error : '%s'\n", tmp->cmd);
+            free_list_cmd();
+            return (1);
+        }
+    }
+    return (0);
+}
+
 void    start_parsing(char *buff)
 {
     int i;
@@ -87,9 +106,12 @@ void    start_parsing(char *buff)
         while (buff[i + j] && check_token(buff, i + j, 1) && !ft_isspace(buff[i + j]))
             j++;
         if (j > 0)
-            insertion_end_cmd(ft_strndup(&buff[i], j), 0); //ICI C EST UN TOKEN       
+        {
+            insertion_end_cmd(ft_strndup(&buff[i], j), 0); //ICI C EST UN TOKEN     
+            if (check_last())
+                return ;
+        }
         i += j + ft_skipspaces(&buff[i + j]);
     }
-    give_list_token();
     print_liste_cmd();
 }

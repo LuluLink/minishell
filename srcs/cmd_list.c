@@ -32,6 +32,7 @@ void    insertion_end_cmd(char *str, int token)
     if (tmp == NULL)
     {
         initialisation_cmd(str, token);
+        give_list_token();
         return ;
     }
     nouveau->cmd = str;
@@ -49,6 +50,7 @@ void    insertion_end_cmd(char *str, int token)
     tmp->next = nouveau;
     nouveau->next = NULL;
     nouveau->prev = tmp->prev->next;
+    give_list_token();
 }
 
 /*
@@ -94,6 +96,19 @@ char    *line_cut(char  *line, int i)
         i++;
     }
     return (dest);
+}
+
+void    free_list_cmd()
+{
+    t_elem_cmd *tmp;
+    tmp = g_all.first_cmd;
+    while (tmp != NULL)
+    {
+        free(tmp->cmd);
+        g_all.first_cmd = g_all.first_cmd->next;
+        free(tmp);
+        tmp = g_all.first_cmd;
+    }
 }
 
 /*
