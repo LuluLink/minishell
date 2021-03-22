@@ -9,15 +9,15 @@ tmp : element tampon de la liste chaine cmd
 
 void    search_token(char *str, t_elem_cmd *tmp, t_elem_cmd *prev)
 {
-    if (strcmp(str, "|") == 0)
+    if (ft_strcmp(str, "|") == 0)
         tmp->token = PIPE;
-    else if (strcmp(str, ">>") == 0)
+    else if (ft_strcmp(str, ">>") == 0)
         tmp->token = DOUBLERIGHT;
-    else if (strcmp(str, ">") == 0)
+    else if (ft_strcmp(str, ">") == 0)
         tmp->token = RIGHT;
-    else if (strcmp(str, "<") == 0)
+    else if (ft_strcmp(str, "<") == 0)
         tmp->token = LEFT;
-    else if (strcmp(str, ";") == 0)
+    else if (ft_strcmp(str, ";") == 0)
         tmp->token = SEMICOLON;
     else if (prev == NULL || prev->token == SEMICOLON || prev->token == PIPE)
         tmp->token = CMD;
