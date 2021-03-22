@@ -23,6 +23,7 @@ int main(int ac, char **av, char **envp)
               free(buff);
        }
        free_list_cmd();
+       free_list_env();
        free(buff);
        return(0);
 }

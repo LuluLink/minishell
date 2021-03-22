@@ -10,6 +10,19 @@ void    print_liste_env()
     }
 }
 
+void    free_list_env()
+{
+    t_elem_env *tmp;
+    tmp = g_all.first_env;
+    while (tmp != NULL)
+    {
+        free(tmp->env);
+        g_all.first_env = g_all.first_env->next;
+        free(tmp);
+        tmp = g_all.first_env;
+    }
+}
+
 void    insertion_end_env(char *str)
 {
     t_elem_env *nouveau = malloc(sizeof(*nouveau));
