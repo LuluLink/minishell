@@ -167,4 +167,5 @@ void    start_parsing(char *buff)
     }
     check_env();
     print_liste_cmd();
+    ft_execution(g_all.first_cmd);
 }

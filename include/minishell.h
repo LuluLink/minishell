@@ -72,5 +72,6 @@ int         verif_end_backslash(char *line);
 void        free_list_cmd();
 void        free_list_env();
 int         ft_isalnum(int c);
+void        ft_execution(t_elem_cmd *actual);
 
 #endif
