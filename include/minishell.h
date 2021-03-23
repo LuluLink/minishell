@@ -76,5 +76,6 @@ int         ft_isalnum(int c);
 void        ft_execution(t_elem_cmd *actual);
 void        launch_cmd(t_elem_cmd *tmp);
 void        ft_exit();
+void        ft_env();
 
 #endif

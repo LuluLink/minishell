@@ -15,7 +15,7 @@ int     builtins_cmd(t_elem_cmd *tmp)
     else if (ft_strcmp(tmp->cmd, "unset") == 0)
         return (1);// ICI APPELER UNSET
     else if (ft_strcmp(tmp->cmd, "env") == 0)
-        return (1);// ICI APPELER ENV
+        ft_env();
     else if (ft_strcmp(tmp->cmd, "exit") == 0)
         ft_exit();
     else
