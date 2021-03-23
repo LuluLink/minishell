@@ -13,5 +13,5 @@ void    ft_execution(t_elem_cmd *actual)
     if(actual->next != NULL && actual->next->token != SEMICOLON)
         ft_execution(actual->next);
     if(actual->token == CMD)
-        launchcmd(actual);
+        launch_cmd(actual);
 }

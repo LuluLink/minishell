@@ -73,5 +73,6 @@ void        free_list_cmd();
 void        free_list_env();
 int         ft_isalnum(int c);
 void        ft_execution(t_elem_cmd *actual);
+void        launch_cmd(t_elem_cmd *tmp);
 
 #endif
