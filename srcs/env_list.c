@@ -21,6 +21,7 @@ void    free_list_env()
         free(tmp);
         tmp = g_all.first_env;
     }
+    //free(g_all.first_env);
 }
 
 void    insertion_end_env(char *str)
@@ -46,7 +47,7 @@ void    insertion_end_env(char *str)
 
 void    initialisation_env(char *str)
 {
-    g_all.first_env = malloc(sizeof(char*)); //malloc le pointeur
+   // g_all.first_env = malloc(sizeof(char*)); //malloc le pointeur
     t_elem_env *elem = malloc(sizeof(*elem)); //malloc la structure
 
     elem->env = str;

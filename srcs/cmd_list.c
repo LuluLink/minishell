@@ -15,7 +15,7 @@ void print_liste_cmd()
 
 void    initialisation_cmd(char *str, int token)
 {
-    g_all.first_cmd = malloc(sizeof(char*));
+    //g_all.first_cmd = malloc(sizeof(char*));
     t_elem_cmd *cmd = malloc(sizeof(*cmd));
 
     cmd->cmd = str;
@@ -42,6 +42,8 @@ void    insertion_end_cmd(char *str, int token)
         tmp->next = nouveau;
         nouveau->next = NULL;
         nouveau->prev = g_all.first_cmd;
+        give_list_token();
+        return ;
     }
     while(tmp->next != NULL)
     {
@@ -49,7 +51,7 @@ void    insertion_end_cmd(char *str, int token)
     }
     tmp->next = nouveau;
     nouveau->next = NULL;
-    nouveau->prev = tmp->prev->next;
+    nouveau->prev = tmp;
     give_list_token();
 }
 
@@ -109,6 +111,7 @@ void    free_list_cmd()
         free(tmp);
         tmp = g_all.first_cmd;
     }
+    //free(g_all.first_cmd);
 }
 
 /*
