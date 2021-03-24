@@ -54,7 +54,7 @@ int     builtins_cmd(t_elem_cmd *tmp)
     return (1);
 }
 
-void	ft_execve(char *path, char **cmd, char **env)
+void	ft_execve(char *path, char **cmd)
 {
 	pid_t	pid = 0;
 	int		status = 0;
@@ -102,7 +102,7 @@ void    ft_create_path(char *path, t_elem_cmd *lst)
         lst = lst->next;
     }
     tab[j] = NULL;
-    ft_execve(path, tab, NULL);
+    ft_execve(path, tab);
     free(path);
     free_double_char(tab);
 }
