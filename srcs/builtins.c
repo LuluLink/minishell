@@ -50,7 +50,7 @@ int     builtins_cmd(t_elem_cmd *tmp)
     else if (ft_strcmp(tmp->cmd, "pwd") == 0)
         printf("builtin pwd\n");// ICI APPELER PWD
     else if (ft_strcmp(tmp->cmd, "export") == 0)
-        printf("builtin export\n");// ICI APPELER EXPORT
+        ft_export(tmp);
     else if (ft_strcmp(tmp->cmd, "unset") == 0)
         ft_unset(tmp->next->cmd);
     else if (ft_strcmp(tmp->cmd, "env") == 0)
