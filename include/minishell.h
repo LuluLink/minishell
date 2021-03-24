@@ -10,6 +10,9 @@
 # include <sys/wait.h>
 # include <signal.h>
 # include <unistd.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+
 # define RIGHT 1
 # define DOUBLERIGHT 2
 # define LEFT 3
@@ -74,5 +77,6 @@ void        free_list_env();
 int         ft_isalnum(int c);
 void        ft_execution(t_elem_cmd *actual);
 void        launch_cmd(t_elem_cmd *tmp);
+char        **ft_split(char *str, char c);
 
 #endif

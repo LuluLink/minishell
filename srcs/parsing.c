@@ -166,6 +166,6 @@ void    start_parsing(char *buff)
         i += j + ft_skipspaces(&buff[i + j]);
     }
     check_env();
-    print_liste_cmd();
+    //print_liste_cmd();
     ft_execution(g_all.first_cmd);
 }
