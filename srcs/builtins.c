@@ -7,9 +7,9 @@ int     check_path_cmd(char *path)
     int fd;
     
     fd = open(path, O_RDONLY);
-    close(fd);
     if (fd == -1)
         return (0);
+    close(fd);
     return (1);
 }
 
