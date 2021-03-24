@@ -13,23 +13,24 @@ int     check_path_cmd(char *path)
     return (1);
 }
 
-void    check_cmd(t_elem_cmd *tmp)
+char    *check_cmd(t_elem_cmd *tmp)
 {
-    char *path;
-    char **files;
+    char    *path;
+    char    **files;
+    int     i;
     
     if (!(path = chrenv(ft_strdup("PATH"))))
         path = ft_strdup("/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin");
     files = ft_split(path, ':');
-    int i = 0;
+    i = 0;
     while (files[i])
     {
         files[i] = ft_strjoin(files[i], ft_strjoin(ft_strdup("/"), ft_strdup(tmp->cmd)));
-        int j = check_path_cmd(files[i]);
-        printf("path %2d, success : %2d : %s\n", i, j,files[i]);
+        if (check_path_cmd(files[i]))
+            return (files[i]);
         i++;
     }
-    (void)tmp;
+    return (NULL);
 }
 
 int     builtins_cmd(t_elem_cmd *tmp)
@@ -53,8 +54,39 @@ int     builtins_cmd(t_elem_cmd *tmp)
     return (1);
 }
 
+void    ft_execve(char *path, t_elem_cmd *lst)
+{
+    t_elem_cmd *tmp;
+    char **tab;
+    int i;
+    int j;
+
+    tmp = lst;
+    i = 0;
+    while (tmp->next && tmp->next->token == ARG)
+    {
+        tmp = tmp->next;
+        i++;
+    }
+    tab = malloc(sizeof(char*) * (++i + 1));
+    j = 0;
+    while (i-- > 0)
+    {
+        tab[j++] = ft_strdup(lst->cmd);
+        lst = lst->next;
+    }
+    tab[j] = NULL;
+    execve(path, tab, NULL);
+    //ft_free_tab(tab);
+    //ft_free_tab();
+}
+
 void    launch_cmd(t_elem_cmd *tmp)
 {
+    char    *path;
     if (!builtins_cmd(tmp))
-        check_cmd(tmp);
+    {
+        path = check_cmd(tmp);
+        ft_execve(path, tmp);
+    }
 }
