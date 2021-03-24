@@ -13,7 +13,7 @@ int     builtins_cmd(t_elem_cmd *tmp)
     else if (ft_strcmp(tmp->cmd, "export") == 0)
         return (1);// ICI APPELER EXPORT
     else if (ft_strcmp(tmp->cmd, "unset") == 0)
-        return (1);// ICI APPELER UNSET
+        ft_unset(tmp->next->cmd);
     else if (ft_strcmp(tmp->cmd, "env") == 0)
         ft_env();
     else if (ft_strcmp(tmp->cmd, "exit") == 0)
