@@ -52,3 +52,29 @@ void    suppression_middle_env(t_elem_env *liste)
     free(tmp->env);
     free(tmp);
 }
+
+char    **liste_env_to_wordtab()
+{
+    char    **dest;
+    int     i;
+    t_elem_env *tmp;
+
+    i = 0;
+    tmp = g_all.first_env;
+    while (tmp != NULL)
+    {
+        tmp = tmp->next;
+        i++;
+    }
+    dest = malloc(sizeof(char*) * (i + 1));
+    dest[i] = NULL;
+    tmp = g_all.first_env;
+    i = 0;
+    while (tmp != NULL)
+    {
+        dest[i] = ft_strdup(tmp->env);
+        i++;
+        tmp = tmp->next;
+    }
+    return (dest);
+}

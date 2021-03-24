@@ -20,10 +20,11 @@ char    *check_cmd(t_elem_cmd *tmp)
     char    *cmd;
     int     i;
     
-    path = chrenv(ft_strdup("PATH"));
+    if (!(path = chrenv(ft_strdup("PATH"))))
+        path = ft_strdup("/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin");
     files = ft_split(path, ':');
     i = 0;
-    while (files && files[i])
+    while (files[i])
     {
         files[i] = ft_strjoin(files[i], ft_strjoin(ft_strdup("/"), ft_strdup(tmp->cmd)));
         if (check_path_cmd(files[i]))
@@ -73,8 +74,7 @@ void	ft_execve(char *path, char **cmd)
         error = strerror(errno);
         ft_putstr(error);
         ft_putchar('\n');
-        exit(0);
-    }
+        }
 	else if (pid > 0)
     {
 		waitpid(pid, &status, 0);
@@ -85,7 +85,6 @@ void	ft_execve(char *path, char **cmd)
         error = strerror(errno);
         ft_putstr(error);
         ft_putchar('\n');
-        exit(0);
     }
 }
 
@@ -111,10 +110,7 @@ void    ft_create_path(char *path, t_elem_cmd *lst)
         lst = lst->next;
     }
     tab[j] = NULL;
-    if (path)
-        ft_execve(path, tab);
-    else
-        ft_execve(tab[0], tab);
+    ft_execve(path, tab);
     free(path);
     free_double_char(tab);
 }

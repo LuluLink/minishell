@@ -192,7 +192,7 @@ void    free_double_char(char **str)
     int i;
 
     i = 0;
-    while (str && str[i] != NULL)
+    while (str[i] != NULL)
     {
         free(str[i]);
         i++;
