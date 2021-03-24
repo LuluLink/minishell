@@ -13,7 +13,6 @@ void    ft_unset(char *str)
         //printf("env :%s    str :%s    ret :%d     strncmp %d\n", tmp->env, str, ret, ft_strncmp(tmp->env, str, ret));
         if ((ft_strncmp(tmp->env, str, ret) == 0))
         {
-            ft_putchar('3');
             suppression_middle_env(tmp);
             return ;
         }

@@ -20,11 +20,12 @@ char    *check_cmd(t_elem_cmd *tmp)
     char    *cmd;
     int     i;
     
-    if (!(path = chrenv(ft_strdup("PATH"))))
-        path = ft_strdup("/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin");
+    //if (!(path = chrenv(ft_strdup("PATH"))))
+    //    path = ft_strdup("/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin");
+    path = chrenv(ft_strdup("PATH"));
     files = ft_split(path, ':');
     i = 0;
-    while (files[i])
+    while (files && files[i])
     {
         files[i] = ft_strjoin(files[i], ft_strjoin(ft_strdup("/"), ft_strdup(tmp->cmd)));
         if (check_path_cmd(files[i]))
@@ -56,7 +57,10 @@ int     builtins_cmd(t_elem_cmd *tmp)
     else if (ft_strcmp(tmp->cmd, "env") == 0)
         ft_env();
     else if (ft_strcmp(tmp->cmd, "exit") == 0)
+    {
+        printf("dans le exit\n");
         ft_exit();
+    }
     else
         return (0);
     return (1);
@@ -74,7 +78,8 @@ void	ft_execve(char *path, char **cmd)
         error = strerror(errno);
         ft_putstr(error);
         ft_putchar('\n');
-        }
+        exit(0);
+    }
 	else if (pid > 0)
     {
 		waitpid(pid, &status, 0);
@@ -85,6 +90,7 @@ void	ft_execve(char *path, char **cmd)
         error = strerror(errno);
         ft_putstr(error);
         ft_putchar('\n');
+        exit(0);
     }
 }
 

@@ -20,6 +20,7 @@
 # define ARG 5
 # define CMD 6
 # define SEMICOLON 7
+# define NEWLINE "\e[38;5;196m$> \e[0m"
 
 typedef struct s_elem_cmd
 {
