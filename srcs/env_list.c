@@ -42,29 +42,32 @@ void    insertion_end_env(char *str)
     }
     tmp->next = nouveau;//l'avant dernier pointe sur le dernier
     nouveau->next = NULL;
-    nouveau->prev = tmp->prev->next;
+    nouveau->prev = tmp;
 }
 
 void    initialisation_env(char *str)
 {
    // g_all.first_env = malloc(sizeof(char*)); //malloc le pointeur
-    t_elem_env *elem = malloc(sizeof(*elem)); //malloc la structure
+    t_elem_env *nouveau = malloc(sizeof(*nouveau)); //malloc la structure
 
-    elem->env = str;
-    elem->next = NULL; //premier élément donc pas de next ou previous
-    elem->prev = NULL;
-    g_all.first_env = elem; //le pointeur first_env pointe sur la premiere struct
+    nouveau->env = str;
+    nouveau->next = NULL; //premier élément donc pas de next ou previous
+    nouveau->prev = NULL;
+    g_all.first_env = nouveau; //le pointeur first_env pointe sur la premiere struct
 }
 
 void    init_liste_env(char **envp)
 {
     int i;
+    char *tmp;
 
 	i = 1;
-    initialisation_env(envp[0]); //init du pointeur sur le premier élément de la liste env
+    tmp = ft_strdup(envp[0]);
+    initialisation_env(tmp); //init du pointeur sur le premier élément de la liste env
 	while (envp[i] != NULL)
 	{
-		insertion_end_env(envp[i]); //ajout nouvelle élément a la fin de la liste env
+        tmp = ft_strdup(envp[i]);
+		insertion_end_env(tmp); //ajout nouvelle élément a la fin de la liste env
 		i++;
 	}
 }

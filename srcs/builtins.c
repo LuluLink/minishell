@@ -45,9 +45,9 @@ int     builtins_cmd(t_elem_cmd *tmp)
     else if (ft_strcmp(tmp->cmd, "unset") == 0)
         printf("builtin unset\n");// ICI APPELER UNSET
     else if (ft_strcmp(tmp->cmd, "env") == 0)
-        printf("builtin env\n");// ICI APPELER ENV
+        ft_env();
     else if (ft_strcmp(tmp->cmd, "exit") == 0)
-        printf("exit\n");// ICI APPELER EXIT
+        ft_exit();
     else
         return (0);
     return (1);

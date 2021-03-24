@@ -41,6 +41,7 @@ typedef struct s_struct_all
 {
     int         quote;
     int         d_quote;
+    char        *buff;
     t_elem_env *first_env;
     t_elem_cmd *first_cmd;
 }   t_struct_all;
@@ -78,5 +79,7 @@ int         ft_isalnum(int c);
 void        ft_execution(t_elem_cmd *actual);
 void        launch_cmd(t_elem_cmd *tmp);
 char        **ft_split(char *str, char c);
+void        ft_exit();
+void        ft_env();
 
 #endif

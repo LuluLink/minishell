@@ -31,6 +31,7 @@ void    insertion_end_cmd(char *str, int token)
     t_elem_cmd *tmp = g_all.first_cmd;
     if (tmp == NULL)
     {
+        free(nouveau);
         initialisation_cmd(str, token);
         give_list_token();
         return ;
