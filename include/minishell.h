@@ -85,5 +85,7 @@ void        ft_env();
 void        ft_unset(char *str);
 void        suppression_middle_env(t_elem_env *liste);
 void        free_double_char(char **str);
+void        ft_export(t_elem_cmd *actual);
+void        insertion_end_env(char *str);
 
 #endif
