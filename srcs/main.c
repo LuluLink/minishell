@@ -2,7 +2,6 @@
 
 int main(int ac, char **av, char **envp)
 {
-      // char    *buff;
        (void)ac;
        (void)av;
        (void)envp;
@@ -19,7 +18,6 @@ int main(int ac, char **av, char **envp)
                      ft_putstr_fd("Error : quote not closed\n", 2);
               else if ((verif_end_backslash(g_all.buff) == -1))
                      ft_putstr_fd("Error : multiligne with '\\' \n", 2);
-              write(1, COLOREND, ft_strlen(COLOREND));
               write(1, NEWLINE, ft_strlen(NEWLINE));
               free_list_cmd();
               free(g_all.buff);

@@ -91,5 +91,6 @@ void        free_double_char(char **str);
 void        ft_export(t_elem_cmd *actual);
 void        insertion_end_env(char *str);
 void        ft_putstr_fd(char *s, int fd);
+char        **liste_env_to_wordtab();
 
 #endif
