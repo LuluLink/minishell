@@ -81,5 +81,7 @@ void        launch_cmd(t_elem_cmd *tmp);
 char        **ft_split(char *str, char c);
 void        ft_exit();
 void        ft_env();
+void        ft_unset(char *str);
+void        suppression_middle_env(t_elem_env *liste);
 
 #endif
