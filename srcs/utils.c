@@ -186,3 +186,16 @@ int		ft_isalnum(int c)
 	return ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') ||
 			(c >= 'A' && c <= 'Z'));
 }
+
+void    free_double_char(char **str)
+{
+    int i;
+
+    i = 0;
+    while (str[i] != NULL)
+    {
+        free(str[i]);
+        i++;
+    }
+    free(str);
+}

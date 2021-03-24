@@ -54,12 +54,38 @@ int     builtins_cmd(t_elem_cmd *tmp)
     return (1);
 }
 
-void    ft_execve(char *path, t_elem_cmd *lst)
+void	ft_execve(char *path, char **cmd, char **env)
 {
-    t_elem_cmd *tmp;
-    char **tab;
-    int i;
-    int j;
+	pid_t	pid = 0;
+	int		status = 0;
+    char    *error;
+
+	pid = fork();
+	if (pid == -1)
+    {
+        error = strerror(errno);
+        ft_putstr(error);
+        ft_putchar('\n');
+        }
+	else if (pid > 0)
+    {
+		waitpid(pid, &status, 0);
+		kill(pid, SIGTERM);
+	}
+    else if (execve(path, cmd, NULL) == -1)
+    {
+        error = strerror(errno);
+        ft_putstr(error);
+        ft_putchar('\n');
+    }
+}
+
+void    ft_create_path(char *path, t_elem_cmd *lst)
+{
+    t_elem_cmd  *tmp;
+    char        **tab;
+    int         i;
+    int         j;
 
     tmp = lst;
     i = 0;
@@ -76,9 +102,9 @@ void    ft_execve(char *path, t_elem_cmd *lst)
         lst = lst->next;
     }
     tab[j] = NULL;
-    execve(path, tab, NULL);
-    //ft_free_tab(tab);
-    //ft_free_tab();
+    ft_execve(path, tab, NULL);
+    free(path);
+    free_double_char(tab);
 }
 
 void    launch_cmd(t_elem_cmd *tmp)
@@ -87,6 +113,6 @@ void    launch_cmd(t_elem_cmd *tmp)
     if (!builtins_cmd(tmp))
     {
         path = check_cmd(tmp);
-        ft_execve(path, tmp);
+        ft_create_path(path, tmp);
     }
 }
