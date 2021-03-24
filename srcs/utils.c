@@ -180,7 +180,7 @@ void	ft_putstr_fd(char *s, int fd)
 		ft_putchar_fd(s[i], fd);
 		i++;
 	}
-	write(2, COLORSTART, ft_strlen(COLOREND));
+	write(2, COLOREND, ft_strlen(COLOREND));
 }
 
 int		ft_isalnum(int c)

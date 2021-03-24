@@ -2,6 +2,8 @@
 
 void    ft_execution(t_elem_cmd *actual)
 {
+    if (!actual)
+        return ;
     if(actual->prev && actual->prev->token == DOUBLERIGHT)
        printf("double right\n");// ft_doubleright(actual);
     if(actual->prev && actual->prev->token == RIGHT)

@@ -10,7 +10,7 @@ int     verif_end_backslash(char *line)
     verif = 0;
     while (line[i] != '\0')
         i++;
-    if (line[i - 1] == '\\')
+    if (i > 0 && line[i - 1] == '\\')
     {
         while (line[i - 1] == '\\')
         {
