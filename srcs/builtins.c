@@ -20,8 +20,6 @@ char    *check_cmd(t_elem_cmd *tmp)
     char    *cmd;
     int     i;
     
-    //if (!(path = chrenv(ft_strdup("PATH"))))
-    //    path = ft_strdup("/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin");
     path = chrenv(ft_strdup("PATH"));
     files = ft_split(path, ':');
     i = 0;
@@ -57,10 +55,7 @@ int     builtins_cmd(t_elem_cmd *tmp)
     else if (ft_strcmp(tmp->cmd, "env") == 0)
         ft_env();
     else if (ft_strcmp(tmp->cmd, "exit") == 0)
-    {
-        printf("dans le exit\n");
         ft_exit();
-    }
     else
         return (0);
     return (1);
@@ -116,7 +111,10 @@ void    ft_create_path(char *path, t_elem_cmd *lst)
         lst = lst->next;
     }
     tab[j] = NULL;
-    ft_execve(path, tab);
+    if (path)
+        ft_execve(path, tab);
+    else
+        ft_execve(tab[0], tab);
     free(path);
     free_double_char(tab);
 }
