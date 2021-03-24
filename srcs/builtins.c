@@ -17,6 +17,7 @@ char    *check_cmd(t_elem_cmd *tmp)
 {
     char    *path;
     char    **files;
+    char    *cmd;
     int     i;
     
     if (!(path = chrenv(ft_strdup("PATH"))))
@@ -27,9 +28,16 @@ char    *check_cmd(t_elem_cmd *tmp)
     {
         files[i] = ft_strjoin(files[i], ft_strjoin(ft_strdup("/"), ft_strdup(tmp->cmd)));
         if (check_path_cmd(files[i]))
-            return (files[i]);
+        {
+            cmd = ft_strdup(files[i]);
+            free_double_char(files);
+            free(path);
+            return (cmd);
+        }
         i++;
     }
+    free_double_char(files);
+    free(path);
     return (NULL);
 }
 

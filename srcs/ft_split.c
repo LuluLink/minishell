@@ -7,6 +7,7 @@ static char			**ft_free(char **tab, int i)
 		free(tab[i]);
 		tab[i] = 0;
 	}
+	free(tab[i]);
 	free(tab);
 	tab = 0;
 	return (NULL);

@@ -197,5 +197,6 @@ void    free_double_char(char **str)
         free(str[i]);
         i++;
     }
-    free(str);
+	if (str)
+    	free(str);
 }
