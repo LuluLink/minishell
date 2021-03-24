@@ -71,8 +71,8 @@ void	ft_execve(char *path, char **cmd)
 	if (pid == -1)
     {
         error = strerror(errno);
-        ft_putstr(error);
-        ft_putchar('\n');
+        ft_putstr_fd(error, 2);
+        ft_putstr_fd("\n", 2);
         exit(0);
     }
 	else if (pid > 0)
@@ -83,8 +83,8 @@ void	ft_execve(char *path, char **cmd)
     else if (execve(path, cmd, NULL) == -1)
     {
         error = strerror(errno);
-        ft_putstr(error);
-        ft_putchar('\n');
+        ft_putstr_fd(error, 2);
+        ft_putstr_fd("\n", 2);
         exit(0);
     }
 }

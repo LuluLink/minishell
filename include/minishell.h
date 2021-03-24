@@ -20,7 +20,10 @@
 # define ARG 5
 # define CMD 6
 # define SEMICOLON 7
-# define NEWLINE "\e[38;5;196m$> \e[0m"
+# define NEWLINE "\e[38;5;82m$> \e[0m"
+# define COLORSTART "\e[38;5;226m"
+# define COLOREND "\e[0m"
+# define STRERRORCOLOR "\e[38;5;196m"
 
 typedef struct s_elem_cmd
 {
@@ -87,5 +90,6 @@ void        suppression_middle_env(t_elem_env *liste);
 void        free_double_char(char **str);
 void        ft_export(t_elem_cmd *actual);
 void        insertion_end_env(char *str);
+void        ft_putstr_fd(char *s, int fd);
 
 #endif
