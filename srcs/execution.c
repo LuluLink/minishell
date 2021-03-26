@@ -3,10 +3,10 @@
 void    ft_start_execution(t_elem_cmd *actual)
 {
     ft_execution(actual);
-    while(actual->next)
+    while(actual && actual->next)
     {
         actual = actual->next;
-        if (actual->next && actual->token == SEMICOLON)
+        if (actual && actual->next && actual->token == SEMICOLON)
         {
             actual = actual->next;
             ft_execution(actual);

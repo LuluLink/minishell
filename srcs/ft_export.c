@@ -121,18 +121,64 @@ int     verif_arg_export(t_elem_cmd *actual)
     return (0);
 }
 
+void        ft_sort_lst(t_elem_env *lst)
+{
+    t_elem_env  *first;
+    char        *tmp;
+
+    first = lst;
+    while (first && first->next)
+    {
+        if (ft_strcmp(first->env, first->next->env) > 0)
+        {
+            tmp = first->env;
+            first->env = first->next->env;
+            first->next->env = tmp;
+            first = lst;
+        }
+        else
+            first = first->next;
+    }
+}
+
+t_elem_env  *ft_copy_sort(t_elem_env *tocopy)
+{
+    t_elem_env  *first;
+    t_elem_env  *new;
+    t_elem_env  *tmp;
+
+    first = NULL;
+    tmp = NULL;
+    while (tocopy)
+    {
+        new = malloc(sizeof(t_elem_env));
+        new->env = ft_strdup(tocopy->env);
+        if (tmp)
+            tmp->next = new;
+        tmp = new;
+        if (!first)
+            first = new;
+        tocopy = tocopy->next;
+    }
+    tmp->next = NULL;
+    ft_sort_lst(first);
+    return (first);
+}
+
 void    ft_export(t_elem_cmd *actual)
 {
-    int i;
-    int verif_quote;
-    char    *str;
+    int         i;
+    int         verif_quote;
+    char        *str;
+    t_elem_env  *tmp;
+    t_elem_env  *first;
 
     i = 0;
     verif_quote = 0;
     if (actual->next == NULL || actual->next->token != ARG)
     {
-        t_elem_env *tmp;
-        tmp = g_all.first_env;
+        first = ft_copy_sort(g_all.first_env);
+        tmp = first;
         while (tmp != NULL)
         {
             ft_putstr("declare -x ");
@@ -153,6 +199,7 @@ void    ft_export(t_elem_cmd *actual)
             tmp = tmp->next;
             ft_putchar('\n');
         }
+        free_list_env_sort(first);
         return ;
     }
     while (actual->next != NULL && actual->next->token == ARG)
