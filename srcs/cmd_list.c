@@ -47,9 +47,7 @@ void    insertion_end_cmd(char *str, int token)
         return ;
     }
     while(tmp->next != NULL)
-    {
         tmp = tmp->next;
-    }
     tmp->next = nouveau;
     nouveau->next = NULL;
     nouveau->prev = tmp;

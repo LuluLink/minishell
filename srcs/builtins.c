@@ -86,7 +86,6 @@ void	ft_execve(char *path, char **cmd, char **env)
         error = strerror(errno);
         ft_putstr_fd(error, 2);
         ft_putstr_fd("\n", 2);
-        //printf("path : %s\ncmd : %s\nenv[0] : %s\n\n", path, cmd[0], env[0]);
         exit(0);
     }
 }
