@@ -26,7 +26,7 @@ void    free_list_env()
 
 void    insertion_end_env(char *str)
 {
-    t_elem_env *nouveau = malloc(sizeof(*nouveau));
+    t_elem_env *nouveau = malloc(sizeof(t_elem_env));
     t_elem_env *tmp = g_all.first_env;
     nouveau->env = str;
     if (tmp->next == NULL) // si c'est le deuxième élément de la chaine 
@@ -48,7 +48,7 @@ void    insertion_end_env(char *str)
 void    initialisation_env(char *str)
 {
    // g_all.first_env = malloc(sizeof(char*)); //malloc le pointeur
-    t_elem_env *nouveau = malloc(sizeof(*nouveau)); //malloc la structure
+    t_elem_env *nouveau = malloc(sizeof(t_elem_env)); //malloc la structure
 
     nouveau->env = str;
     nouveau->next = NULL; //premier élément donc pas de next ou previous

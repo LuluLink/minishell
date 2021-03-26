@@ -45,7 +45,7 @@ char    *check_cmd(t_elem_cmd *tmp)
 int     builtins_cmd(t_elem_cmd *tmp)
 {
     if (ft_strcmp(tmp->cmd, "echo") == 0)
-        printf("builtin echo\n");// ICI APPELER ECHO
+        ft_echo(tmp);
     else if (ft_strcmp(tmp->cmd, "cd") == 0)
         printf("builtin cd\n");// ICI APPELER CD
     else if (ft_strcmp(tmp->cmd, "pwd") == 0)
