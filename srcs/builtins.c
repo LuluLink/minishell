@@ -41,6 +41,7 @@ char    *check_cmd(t_elem_cmd *tmp)
     return (NULL);
 }
 
+
 int     builtins_cmd(t_elem_cmd *tmp)
 {
     if (ft_strcmp(tmp->cmd, "echo") == 0)
@@ -48,7 +49,7 @@ int     builtins_cmd(t_elem_cmd *tmp)
     else if (ft_strcmp(tmp->cmd, "cd") == 0)
         printf("builtin cd\n");// ICI APPELER CD
     else if (ft_strcmp(tmp->cmd, "pwd") == 0)
-        printf("builtin pwd\n");// ICI APPELER PWD
+        ft_pwd();// ICI APPELER PWD
     else if (ft_strcmp(tmp->cmd, "export") == 0)
         ft_export(tmp);
     else if (ft_strcmp(tmp->cmd, "unset") == 0)

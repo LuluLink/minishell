@@ -174,13 +174,15 @@ void	ft_putstr_fd(char *s, int fd)
 	i = 0;
 	if (!s)
 		return ;
-	write(2, STRERRORCOLOR, ft_strlen(STRERRORCOLOR));
+	if (fd == 2)
+		write(2, STRERRORCOLOR, ft_strlen(STRERRORCOLOR));
 	while (s[i])
 	{
 		ft_putchar_fd(s[i], fd);
 		i++;
 	}
-	write(2, COLOREND, ft_strlen(COLOREND));
+	if (fd == 2)
+		write(2, COLOREND, ft_strlen(COLOREND));
 }
 
 int		ft_isalnum(int c)
