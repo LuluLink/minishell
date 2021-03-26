@@ -80,12 +80,12 @@ int verif_quote(char *line)
     while (line[i] != '\0')
     {
         if ((line[i] == '\"' && g_all.d_quote == 0 && i == 0) ||
-            (line[i] == '\"' && g_all.d_quote == 0 && line[i - 1] != '\\'))
+            (line[i] == '\"' && g_all.d_quote == 0 && line[i - 1] != '\\' && g_all.quote == 0))
             g_all.d_quote = 1;
         else if (line[i] == '\"' && g_all.d_quote == 1 && line[i - 1] != '\\')
             g_all.d_quote = 0;
         if ((line[i] == '\'' && g_all.quote == 0 && i == 0) ||
-            (line[i] == '\'' && g_all.quote == 0 && line[i - 1] != '\\'))
+            (line[i] == '\'' && g_all.quote == 0 && line[i - 1] != '\\' && g_all.d_quote == 0))
             g_all.quote = 1;
         else if (line[i] == '\'' && g_all.quote == 1 && line[i - 1] != '\\')
             g_all.quote = 0;
