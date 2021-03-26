@@ -10,6 +10,19 @@ void    print_liste_env()
     }
 }
 
+void    free_list_env_sort(t_elem_env *lst)
+{
+    t_elem_env *tmp;
+    tmp = lst;
+    while (tmp)
+    {
+        free(tmp->env);
+        lst = lst->next;
+        free(tmp);
+        tmp = lst;
+    }
+}
+
 void    free_list_env()
 {
     t_elem_env *tmp;

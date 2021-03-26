@@ -20,7 +20,7 @@
 # define ARG 5
 # define CMD 6
 # define SEMICOLON 7
-# define NEWLINE "\e[38;5;82m$> \e[0m"
+# define NEWLINE "\e[1m\e[38;5;82m$> \e[0m"
 # define COLORSTART "\e[38;5;226m"
 # define COLOREND "\e[0m"
 # define STRERRORCOLOR "\e[38;5;196m"
@@ -94,5 +94,6 @@ void        ft_putstr_fd(char *s, int fd);
 char        **liste_env_to_wordtab();
 void        ft_start_execution(t_elem_cmd *actual);
 void        ft_pwd(void);
+void        free_list_env_sort(t_elem_env *lst);
 
 #endif
