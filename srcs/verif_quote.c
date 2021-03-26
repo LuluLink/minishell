@@ -40,7 +40,7 @@ void    verif_backslash_quote(char *line, int i)
         g_all.quote = 1;
         return ;
     }
-        if (backslash == 0 && g_all.quote == 1)
+    if (backslash == 0 && g_all.quote == 1)
     {
         g_all.quote = 0;
         return ;

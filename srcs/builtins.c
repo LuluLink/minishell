@@ -62,7 +62,7 @@ int     builtins_cmd(t_elem_cmd *tmp)
     return (1);
 }
 
-void	ft_execve(char *path, char **cmd)
+void	ft_execve(char *path, char **cmd, char **env)
 {
 	pid_t	pid = 0;
 	int		status = 0;
@@ -81,7 +81,7 @@ void	ft_execve(char *path, char **cmd)
 		waitpid(pid, &status, 0);
 		kill(pid, SIGTERM);
 	}
-    else if (execve(path, cmd, NULL) == -1)
+    else if (execve(path, cmd, env) == -1)
     {
         error = strerror(errno);
         ft_putstr_fd(error, 2);
@@ -94,6 +94,7 @@ void    ft_create_path(char *path, t_elem_cmd *lst)
 {
     t_elem_cmd  *tmp;
     char        **tab;
+    char        **env;
     int         i;
     int         j;
 
@@ -112,8 +113,10 @@ void    ft_create_path(char *path, t_elem_cmd *lst)
         lst = lst->next;
     }
     tab[j] = NULL;
-    ft_execve(path, tab);
+    env = liste_env_to_wordtab();
+    ft_execve(path, tab, env);
     free(path);
+    free_double_char(env);
     free_double_char(tab);
 }
 
@@ -123,6 +126,9 @@ void    launch_cmd(t_elem_cmd *tmp)
     if (!builtins_cmd(tmp))
     {
         path = check_cmd(tmp);
-        ft_create_path(path, tmp);
+        if (path)
+            ft_create_path(path, tmp);
+        else
+            ft_create_path(ft_strdup(tmp->cmd), tmp);
     }
 }
