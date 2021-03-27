@@ -94,6 +94,7 @@ void        ft_putstr_fd(char *s, int fd);
 char        **liste_env_to_wordtab();
 void        ft_start_execution(t_elem_cmd *actual);
 void        ft_pwd(void);
+void        ft_echo(t_elem_cmd *actual);
 void        free_list_env_sort(t_elem_env *lst);
 void        ft_aff_minishell(void);
 void        ft_cd(char *path);
