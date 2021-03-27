@@ -71,6 +71,6 @@ void    ft_echo(t_elem_cmd *actual)
             ft_putchar(' ');
         actual = actual->next;
     }
-    if ((verif == 0))
+    if (verif == 0)
         ft_putchar('\n');
 }
