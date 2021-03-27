@@ -11,3 +11,28 @@ void    pwd_env(char *str)
         tmp->env = ft_strjoin(ft_strdup("PWD="), str);
     }
 }
+
+void    ft_cd(char *path)
+{
+    char    *error;
+    int     tofree;
+
+    tofree = 0;
+    if (!path)
+    {
+        tofree = 1;
+        path = chrenv(ft_strdup("HOME"));
+    }
+    if (chdir(path) == -1)
+    {
+        error = strerror(errno);
+        ft_putstr_fd(error, 2);
+        ft_putstr_fd("\n", 2);
+        if (tofree == 1)
+            free(path);
+        return ;
+    }
+    pwd_env(path);
+    if (tofree == 1)
+        free(path);
+}

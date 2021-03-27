@@ -47,13 +47,13 @@ int     builtins_cmd(t_elem_cmd *tmp)
     if (ft_strcmp(tmp->cmd, "echo") == 0)
         printf("builtin echo\n");// ICI APPELER ECHO
     else if (ft_strcmp(tmp->cmd, "cd") == 0)
-        printf("builtin cd\n");// ICI APPELER CD
+        ft_cd((tmp->next && tmp->next->token != SEMICOLON) ? tmp->next->cmd : NULL);
     else if (ft_strcmp(tmp->cmd, "pwd") == 0)
-        ft_pwd();// ICI APPELER PWD
+        ft_pwd();
     else if (ft_strcmp(tmp->cmd, "export") == 0)
         ft_export(tmp);
     else if (ft_strcmp(tmp->cmd, "unset") == 0)
-        ft_unset(tmp->next->cmd);
+        ft_unset((tmp->next) ? tmp->next->cmd : "");
     else if (ft_strcmp(tmp->cmd, "env") == 0)
         ft_env();
     else if (ft_strcmp(tmp->cmd, "exit") == 0)
