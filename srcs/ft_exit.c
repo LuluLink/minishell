@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pacorrei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
+/*   Updated: 2021/03/28 11:03:38 by pacorrei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void    ft_exit()
+void	ft_exit()
 {
-    free_list_cmd();
-    free_list_env();
-    free(g_all.buff);
-    printf("exit\n");
-    exit(0);
+	free_list_cmd();
+	free_list_env();
+	free(g_all.buff);
+	printf("exit\n");
+	exit(0);
 }
