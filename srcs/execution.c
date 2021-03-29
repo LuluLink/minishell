@@ -28,12 +28,12 @@ void	ft_start_execution(t_elem_cmd *actual)
 
 void	ft_execution(t_elem_cmd *actual)
 {
-	if (!actual)
+	if (!actual || g_all->exit == 1)
 		return ;
 	if (actual->prev && actual->prev->token == DOUBLERIGHT)
 		printf("double right\n");// ft_doubleright(actual);
 	if (actual->prev && actual->prev->token == RIGHT)
-		printf("right\n");//ft_right(actual);
+		ft_right(actual);
 	if (actual->prev && actual->prev->token == LEFT)
 		printf("left\n");// ft_left(actual);
 	if (actual->prev && actual->prev->token == PIPE)

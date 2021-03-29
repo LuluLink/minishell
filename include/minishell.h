@@ -45,6 +45,7 @@ typedef struct s_struct_all
 {
     int         quote;
     int         d_quote;
+	int			exit;
     char        *buff;
     t_elem_env *first_env;
     t_elem_cmd *first_cmd;
@@ -98,5 +99,6 @@ void        ft_echo(t_elem_cmd *actual);
 void        free_list_env_sort(t_elem_env *lst);
 void        ft_aff_minishell(void);
 void        ft_cd(char *path);
+void		ft_right(t_elem_cmd *actual);
 
 #endif
