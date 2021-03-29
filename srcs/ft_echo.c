@@ -33,8 +33,13 @@ void    print_echo_arg(char *str)
                 ft_putchar(str[i++]);
             i++;
         }
-        if (str[i] != '\0')
+		if (str[i] != '\0' && str[i] != '\\')
             ft_putchar(str[i++]);
+		if (str[i] == '\\')
+		{
+            ft_putchar(str[i + 1]);
+			i = i + 2;
+		}
     }
 }
 
@@ -66,6 +71,7 @@ void    ft_echo(t_elem_cmd *actual)
     t_elem_cmd *tmp;
     int verif;
     
+	verif = 0;
     if (actual->next == NULL)
     {
         putchar('\n');
