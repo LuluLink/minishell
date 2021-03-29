@@ -10,7 +10,7 @@ void	ft_right(t_elem_cmd *actual)
 	{
 		ft_putstr_fd("Cant open file : ", 2);
 		ft_putstr_fd(actual->cmd, 2);
-		ft_putchar_fd('\n', 2);
+		ft_putstr_fd("\n", 2);
 		g_all.exit = 1;
 	}
 }

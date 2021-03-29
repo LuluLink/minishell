@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/03/29 13:59:49 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/03/29 19:07:14 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,9 @@ int     check_env_exist(char *str)
     while (tmp != NULL)
     {
         if (ft_strncmp(tmp->env, str, ft_strlen(str)) == 0)
-        {
-            printf("%s exist.\n", str);
             return (1);
-        }
         tmp = tmp->next;
     }
-    printf("%s doesn't exist.\n", str);
     return (0);
 }
 

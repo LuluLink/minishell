@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pacorrei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/03/28 11:03:38 by pacorrei         ###   ########.fr       */
+/*   Updated: 2021/03/29 19:05:17 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	ft_start_execution(t_elem_cmd *actual)
 
 void	ft_execution(t_elem_cmd *actual)
 {
-	if (!actual || g_all->exit == 1)
+	if (!actual || g_all.exit == 1)
 		return ;
 	if (actual->prev && actual->prev->token == DOUBLERIGHT)
 		printf("double right\n");// ft_doubleright(actual);
 	if (actual->prev && actual->prev->token == RIGHT)
-		ft_right(actual);
+		printf("right\n");//ft_right(actual);
 	if (actual->prev && actual->prev->token == LEFT)
 		printf("left\n");// ft_left(actual);
 	if (actual->prev && actual->prev->token == PIPE)
