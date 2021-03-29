@@ -19,7 +19,7 @@ int			remplace_env(char *str)
 
 	i = 0;
 	tmp = g_all.first_env;
-	while (str[i] != '=')
+	while (str[i] != '\0' && str[i] != '=')
 		i++;
 	while (tmp != NULL)
 	{
@@ -216,11 +216,14 @@ void		ft_export(t_elem_cmd *actual)
 	}
 	while (actual->next != NULL && actual->next->token == ARG)
 	{
-		if ((verif_arg_export(actual) == -1))
+		if ((verif_arg_export(actual) == 0))
+		{
+			str = str_to_env(actual->next->cmd);
+			if ((remplace_env(str) == 0))
+				insertion_end_env(str);
+		}
+		else
 			printf("export : %s : indentifiant invalide\n", actual->next->cmd);
-		str = str_to_env(actual->next->cmd);
-		if ((remplace_env(str) == 0))
-			insertion_end_env(str);
 		actual = actual->next;
 	}
 }

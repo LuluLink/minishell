@@ -14,5 +14,28 @@
 
 void    ft_env()
 {
-    print_liste_env();
+	int			verif;
+	int			i;
+    t_elem_env	*tmp;
+
+	tmp = g_all.first_env;
+	verif = 0;
+	i = 0;
+	while (tmp != NULL)
+	{
+		while (tmp->env[i] != '\0')
+		{
+			if (tmp->env[i] == '=')
+				verif = 1;
+			i++;
+		}
+		if (verif == 1)
+		{
+			ft_putstr(tmp->env);
+			ft_putchar('\n');
+		}
+		i = 0;
+		verif = 0;
+		tmp = tmp->next;
+	}
 }
