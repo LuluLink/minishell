@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pacorrei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/03/28 11:03:38 by pacorrei         ###   ########.fr       */
+/*   Updated: 2021/03/29 13:59:49 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,44 @@ void	initialisation_env(char *str)
 	nouveau->prev = NULL;
 	g_all.first_env = nouveau;
 }
+int     check_env_exist(char *str)
+{
+    t_elem_env *tmp;
+    
+    tmp = g_all.first_env;
+    while (tmp != NULL)
+    {
+        if (ft_strncmp(tmp->env, str, ft_strlen(str)) == 0)
+        {
+            printf("%s exist.\n", str);
+            return (1);
+        }
+        tmp = tmp->next;
+    }
+    printf("%s doesn't exist.\n", str);
+    return (0);
+}
+
+void    check_min_env(void)
+{
+    char    *pwd;
+
+    pwd = getcwd(NULL, 0);
+    if (!pwd && errno == 2)
+		ft_putstr_fd("Error when trying to enable a default pwd.\n", 2);
+    if (!check_env_exist("PATH"))
+        insertion_end_env(ft_strdup("PATH=/bin:/usr/bin"));
+    if (!check_env_exist("HOME"))
+        insertion_end_env(ft_strdup("HOME="));
+    if (!check_env_exist("OLDPWD"))
+        insertion_end_env(ft_strdup("OLDPWD="));
+    if (!check_env_exist("PWD") && pwd)
+        insertion_end_env(ft_strjoin(ft_strdup("PWD="), ft_strdup(pwd)));
+    if (!check_env_exist("SHLVL"))
+        insertion_end_env(ft_strdup("SHLVL=1"));
+    if (pwd)
+        free(pwd);
+}
 
 void	init_liste_env(char **envp)
 {
@@ -101,4 +139,5 @@ void	init_liste_env(char **envp)
 		insertion_end_env(tmp);
 		i++;
 	}
+    check_min_env();
 }
