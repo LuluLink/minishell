@@ -12,9 +12,22 @@
 
 #include "minishell.h"
 
+void	ft_reset_fd(void)
+{
+	if (g_all.fdin != -1)
+		close(g_all.fdin);
+	if (g_all.fdout != -1)
+		close(g_all.fdout);
+	g_all.fdin = -1;
+	g_all.fdout = -1;
+	dup2(g_all.standardin, 0);
+	dup2(g_all.standardout, 1);
+}
+
 void	ft_start_execution(t_elem_cmd *actual)
 {
 	ft_execution(actual);
+	ft_reset_fd();
 	while (actual && actual->next)
 	{
 		actual = actual->next;
@@ -22,6 +35,8 @@ void	ft_start_execution(t_elem_cmd *actual)
 		{
 			actual = actual->next;
 			ft_execution(actual);
+			ft_reset_fd();
+
 		}
 	}
 }
@@ -31,11 +46,11 @@ void	ft_execution(t_elem_cmd *actual)
 	if (!actual || g_all.exit == 1)
 		return ;
 	if (actual->prev && actual->prev->token == DOUBLERIGHT)
-		printf("double right\n");// ft_doubleright(actual);
+		ft_doubleright(actual);
 	if (actual->prev && actual->prev->token == RIGHT)
-		printf("right\n");//ft_right(actual);
+		ft_right(actual);
 	if (actual->prev && actual->prev->token == LEFT)
-		printf("left\n");// ft_left(actual);
+		ft_left(actual);
 	if (actual->prev && actual->prev->token == PIPE)
 		printf("pipe\n");// ft_pipe(actual);
 	if (actual->next != NULL && actual->next->token != SEMICOLON)
