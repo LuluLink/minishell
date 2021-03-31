@@ -18,16 +18,34 @@ void	ft_reset_fd(void)
 		close(g_all.fdin);
 	if (g_all.fdout != -1)
 		close(g_all.fdout);
+	if (g_all.pipefdin != -1)
+		close(g_all.pipefdin);
+	if (g_all.pipefdout != -1)
+		close(g_all.pipefdout);
 	g_all.fdin = -1;
 	g_all.fdout = -1;
+	g_all.pipefdin = -1;
+	g_all.pipefdout = -1;
 	dup2(g_all.standardin, 0);
 	dup2(g_all.standardout, 1);
 }
 
-void	ft_start_execution(t_elem_cmd *actual)
+void	ft_start_execution(t_elem_cmd *actual, int pid)
 {
 	ft_execution(actual);
 	ft_reset_fd();
+	waitpid(-1, &pid, 0);
+	if (WIFEXITED(pid))
+		pid = WEXITSTATUS(pid);
+	if (g_all.child == 1)
+	{
+		free_list_cmd();
+		free_list_env();
+		free(g_all.buff);
+		exit(0);
+	}
+	g_all.child = 0;
+	g_all.block_cmd = 0;
 	while (actual && actual->next)
 	{
 		actual = actual->next;
@@ -36,13 +54,27 @@ void	ft_start_execution(t_elem_cmd *actual)
 			actual = actual->next;
 			ft_execution(actual);
 			ft_reset_fd();
-
+			waitpid(-1, &pid, 0);
+			if (WIFEXITED(pid))
+				pid = WEXITSTATUS(pid);
+			if (g_all.child == 1)
+			{
+				free_list_cmd();
+				free_list_env();
+				free(g_all.buff);
+				exit(0);
+			}
+			g_all.child = 0;
+			g_all.block_cmd = 0;
 		}
 	}
 }
 
 void	ft_execution(t_elem_cmd *actual)
 {
+	int ret;
+
+	ret = 0;
 	if (!actual || g_all.exit == 1)
 		return ;
 	if (actual->prev && actual->prev->token == DOUBLERIGHT)
@@ -52,9 +84,12 @@ void	ft_execution(t_elem_cmd *actual)
 	if (actual->prev && actual->prev->token == LEFT)
 		ft_left(actual);
 	if (actual->prev && actual->prev->token == PIPE)
-		printf("pipe\n");// ft_pipe(actual);
-	if (actual->next != NULL && actual->next->token != SEMICOLON)
+		ret = ft_pipe();
+	if (actual->next != NULL && actual->next->token != SEMICOLON && ret != 1)
 		ft_execution(actual->next);
-	if (actual->token == CMD)
+	if (g_all.block_cmd == 0 && actual->token == CMD && ret != 1)
+	{
 		launch_cmd(actual);
+		g_all.block_cmd = 1;
+	}
 }

@@ -50,6 +50,10 @@ typedef struct s_struct_all
 	int			fdin;
 	int			standardin;
 	int			standardout;
+	int			pipefdin;
+	int			pipefdout;
+	int			child;
+	int 		block_cmd;
     char        *buff;
     t_elem_env *first_env;
     t_elem_cmd *first_cmd;
@@ -97,7 +101,7 @@ void        ft_export(t_elem_cmd *actual);
 void        insertion_end_env(char *str);
 void        ft_putstr_fd(char *s, int fd);
 char        **liste_env_to_wordtab();
-void        ft_start_execution(t_elem_cmd *actual);
+void        ft_start_execution(t_elem_cmd *actual, int pid);
 void        ft_pwd(void);
 void        ft_echo(t_elem_cmd *actual);
 void        free_list_env_sort(t_elem_env *lst);
@@ -106,5 +110,6 @@ void        ft_cd(char *path);
 void		ft_right(t_elem_cmd *actual);
 void		ft_doubleright(t_elem_cmd *actual);
 void		ft_left(t_elem_cmd *actual);
+int			ft_pipe();
 
 #endif
