@@ -13,5 +13,6 @@ void    initialisation_struct()
 	g_all.pipefdin = -1;
 	g_all.pipefdout = -1;
 	g_all.block_cmd = 0;
+	g_all.exit_code = 0;
     ft_aff_minishell();
 }

@@ -34,6 +34,7 @@ int	ft_pipe(void)
 		dup2(fd[1], 1);
 		g_all.pipefdout = fd[1];
 		g_all.child = 0;
+		g_all.dad = 1;
 		return (1);
 	}
 

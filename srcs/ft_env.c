@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void    ft_env()
+int		ft_env(t_elem_cmd *actual)
 {
 	int			verif;
 	int			i;
@@ -21,6 +21,11 @@ void    ft_env()
 	tmp = g_all.first_env;
 	verif = 0;
 	i = 0;
+	if (actual->next->token == ARG)
+	{
+		ft_putstr_fd("Wrong argument\n", 2);
+		return (1);
+	}
 	while (tmp != NULL)
 	{
 		while (tmp->env[i] != '\0')
@@ -38,4 +43,5 @@ void    ft_env()
 		verif = 0;
 		tmp = tmp->next;
 	}
+	return (0);
 }

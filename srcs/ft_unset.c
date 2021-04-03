@@ -12,21 +12,25 @@
 
 #include "minishell.h"
 
-void	ft_unset(char *str)
+int		ft_unset(t_elem_cmd *actual)
 {
 	int			ret;
 	t_elem_env	*tmp;
 
-
-	ret = ft_strlen(str);
-	tmp = g_all.first_env;
-	while (tmp != NULL)
+	while (actual != NULL && actual->token != ARG)
 	{
-		if ((ft_strncmp(tmp->env, str, ret) == 0))
+		ret = ft_strlen(actual->cmd);
+		tmp = g_all.first_env;
+		while (tmp != NULL)
 		{
-			suppression_middle_env(tmp);
-			return ;
+			if ((ft_strncmp(tmp->env, actual->cmd, ret) == 0))
+			{
+				suppression_middle_env(tmp);
+				return (0);
+			}
+			tmp = tmp->next;
 		}
-		tmp = tmp->next;
+		actual = actual->next;
 	}
+	return (0);
 }

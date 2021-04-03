@@ -37,6 +37,8 @@ void	ft_start_execution(t_elem_cmd *actual, int pid)
 	waitpid(-1, &pid, 0);
 	if (WIFEXITED(pid))
 		pid = WEXITSTATUS(pid);
+	if	(g_all.dad == 1)
+		g_all.exit_code = pid;
 	if (g_all.child == 1)
 	{
 		free_list_cmd();
@@ -45,6 +47,7 @@ void	ft_start_execution(t_elem_cmd *actual, int pid)
 		exit(0);
 	}
 	g_all.child = 0;
+	g_all.dad = 0;
 	g_all.block_cmd = 0;
 	while (actual && actual->next)
 	{
@@ -57,6 +60,8 @@ void	ft_start_execution(t_elem_cmd *actual, int pid)
 			waitpid(-1, &pid, 0);
 			if (WIFEXITED(pid))
 				pid = WEXITSTATUS(pid);
+			if	(g_all.dad == 1)
+				g_all.exit_code = pid;
 			if (g_all.child == 1)
 			{
 				free_list_cmd();
@@ -65,6 +70,7 @@ void	ft_start_execution(t_elem_cmd *actual, int pid)
 				exit(0);
 			}
 			g_all.child = 0;
+			g_all.dad = 0;
 			g_all.block_cmd = 0;
 		}
 	}
