@@ -45,7 +45,7 @@ void	pwd_env(void)
 		free(pwd);
 }
 
-void	ft_cd(char *path)
+int		ft_cd(char *path)
 {
 	char	*error;
 	int		tofree;
@@ -63,9 +63,10 @@ void	ft_cd(char *path)
 		ft_putstr_fd("\n", 2);
 		if (tofree == 1)
 			free(path);
-		return ;
+		return (1);
 	}
 	pwd_env();
 	if (tofree == 1)
 		free(path);
+	return (0);
 }

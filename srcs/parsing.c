@@ -144,8 +144,10 @@ void    start_parsing(char *buff)
 {
     int i;
     int j;
+	int pid;
 
     i = 0;
+	pid = 0;
     while (buff[i])
     {
         j = 0;
@@ -166,6 +168,5 @@ void    start_parsing(char *buff)
         i += j + ft_skipspaces(&buff[i + j]);
     }
     check_env();
-    //print_liste_cmd();
-    ft_start_execution(g_all.first_cmd);
+    ft_start_execution(g_all.first_cmd, pid);
 }

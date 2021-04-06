@@ -66,7 +66,7 @@ t_elem_cmd     *verif_n_echo(t_elem_cmd *actual)
     return (actual);
 }
 
-void    ft_echo(t_elem_cmd *actual)
+int		ft_echo(t_elem_cmd *actual)
 {
     t_elem_cmd *tmp;
     int verif;
@@ -75,7 +75,7 @@ void    ft_echo(t_elem_cmd *actual)
     if (actual->next == NULL)
     {
         putchar('\n');
-        return ;
+        return (0);
     }
     actual = actual->next;
     tmp = verif_n_echo(actual);
@@ -85,10 +85,11 @@ void    ft_echo(t_elem_cmd *actual)
     while (actual != NULL && actual->token == ARG)
     {
         print_echo_arg(actual->cmd);
-        if (actual->next != NULL && actual->token == ARG)
+        if (actual->next != NULL && actual->next->token == ARG)
             ft_putchar(' ');
         actual = actual->next;
     }
-    if (verif == 0)
-        ft_putchar('\n');
+	if (verif == 0)
+		ft_putchar('\n');
+	return (0);
 }

@@ -55,20 +55,20 @@ char	*check_cmd(t_elem_cmd *tmp)
 int		builtins_cmd(t_elem_cmd *tmp)
 {
 	if (ft_strcmp(tmp->cmd, "echo") == 0)
-		ft_echo(tmp);
+		g_all.exit_code = ft_echo(tmp);
 	else if (ft_strcmp(tmp->cmd, "cd") == 0)
-		ft_cd((tmp->next &&
+		g_all.exit_code = ft_cd((tmp->next &&
 		tmp->next->token != SEMICOLON) ? tmp->next->cmd : NULL);
 	else if (ft_strcmp(tmp->cmd, "pwd") == 0)
-		ft_pwd();
+		g_all.exit_code = ft_pwd();
 	else if (ft_strcmp(tmp->cmd, "export") == 0)
-		ft_export(tmp);
+		g_all.exit_code = ft_export(tmp);
 	else if (ft_strcmp(tmp->cmd, "unset") == 0)
-		ft_unset((tmp->next) ? tmp->next->cmd : "");
+		g_all.exit_code = ft_unset(tmp);
 	else if (ft_strcmp(tmp->cmd, "env") == 0)
-		ft_env();
+		g_all.exit_code = ft_env(tmp);
 	else if (ft_strcmp(tmp->cmd, "exit") == 0)
-		ft_exit();
+		ft_exit(tmp);
 	else
 		return (0);
 	return (1);
@@ -94,6 +94,8 @@ void	ft_execve(char *path, char **cmd, char **env)
 		waitpid(pid, &status, 0);
 		kill(pid, SIGTERM);
 	}
+	else if (WIFEXITED(pid))
+		g_all.exit_code = WEXITSTATUS(pid);
 	else if (execve(path, cmd, env) == -1)
 	{
 		error = strerror(errno);

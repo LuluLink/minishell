@@ -177,15 +177,17 @@ t_elem_env	*ft_copy_sort(t_elem_env *tocopy)
 	return (first);
 }
 
-void		ft_export(t_elem_cmd *actual)
+int		ft_export(t_elem_cmd *actual)
 {
 	int			i;
+	int			ret;
 	int			verif_quote;
 	char		*str;
 	t_elem_env	*tmp;
 	t_elem_env	*first;
 
 	i = 0;
+	ret = 0;
 	verif_quote = 0;
 	if (actual->next == NULL || actual->next->token != ARG)
 	{
@@ -212,7 +214,7 @@ void		ft_export(t_elem_cmd *actual)
 			ft_putchar('\n');
 		}
 		free_list_env_sort(first);
-		return ;
+		return (0);
 	}
 	while (actual->next != NULL && actual->next->token == ARG)
 	{
@@ -223,7 +225,13 @@ void		ft_export(t_elem_cmd *actual)
 				insertion_end_env(str);
 		}
 		else
+		{
 			printf("export : %s : indentifiant invalide\n", actual->next->cmd);
+			ret = 1;
+		}
 		actual = actual->next;
 	}
+	if (ret == 1)
+		return (1);
+	return (0);
 }
