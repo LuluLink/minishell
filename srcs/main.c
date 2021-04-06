@@ -31,8 +31,8 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	(void)envp;
-	init_term();
 	initialisation_struct();
+	init_term();
 	init_liste_env(envp);
 	write(1, NEWLINE, ft_strlen(NEWLINE));
 	while (get_next_line(&g_all.buff) > 0)

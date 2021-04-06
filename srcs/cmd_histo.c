@@ -99,16 +99,16 @@ void    cmd_histo(void)
     }
 }
 
-/*
 
+/*
 ** g_all.arrow 1 -> fleche du haut
 **             2 -> fleche du bas
-
 */
+
 
 void    check_arrow(char *a)
 {
-    int static i;
+	static int i;
     if (a[0] == 127)
     {
         if (g_all.cursor > 0)

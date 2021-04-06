@@ -94,8 +94,6 @@ void	ft_execve(char *path, char **cmd, char **env)
 		waitpid(pid, &status, 0);
 		kill(pid, SIGTERM);
 	}
-	else if (WIFEXITED(pid))
-		g_all.exit_code = WEXITSTATUS(pid);
 	else if (execve(path, cmd, env) == -1)
 	{
 		error = strerror(errno);
@@ -103,6 +101,8 @@ void	ft_execve(char *path, char **cmd, char **env)
 		ft_putstr_fd("\n", 2);
 		exit(0);
 	}
+	else if (WIFEXITED(pid))
+		g_all.exit_code = WEXITSTATUS(pid);
 }
 
 void	ft_create_path(char *path, t_elem_cmd *lst)

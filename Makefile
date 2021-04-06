@@ -6,13 +6,13 @@ SRCS = *.c
 
 HEAD = -I include/
 
-FLAGS = -Wall -Werror -Wextra -lncurses# -g3 -fsanitize=address
+FLAGS = -Wall -Werror -Wextra# -g3 -fsanitize=address
 
 all: ${NAME}
 
 $(NAME):
 	@echo "Création de l'executable..."
-	@gcc $(FLAGS) $(HEAD) $(DIR)/$(SRCS) -o $(NAME)
+	@gcc $(FLAGS) $(HEAD) $(DIR)/$(SRCS) -o $(NAME) -lncurses
 	@echo "Compilation terminée !"
 
 clean:
