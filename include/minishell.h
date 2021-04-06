@@ -69,7 +69,7 @@ typedef struct  s_struct_all
     t_elem_env  *first_env;
     t_elem_cmd  *first_cmd;
 }               t_struct_all;
-	
+
 	
 	
 	
