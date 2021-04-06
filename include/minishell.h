@@ -70,14 +70,6 @@ typedef struct  s_struct_all
     t_elem_cmd  *first_cmd;
 }               t_struct_all;
 
-	
-	
-	
-    char		*buff;
-    t_elem_env *first_env;
-    t_elem_cmd *first_cmd;
-}   t_struct_all;
-
 t_struct_all g_all;
 
 int			ft_isspace(int c);
@@ -127,16 +119,13 @@ void		free_list_env_sort(t_elem_env *lst);
 void		ft_aff_minishell(void);
 int			ft_cd(char *path);
 void		ft_right(t_elem_cmd *actual);
-<<<<<<< HEAD
 void        check_arrow(char *a);
 void        insertion_end_lst(char *str);
 void        cmd_histo(void);
 int         lst_len(void);
-=======
 void		ft_doubleright(t_elem_cmd *actual);
 void		ft_left(t_elem_cmd *actual);
 int			ft_pipe();
 int			ft_atoi(char *str);
->>>>>>> 2ecfc9407077a9020726e3971cfdfecb196fa708
 
 #endif

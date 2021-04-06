@@ -83,10 +83,10 @@ char        *keep_printable(char *str)
 void        ft_supp(char *str)
 {
     int     i;
-    int     len;
+    //int     len;
     
     //printf("\nlen : %d, str : |%s|\n", ft_strlen(str), str);
-    len = ft_strlen(str);
+   // len = ft_strlen(str);
     i = 0;
     while (str[i])
         i++;
