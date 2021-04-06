@@ -12,6 +12,10 @@
 # include <unistd.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <sys/ioctl.h>
+# include <termios.h>
+# include <curses.h>
+# include <term.h>
 
 # define RIGHT 1
 # define DOUBLERIGHT 2
@@ -41,15 +45,20 @@ typedef struct s_elem_env
     struct  s_elem_env *prev;
 }      t_elem_env;
 
-typedef struct s_struct_all
+typedef struct  s_struct_all
 {
     int         quote;
     int         d_quote;
 	int			exit;
     char        *buff;
-    t_elem_env *first_env;
-    t_elem_cmd *first_cmd;
-}   t_struct_all;
+    int         arrow;
+    int         index;
+    int         cursor;
+    char        *str;
+    t_elem_env  *cmd_lst;
+    t_elem_env  *first_env;
+    t_elem_cmd  *first_cmd;
+}               t_struct_all;
 
 t_struct_all g_all;
 
@@ -100,5 +109,9 @@ void        free_list_env_sort(t_elem_env *lst);
 void        ft_aff_minishell(void);
 void        ft_cd(char *path);
 void		ft_right(t_elem_cmd *actual);
+void        check_arrow(char *a);
+void        insertion_end_lst(char *str);
+void        cmd_histo(void);
+int         lst_len(void);
 
 #endif

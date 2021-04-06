@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pacorrei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/03/28 11:03:38 by pacorrei         ###   ########.fr       */
+/*   Updated: 2021/04/01 17:10:56 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char			**ft_free(char **tab, int i)
+static char			**ft_free(char **mytab, int i)
 {
 	while (--i)
 	{
-		free(tab[i]);
-		tab[i] = 0;
+		free(mytab[i]);
+		mytab[i] = 0;
 	}
-	free(tab[i]);
-	free(tab);
-	tab = 0;
+	free(mytab[i]);
+	free(mytab);
+	mytab = 0;
 	return (NULL);
 }
 
@@ -62,12 +62,12 @@ char				**ft_split(char *str, char c)
 	int			is;
 	int			i;
 	int			j;
-	char		**tab;
+	char		**mytab;
 
 	if (!str)
 		return (NULL);
 	is = 0;
-	if (!(tab = malloc(sizeof(char*) * (ft_nbr_mots(str, c) + 1))))
+	if (!(mytab = malloc(sizeof(char*) * (ft_nbr_mots(str, c) + 1))))
 		return (0);
 	i = 0;
 	while (i < ft_nbr_mots(str, c))
@@ -75,12 +75,12 @@ char				**ft_split(char *str, char c)
 		j = 0;
 		while (str[is] == c && str[is])
 			is++;
-		if (!(tab[i] = malloc(sizeof(char) * (ft_taillem(str, is, c) + 1))))
-			return (ft_free(tab, i));
+		if (!(mytab[i] = malloc(sizeof(char) * (ft_taillem(str, is, c) + 1))))
+			return (ft_free(mytab, i));
 		while (str[is] != c && str[is])
-			tab[i][j++] = str[is++];
-		tab[i++][j] = '\0';
+			mytab[i][j++] = str[is++];
+		mytab[i++][j] = '\0';
 	}
-	tab[i] = NULL;
-	return (tab);
+	mytab[i] = NULL;
+	return (mytab);
 }

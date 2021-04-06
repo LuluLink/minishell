@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/03/29 12:32:59 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/01 17:12:07 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	ft_execve(char *path, char **cmd, char **env)
 void	ft_create_path(char *path, t_elem_cmd *lst)
 {
 	t_elem_cmd	*tmp;
-	char		**tab;
+	char		**mytab;
 	char		**env;
 	int			i;
 	int			j;
@@ -118,19 +118,19 @@ void	ft_create_path(char *path, t_elem_cmd *lst)
 		tmp = tmp->next;
 		i++;
 	}
-	tab = malloc(sizeof(char*) * (++i + 1));
+	mytab = malloc(sizeof(char*) * (++i + 1));
 	j = 0;
 	while (i-- > 0)
 	{
-		tab[j++] = ft_strdup(lst->cmd);
+		mytab[j++] = ft_strdup(lst->cmd);
 		lst = lst->next;
 	}
-	tab[j] = NULL;
+	mytab[j] = NULL;
 	env = liste_env_to_wordtab();
-	ft_execve(path, tab, env);
+	ft_execve(path, mytab, env);
 	free(path);
 	free_double_char(env);
-	free_double_char(tab);
+	free_double_char(mytab);
 }
 
 void	launch_cmd(t_elem_cmd *tmp)
