@@ -21,7 +21,7 @@ int		ft_env(t_elem_cmd *actual)
 	tmp = g_all.first_env;
 	verif = 0;
 	i = 0;
-	if (actual->next->token == ARG)
+	if (actual->next != NULL && actual->next->token == ARG)
 	{
 		ft_putstr_fd("Wrong argument\n", 2);
 		return (1);
