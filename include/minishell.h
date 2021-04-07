@@ -127,5 +127,6 @@ void		ft_doubleright(t_elem_cmd *actual);
 void		ft_left(t_elem_cmd *actual);
 int			ft_pipe();
 int			ft_atoi(char *str);
+void        cmd_rm_last(void);
 
 #endif

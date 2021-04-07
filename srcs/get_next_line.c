@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/04/06 11:36:14 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/07 14:02:11 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,95 +55,78 @@ void        aff_lst_cmd(void)
 char        *keep_printable(char *str)
 {
     char    *a;
-    int     i;
-    int     j;
-    int     k;
 
-    i = 0;
-    j = -1;
-    //printf("str : %s\n", str);
-    while (str[++j])
-        if (str[j] >= 32 && str[j] < 127)
-            i++;
-    if (!(a = malloc(sizeof(char) * (i + 1))))
-        return (NULL);
-    j = 0;
-    k = 0;
-    while (j < i)
+    if (g_all.arrow == 1 || g_all.arrow == 2)
     {
-        while (str[k] >= 127 || str[k] < 32)
-            k++;
-        a[j++] = str[k++];
+        a = ft_strndup(str, ft_strlen(str) - 2);
+        free(str);
     }
-    a[j] = '\0';
-    free(str);
-    //printf("a   : %s\n", a);
+    else
+        a = str;
     return (a);
 }
+
 void        ft_supp(char *str)
 {
     int     i;
-   // int     len;
-    
-    //printf("\nlen : %d, str : |%s|\n", ft_strlen(str), str);
-   // len = ft_strlen(str);
+
     i = 0;
     while (str[i])
         i++;
     if (i > 0)
         i -= 1;
     str[i] = '\0';
-    //printf("len : %d, str : |%s|\n", ft_strlen(str), str);
+}
+
+void        init_gnl(char **line)
+{
+    g_all.arrow = 1;
+    g_all.cursor = 0;
+    *line = NULL;
+    insertion_end_lst("");
 }
 
 int        get_next_line(char **line)
 {
     int     ret;
-    char    *tmp;
     
     ret = 1;
-    g_all.arrow = 1;
-    g_all.cursor = 0;
-    *line = NULL;
+    init_gnl(line);
     while (g_all.arrow != 0)
     {
         g_all.arrow = 0;
         if (!*line)
-            *line = recurs(0, &ret, 0);
+            *line = keep_printable(recurs(0, &ret, 0));
         else
-            *line = ft_strjoin(*line, recurs(0, &ret, 0));
+            *line = ft_strjoin(*line, keep_printable(recurs(0, &ret, 0)));
         if (g_all.str)
         {
-            //*line = ft_strjoin(g_all.str, *line);
-            free(*line);
-            *line = g_all.str;
+            *line = ft_strjoin(g_all.str, *line);
             g_all.str = NULL;
         }
         if (g_all.arrow == 3)
             ft_supp(*line);
         if (g_all.arrow == 0 && ft_strlen(*line) > 0)
         {
-            tmp = keep_printable(ft_strdup(*line));
-            insertion_end_lst(tmp);
-            free(tmp);
-        }
-        else if (g_all.arrow == 1 && ft_strlen(*line) > 2)
-        {
-            tmp = *line;
-            *line = keep_printable(ft_strndup(*line, ft_strlen(*line) - 2));
-            free(tmp);
+            cmd_rm_last();
             insertion_end_lst(*line);
         }
-        if (g_all.arrow != 0 && g_all.arrow != 3)
+        if (g_all.arrow == 1 || g_all.arrow == 2)
+        {
+            if (g_all.index == lst_len() - 1)
+            {
+                cmd_rm_last();
+                insertion_end_lst(*line);
+            }
+            free(*line);
+            *line = NULL;
             cmd_histo();
-        else if (g_all.arrow != 3)
+        }
+        else if (g_all.arrow == 0)
             g_all.index = lst_len();
-        //printf("\nindex : %d\n", g_all.index);
     }
     if (g_all.str)
         free(g_all.str);
     g_all.str = NULL;
-    //aff_lst_cmd();
-    //printf("line : |%s|\n", *line);
     return (ret);
 }

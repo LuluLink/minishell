@@ -19,25 +19,42 @@ void    cmd_add_back(t_elem_env *new)
 		g_all.cmd_lst = new;
 }
 
+void    cmd_rm_last(void)
+{
+	t_elem_env	*tmp;
+    t_elem_env	*prev;
+
+    tmp = g_all.cmd_lst;
+    prev = tmp;
+	if (!tmp)
+		return ;
+	else
+	{
+		while (tmp->next)
+        {
+            prev = tmp;
+			tmp = tmp->next;
+        }
+        if (tmp != prev)
+        {
+		    prev->next = NULL;
+            free(tmp->env);
+            free(tmp);
+            return ;
+        }
+		free(g_all.cmd_lst->env);
+        free(g_all.cmd_lst);
+        g_all.cmd_lst = NULL;
+	}
+}
+
 void	insertion_end_lst(char *str)
 {
 	t_elem_env *nouveau;
 
 	nouveau = malloc(sizeof(t_elem_env));
-    if (g_all.arrow == 1 && ft_strlen(str) > 2)
-        nouveau->env = str;
-    else
-        nouveau->env = ft_strdup(str);
+    nouveau->env = ft_strdup(str);
     cmd_add_back(nouveau);
-    t_elem_env *tmp;
-    tmp = g_all.cmd_lst;
-    int i = 0;
-    while (tmp != NULL)
-    {
-        //printf("maillon %2d: |%s|\n", i, tmp->env);
-        i++;
-        tmp = tmp->next;
-    }
 }
 
 int     lst_len(void)
@@ -68,6 +85,7 @@ void    ft_aff_index(void)
     int         i;
 
     i = 0;
+    //printf("index : %d/%d\n", g_all.index, lst_len() - 1);
     tmp = g_all.cmd_lst;
     while (tmp && i++ < g_all.index)
         tmp = tmp->next;
@@ -99,16 +117,16 @@ void    cmd_histo(void)
     }
 }
 
-
 /*
+
 ** g_all.arrow 1 -> fleche du haut
 **             2 -> fleche du bas
-*/
 
+*/
 
 void    check_arrow(char *a)
 {
-	static int i;
+    static int i;
     if (a[0] == 127)
     {
         if (g_all.cursor > 0)
