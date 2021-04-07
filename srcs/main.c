@@ -30,13 +30,16 @@ int	main(int ac, char **av, char **envp)
 {
 	(void)ac;
 	(void)av;
-	(void)envp;
 	initialisation_struct();
 	init_term();
 	init_liste_env(envp);
 	write(1, NEWLINE, ft_strlen(NEWLINE));
+	signal(SIGINT, ft_signal_hander_c);
+	signal(SIGQUIT, ft_signal_hander_backslash);
 	while (get_next_line(&g_all.buff) > 0)
 	{
+		signal(SIGINT, ft_signal_hander_c);
+		signal(SIGQUIT, ft_signal_hander_backslash);
 		if (g_all.arrow == 0)
 		{
 			write(1, COLORSTART, ft_strlen(COLORSTART));
@@ -47,13 +50,13 @@ int	main(int ac, char **av, char **envp)
 				ft_putstr_fd("Error : quote not closed\n", 2);
 			else if ((verif_end_backslash(g_all.buff) == -1))
 				ft_putstr_fd("Error : multiligne with '\\' \n", 2);
-			write(1, NEWLINE, ft_strlen(NEWLINE));
+			if (g_all.prompt == 0)
+				write(1, NEWLINE, ft_strlen(NEWLINE));
+			g_all.prompt = 0;
 			free_list_cmd();
 		}
+		g_all.ctrl_c = 0;
 		free(g_all.buff);
 	}
-	free_list_cmd();
-	free_list_env();
-	free(g_all.buff);
 	return (0);
 }

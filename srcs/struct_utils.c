@@ -18,6 +18,7 @@ void    initialisation_struct()
 	g_all.exit_code = 0;
 	g_all.arrow = 0;
     g_all.index = 0;
-    g_all.cursor =0;
+    g_all.cursor = 0;
+	g_all.ctrl_c = 0;
     ft_aff_minishell();
 }

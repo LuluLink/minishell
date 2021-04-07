@@ -16,6 +16,7 @@
 # include <termios.h>
 # include <curses.h>
 # include <term.h>
+# include <signal.h>
 
 # define RIGHT 1
 # define DOUBLERIGHT 2
@@ -65,6 +66,7 @@ typedef struct  s_struct_all
 	int			dad;
 	int 		block_cmd;
 	int			exit_code;
+	int			ctrl_c;
     t_elem_env  *cmd_lst;
     t_elem_env  *first_env;
     t_elem_cmd  *first_cmd;
@@ -128,5 +130,8 @@ void		ft_left(t_elem_cmd *actual);
 int			ft_pipe();
 int			ft_atoi(char *str);
 void        cmd_rm_last(void);
+void		ft_signal_hander_c(int signal);
+void		quit_minishell(void);
+void		ft_signal_hander_backslash(int signal);
 
 #endif
