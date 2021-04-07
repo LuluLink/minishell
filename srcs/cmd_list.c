@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pacorrei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/03/28 11:03:38 by pacorrei         ###   ########.fr       */
+/*   Updated: 2021/04/07 15:41:01 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 void	print_liste_cmd(void)
 {
@@ -34,6 +34,15 @@ void	initialisation_cmd(char *str, int token)
 	cmd->next = NULL;
 	cmd->prev = NULL;
 	g_all.first_cmd = cmd;
+}
+
+void	ft_add_back(t_elem_cmd *tmp, t_elem_cmd *nouveau)
+{
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = nouveau;
+	nouveau->next = NULL;
+	nouveau->prev = tmp;
 }
 
 void	insertion_end_cmd(char *str, int token)
@@ -60,19 +69,15 @@ void	insertion_end_cmd(char *str, int token)
 		give_list_token();
 		return ;
 	}
-	while (tmp->next != NULL)
-		tmp = tmp->next;
-	tmp->next = nouveau;
-	nouveau->next = NULL;
-	nouveau->prev = tmp;
+	ft_add_back(tmp, nouveau);
 	give_list_token();
 }
 
 void	free_list_cmd(void)
 {
 	t_elem_cmd *tmp;
-	tmp = g_all.first_cmd;
 
+	tmp = g_all.first_cmd;
 	while (tmp != NULL)
 	{
 		free(tmp->cmd);

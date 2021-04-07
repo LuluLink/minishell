@@ -6,11 +6,11 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/03/29 19:07:14 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/07 15:41:03 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 void	print_liste_env(void)
 {
@@ -86,39 +86,40 @@ void	initialisation_env(char *str)
 	nouveau->prev = NULL;
 	g_all.first_env = nouveau;
 }
-int     check_env_exist(char *str)
+
+int		check_env_exist(char *str)
 {
-    t_elem_env *tmp;
-    
-    tmp = g_all.first_env;
-    while (tmp != NULL)
-    {
-        if (ft_strncmp(tmp->env, str, ft_strlen(str)) == 0)
-            return (1);
-        tmp = tmp->next;
-    }
-    return (0);
+	t_elem_env *tmp;
+
+	tmp = g_all.first_env;
+	while (tmp != NULL)
+	{
+		if (ft_strncmp(tmp->env, str, ft_strlen(str)) == 0)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
 }
 
-void    check_min_env(void)
+void	check_min_env(void)
 {
-    char    *pwd;
+	char *pwd;
 
-    pwd = getcwd(NULL, 0);
-    if (!pwd && errno == 2)
+	pwd = getcwd(NULL, 0);
+	if (!pwd && errno == 2)
 		ft_putstr_fd("Error when trying to enable a default pwd.\n", 2);
-    if (!check_env_exist("PATH"))
-        insertion_end_env(ft_strdup("PATH=/bin:/usr/bin"));
-    if (!check_env_exist("HOME"))
-        insertion_end_env(ft_strdup("HOME="));
-    if (!check_env_exist("OLDPWD"))
-        insertion_end_env(ft_strdup("OLDPWD="));
-    if (!check_env_exist("PWD") && pwd)
-        insertion_end_env(ft_strjoin(ft_strdup("PWD="), ft_strdup(pwd)));
-    if (!check_env_exist("SHLVL"))
-        insertion_end_env(ft_strdup("SHLVL=1"));
-    if (pwd)
-        free(pwd);
+	if (!check_env_exist("PATH"))
+		insertion_end_env(ft_strdup("PATH=/bin:/usr/bin"));
+	if (!check_env_exist("HOME"))
+		insertion_end_env(ft_strdup("HOME="));
+	if (!check_env_exist("OLDPWD"))
+		insertion_end_env(ft_strdup("OLDPWD="));
+	if (!check_env_exist("PWD") && pwd)
+		insertion_end_env(ft_strjoin(ft_strdup("PWD="), ft_strdup(pwd)));
+	if (!check_env_exist("SHLVL"))
+		insertion_end_env(ft_strdup("SHLVL=1"));
+	if (pwd)
+		free(pwd);
 }
 
 void	init_liste_env(char **envp)
@@ -135,5 +136,5 @@ void	init_liste_env(char **envp)
 		insertion_end_env(tmp);
 		i++;
 	}
-    check_min_env();
+	check_min_env();
 }

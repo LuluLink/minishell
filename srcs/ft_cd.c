@@ -6,11 +6,11 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/03/29 14:30:55 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/07 15:41:11 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 void	ft_old_pwd(char *str)
 {
@@ -30,7 +30,7 @@ void	pwd_env(void)
 {
 	t_elem_env	*tmp;
 	char		*pwd;
-	
+
 	pwd = getcwd(NULL, 0);
 	tmp = g_all.first_env;
 	while (tmp->next && ft_strncmp(tmp->env, "PWD=", 4) != 0)

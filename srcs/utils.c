@@ -1,8 +1,21 @@
-#include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/07 15:41:44 by macbookpro        #+#    #+#             */
+/*   Updated: 2021/04/07 15:41:45 by macbookpro       ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	ft_putstr(char *str)
+#include "../include/minishell.h"
+
+void		ft_putstr(char *str)
 {
 	int i;
+
 	i = 0;
 	while (str[i] != '\0')
 	{
@@ -11,21 +24,21 @@ void	ft_putstr(char *str)
 	}
 }
 
-void	ft_putchar(char c)
+void		ft_putchar(char c)
 {
 	write(1, &c, 1);
 }
 
-int		ft_isspace(int c)
+int			ft_isspace(int c)
 {
 	c = (unsigned char)c;
-	if (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r'
-		|| c == ' ')
+	if (c == '\t' || c == '\n' || c == '\v' ||
+	c == '\f' || c == '\r' || c == ' ')
 		return (1);
 	return (0);
 }
 
-int	ft_strcmp(char *s1, char *s2)
+int			ft_strcmp(char *s1, char *s2)
 {
 	int i;
 
@@ -35,7 +48,7 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
-int	ft_strlen(const char *str)
+int			ft_strlen(const char *str)
 {
 	int i;
 
@@ -45,13 +58,14 @@ int	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strndup(const char *src, int n)
+char		*ft_strndup(const char *src, int n)
 {
 	int		i;
 	char	*dest;
 
 	i = 0;
-	if (!(dest = (char *)malloc(sizeof(char) * (((ft_strlen(src) > n) ? n : ft_strlen(src)) + 1))))
+	if (!(dest = (char *)malloc(sizeof(char) *
+	(((ft_strlen(src) > n) ? n : ft_strlen(src)) + 1))))
 		return (0);
 	while (src[i] && i < n)
 	{
@@ -62,7 +76,7 @@ char	*ft_strndup(const char *src, int n)
 	return (dest);
 }
 
-int ft_strncmp(char *s1, char *s2, unsigned int n)
+int			ft_strncmp(char *s1, char *s2, unsigned int n)
 {
 	unsigned int i;
 
@@ -74,7 +88,7 @@ int ft_strncmp(char *s1, char *s2, unsigned int n)
 	return (s1[i] - s2[i]);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char		*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
 	int		j;
@@ -98,7 +112,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (str);
 }
 
-char	*ft_strdup(const char *src)
+char		*ft_strdup(const char *src)
 {
 	char	*dest;
 	int		i;
@@ -119,7 +133,7 @@ char	*ft_strdup(const char *src)
 	return (dest);
 }
 
-char	*ft_strnjoin(char *s1, char *s2, int n)
+char		*ft_strnjoin(char *s1, char *s2, int n)
 {
 	int		i;
 	int		j;
@@ -141,7 +155,7 @@ char	*ft_strnjoin(char *s1, char *s2, int n)
 	return (str);
 }
 
-char	*ft_strjoinchar(char *s1, char s2)
+char		*ft_strjoinchar(char *s1, char s2)
 {
 	int		i;
 	int		j;
@@ -162,12 +176,12 @@ char	*ft_strjoinchar(char *s1, char s2)
 	return (str);
 }
 
-void	ft_putchar_fd(char c, int fd)
+void		ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
 }
 
-void	ft_putstr_fd(char *s, int fd)
+void		ft_putstr_fd(char *s, int fd)
 {
 	int i;
 
@@ -185,32 +199,42 @@ void	ft_putstr_fd(char *s, int fd)
 		write(2, COLOREND, ft_strlen(COLOREND));
 }
 
-int		ft_isalnum(int c)
+int			ft_isalnum(int c)
 {
 	return ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') ||
 			(c >= 'A' && c <= 'Z'));
 }
 
-void    free_double_char(char **str)
+void		free_double_char(char **str)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (str[i] != NULL)
-    {
-        free(str[i]);
-        i++;
-    }
+	i = 0;
+	while (str[i] != NULL)
+	{
+		free(str[i]);
+		i++;
+	}
 	if (str)
-    	free(str);
+		free(str);
 }
 
-void	ft_aff_minishell(void)
+void		ft_aff_minishell(void)
 {
-	printf("\n                                  __              ___    ___      \n /'\\_/`\\  __          __         /\\ \\            /\\_ \\  /\\_ \\     \n/\\      \\/\\_\\    ___ /\\_\\    ____\\ \\ \\___      __\\//\\ \\ \\//\\ \\    \n\\ \\ \\__\\ \\/\\ \\ /' _ `\\/\\ \\  /',__\\\\ \\  _ `\\  /'__`\\\\ \\ \\  \\ \\ \\   \n \\ \\ \\_/\\ \\ \\ \\/\\ \\/\\ \\ \\ \\/\\__, `\\\\ \\ \\ \\ \\/\\  __/ \\_\\ \\_ \\_\\ \\_ \n  \\ \\_\\\\ \\_\\ \\_\\ \\_\\ \\_\\ \\_\\/\\____/ \\ \\_\\ \\_\\ \\____\\/\\____\\/\\____\\\n   \\/_/ \\/_/\\/_/\\/_/\\/_/\\/_/\\/___/   \\/_/\\/_/\\/____/\\/____/\\/____/\n\n");
+	printf("\n                                  __              \
+___    ___      \n /'\\_/`\\  __          __         /\\ \\            \
+/\\_ \\  /\\_ \\     \n/\\      \\/\\_\\    ___ /\\_\\    ____\\ \\ \\___      \
+__\\//\\ \\ \\//\\ \\    \n\\ \\ \\__\\ \\/\\ \\ /' _ `\\/\\ \\  /',__\\\\ \\  \
+_ `\\  /'__`\\\\ \\ \\  \\ \\ \\   \n \\ \\ \\_/\\ \
+\\ \\ \\/\\ \\/\\ \\ \\ \\/\\__, \
+`\\\\ \\ \\ \\ \\/\\  __/ \\_\\ \\_ \\_\\ \\_ \
+\n  \\ \\_\\\\ \\_\\ \\_\\ \\_\\ \\_\\ \
+\\_\\/\\____/ \\ \\_\\ \\_\\ \\____\\/\\____\\\
+/\\____\\\n   \\/_/ \\/_/\\/_/\\/_/\\/_\
+/\\/_/\\/___/   \\/_/\\/_/\\/____/\\/____/\\/____/\n\n");
 }
 
-int		ft_atoi(char *str)
+int			ft_atoi(char *str)
 {
 	int i;
 	int tmp;
@@ -220,7 +244,7 @@ int		ft_atoi(char *str)
 	sign = 1;
 	tmp = 0;
 	while (str[i] == ' ' || str[i] == '\f' || str[i] == '\n' ||
-			str[i] == '\r' || str[i] == '\t' || str[i] == '\v')
+		str[i] == '\r' || str[i] == '\t' || str[i] == '\v')
 		i++;
 	while (str[i] == '+' || str[i] == '-')
 	{
