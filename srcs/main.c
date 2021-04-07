@@ -49,9 +49,7 @@ int		main(int ac, char **av, char **envp)
 				ft_putstr_fd("Error : quote not closed\n", 2);
 			else if ((verif_end_backslash(g_all.buff) == -1))
 				ft_putstr_fd("Error : multiligne with '\\' \n", 2);
-			if (g_all.prompt == 0)
 				write(1, NEWLINE, ft_strlen(NEWLINE));
-			g_all.prompt = 0;
 			free_list_cmd();
 		}
 		g_all.ctrl_c = 0;
