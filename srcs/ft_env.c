@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pacorrei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/03/28 11:03:38 by pacorrei         ###   ########.fr       */
+/*   Updated: 2021/04/07 15:41:16 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 int		ft_env(t_elem_cmd *actual)
 {
 	int			verif;
 	int			i;
-    t_elem_env	*tmp;
+	t_elem_env	*tmp;
 
 	tmp = g_all.first_env;
 	verif = 0;

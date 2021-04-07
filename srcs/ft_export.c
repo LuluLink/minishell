@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pacorrei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/03/28 11:03:38 by pacorrei         ###   ########.fr       */
+/*   Updated: 2021/04/07 15:22:05 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 int			remplace_env(char *str)
 {
@@ -177,7 +177,7 @@ t_elem_env	*ft_copy_sort(t_elem_env *tocopy)
 	return (first);
 }
 
-int		ft_export(t_elem_cmd *actual)
+int			ft_export(t_elem_cmd *actual)
 {
 	int			i;
 	int			ret;

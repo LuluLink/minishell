@@ -6,11 +6,11 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/04/01 17:12:07 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/07 15:40:55 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 int		check_path_cmd(char *path)
 {
@@ -74,46 +74,43 @@ int		builtins_cmd(t_elem_cmd *tmp)
 	return (1);
 }
 
+void	ft_send_error(void)
+{
+	char	*error;
+
+	error = strerror(errno);
+	ft_putstr_fd(error, 2);
+	ft_putstr_fd("\n", 2);
+	exit(0);
+}
+
 void	ft_execve(char *path, char **cmd, char **env)
 {
 	pid_t	pid;
 	int		status;
-	char	*error;
 
 	status = 0;
 	pid = fork();
 	if (pid == -1)
-	{
-		error = strerror(errno);
-		ft_putstr_fd(error, 2);
-		ft_putstr_fd("\n", 2);
-		exit(0);
-	}
+		ft_send_error();
 	else if (pid > 0)
 	{
 		waitpid(pid, &status, 0);
 		kill(pid, SIGTERM);
 	}
 	else if (execve(path, cmd, env) == -1)
-	{
-		error = strerror(errno);
-		ft_putstr_fd(error, 2);
-		ft_putstr_fd("\n", 2);
-		exit(0);
-	}
+		ft_send_error();
 	else if (WIFEXITED(pid))
 		g_all.exit_code = WEXITSTATUS(pid);
 }
 
-void	ft_create_path(char *path, t_elem_cmd *lst)
+void	ft_create_path(char *path, t_elem_cmd *lst, t_elem_cmd *tmp)
 {
-	t_elem_cmd	*tmp;
 	char		**mytab;
 	char		**env;
 	int			i;
 	int			j;
 
-	tmp = lst;
 	i = 0;
 	while (tmp->next && tmp->next->token == ARG)
 	{
@@ -143,8 +140,8 @@ void	launch_cmd(t_elem_cmd *tmp)
 	{
 		path = check_cmd(tmp);
 		if (path)
-			ft_create_path(path, tmp);
+			ft_create_path(path, tmp, tmp);
 		else
-			ft_create_path(ft_strdup(tmp->cmd), tmp);
+			ft_create_path(ft_strdup(tmp->cmd), tmp, tmp);
 	}
 }

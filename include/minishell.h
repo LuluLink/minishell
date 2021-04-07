@@ -48,18 +48,18 @@ typedef struct s_elem_env
 
 typedef struct  s_struct_all
 {
-    int			quote;
-    int			d_quote;
-	int			exit;
-    char        *buff;
     int         arrow;
-    int         index;
+    int 		block_cmd;
+    char        *buff;
+    int			child;
     int         cursor;
-    char        *str;
+    int			dad;
+    int			d_quote;
+    int			exit;
+    int			exit_code;
+    int			fdin;
     int			fdout;
-	int			fdin;
-    int			standardin;
-	int			standardout;
+    int         index;
     int			pipefdin;
 	int			pipefdout;
     int			child;
@@ -67,6 +67,10 @@ typedef struct  s_struct_all
 	int 		block_cmd;
 	int			exit_code;
 	int			ctrl_c;
+    int			quote;
+    int			standardin;
+	int			standardout;
+    char        *str;
     t_elem_env  *cmd_lst;
     t_elem_env  *first_env;
     t_elem_cmd  *first_cmd;

@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pacorrei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/03/28 11:03:38 by pacorrei         ###   ########.fr       */
+/*   Updated: 2021/04/07 15:41:19 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
+#include "../include/minishell.h"
 
 int		verif_nb_arg(t_elem_cmd *actual)
 {
-	t_elem_cmd *tmp;
-	int i;
+	t_elem_cmd	*tmp;
+	int			i;
 
 	i = 0;
 	tmp = actual->next;
@@ -32,14 +31,15 @@ int		verif_first_arg(t_elem_cmd *actual)
 {
 	t_elem_cmd	*tmp;
 	int			i;
-	int nb;
+	int			nb;
 
 	i = 0;
 	nb = 0;
 	tmp = actual->next;
 	while (tmp->cmd[i] != '\0')
 	{
-		if ((tmp->cmd[i] >= '0' && tmp->cmd[i] <= '9') || tmp->cmd[i] == '-' || tmp->cmd[i] == '+')
+		if ((tmp->cmd[i] >= '0' && tmp->cmd[i] <= '9') ||
+		tmp->cmd[i] == '-' || tmp->cmd[i] == '+')
 		{
 			if (tmp->cmd[i] == '-' || tmp->cmd[i] == '+')
 				nb++;
@@ -64,8 +64,8 @@ void	quit_minishell(void)
 
 void	ft_exit(t_elem_cmd *actual)
 {
-	int i;
-	int verif_arg;
+	int	i;
+	int	verif_arg;
 
 	if (actual->next == NULL)
 		quit_minishell();

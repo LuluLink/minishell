@@ -6,11 +6,11 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/03/29 19:05:17 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/07 15:41:08 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 void	ft_reset_fd(void)
 {
@@ -37,7 +37,7 @@ void	ft_start_execution(t_elem_cmd *actual, int pid)
 	waitpid(-1, &pid, 0);
 	if (WIFEXITED(pid))
 		pid = WEXITSTATUS(pid);
-	if	(g_all.dad == 1)
+	if (g_all.dad == 1)
 		g_all.exit_code = pid;
 	if (g_all.child == 1)
 	{
@@ -60,7 +60,7 @@ void	ft_start_execution(t_elem_cmd *actual, int pid)
 			waitpid(-1, &pid, 0);
 			if (WIFEXITED(pid))
 				pid = WEXITSTATUS(pid);
-			if	(g_all.dad == 1)
+			if (g_all.dad == 1)
 				g_all.exit_code = pid;
 			if (g_all.child == 1)
 			{
