@@ -12,6 +12,13 @@
 
 #include "../include/minishell.h"
 
+int			print_backslash(char *str, int i)
+{
+	ft_putchar(str[i + 1]);
+	i = i + 2;
+	return (i);
+}
+
 void		print_echo_arg(char *str)
 {
 	int i;
@@ -36,10 +43,7 @@ void		print_echo_arg(char *str)
 		if (str[i] != '\0' && str[i] != '\\')
 			ft_putchar(str[i++]);
 		if (str[i] == '\\')
-		{
-			ft_putchar(str[i + 1]);
-			i = i + 2;
-		}
+			i = print_backslash(str, i);
 	}
 }
 

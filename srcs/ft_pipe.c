@@ -12,26 +12,25 @@
 
 #include "../include/minishell.h"
 
-int	ft_pipe(void)
+void	error_pipe(void)
+{
+	char	*error;
+
+	error = strerror(errno);
+	ft_putstr_fd(error, 2);
+	ft_putstr_fd("\n", 2);
+	exit(0);
+}
+
+int		ft_pipe(void)
 {
 	int		fd[2];
 	pid_t	pid;
-	char	*error;
 
 	if ((pipe(fd) == -1))
-	{
-		error = strerror(errno);
-		ft_putstr_fd(error, 2);
-		ft_putstr_fd("\n", 2);
-		exit(0);
-	}
+		error_pipe();
 	if ((pid = fork()) == -1)
-	{
-		error = strerror(errno);
-		ft_putstr_fd(error, 2);
-		ft_putstr_fd("\n", 2);
-		exit(0);
-	}
+		error_pipe();
 	if (pid == 0)
 	{
 		close(fd[1]);

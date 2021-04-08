@@ -1,53 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/04/07 15:41:16 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/07 15:40:55 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	print_env_builtins(t_elem_env *tmp)
+int		check_path_cmd(char *path)
 {
-	int			verif;
-	int			i;
+	int fd;
 
-	verif = 0;
-	i = 0;
-	while (tmp != NULL)
-	{
-		while (tmp->env[i] != '\0')
-		{
-			if (tmp->env[i] == '=')
-				verif = 1;
-			i++;
-		}
-		if (verif == 1)
-		{
-			ft_putstr(tmp->env);
-			ft_putchar('\n');
-		}
-		i = 0;
-		verif = 0;
-		tmp = tmp->next;
-	}
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		return (0);
+	close(fd);
+	return (1);
 }
 
-int		ft_env(t_elem_cmd *actual)
+char	*check_cmd(t_elem_cmd *tmp)
 {
-	t_elem_env	*tmp;
+	char	*path;
+	char	**files;
+	char	*cmd;
+	int		i;
 
-	tmp = g_all.first_env;
-	if (actual->next != NULL && actual->next->token == ARG)
+	if (!(path = chrenv(ft_strdup("PATH"))))
+		path = ft_strdup("");
+	files = ft_split(path, ':');
+	i = 0;
+	while (files[i])
 	{
-		ft_putstr_fd("Wrong argument\n", 2);
-		return (1);
+		files[i] = ft_strjoin(files[i],
+		ft_strjoin(ft_strdup("/"), ft_strdup(tmp->cmd)));
+		if (check_path_cmd(files[i]))
+		{
+			cmd = ft_strdup(files[i]);
+			free_double_char(files);
+			free(path);
+			return (cmd);
+		}
+		i++;
 	}
-	print_env_builtins(tmp);
-	return (0);
+	free_double_char(files);
+	free(path);
+	return (NULL);
 }
