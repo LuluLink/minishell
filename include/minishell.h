@@ -53,7 +53,6 @@ typedef struct  s_struct_all
     char        *buff;
     int			child;
     int         cursor;
-    int			dad;
     int			d_quote;
     int			exit;
     int			exit_code;
@@ -62,15 +61,14 @@ typedef struct  s_struct_all
     int         index;
     int			pipefdin;
 	int			pipefdout;
-    int			child;
 	int			dad;
-	int 		block_cmd;
-	int			exit_code;
 	int			ctrl_c;
     int			quote;
     int			standardin;
 	int			standardout;
     char        *str;
+	int			i;
+	int			j;
     t_elem_env  *cmd_lst;
     t_elem_env  *first_env;
     t_elem_cmd  *first_cmd;
@@ -137,5 +135,8 @@ void        cmd_rm_last(void);
 void		ft_signal_hander_c(int signal);
 void		quit_minishell(void);
 void		ft_signal_hander_backslash(int signal);
+char		*str_to_env(char *str);
+int			print_env(t_elem_env *tmp, int i, int verif_quote);
+int			remplace_env(char *str);
 
 #endif
