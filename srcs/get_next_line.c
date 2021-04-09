@@ -18,11 +18,21 @@ char	*recurs(int index, int *ret, int fd)
 	char	*str;
 	int		test;
 
-	test = read(fd, buff, 1);
+	//signal(SIGINT, ft_signal_hander_c);
+	//signal(SIGQUIT, ft_signal_hander_backslash);
+	//printf("av ctrl c : %d\n", g_all.ctrl_c);
+	//if (g_all.ctrl_c == 0)
+		test = read(fd, buff, 1);
+	/*else
+	{
+		test = 1;
+		buff[0] = '\n';
+	}*/
+	//printf("\nap ctrl c : %d\n", g_all.ctrl_c);
 	check_arrow(&buff[0]);
 	if (test == 0)
 		buff[0] = 0;
-	if (buff[0] == '\n' || buff[0] == 0)
+	if (buff[0] == '\n' || buff[0] == 0 || g_all.ctrl_c != 0)
 	{
 		if (!(str = malloc(sizeof(char) * index + 1)))
 			return (0);
@@ -117,7 +127,7 @@ int		get_next_line(char **line)
 
 	ret = 1;
 	init_gnl(line);
-	while (g_all.arrow != 0)
+	while (g_all.arrow != 0 && g_all.ctrl_c == 0)
 	{
 		g_all.arrow = 0;
 		if (!*line)
@@ -131,6 +141,9 @@ int		get_next_line(char **line)
 		}
 		if_arrow(line);
 	}
+	//printf("ctrl c : %d, line : |%s|\n", g_all.ctrl_c, *line);
+	//if (g_all.ctrl_c != 0)
+	//	free(*line);
 	if (g_all.str)
 		free(g_all.str);
 	g_all.str = NULL;

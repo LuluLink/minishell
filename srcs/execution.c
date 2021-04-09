@@ -30,7 +30,14 @@ void	ft_reset_fd(void)
 	dup2(g_all.standardout, 1);
 }
 
-void	ft_start_execution(t_elem_cmd *actual, int pid)
+void	reset_var(void)
+{
+	g_all.child = 0;
+	g_all.dad = 0;
+	g_all.block_cmd = 0;
+}
+
+void	execution_first(t_elem_cmd *actual, int pid)
 {
 	ft_execution(actual);
 	ft_reset_fd();
@@ -46,9 +53,12 @@ void	ft_start_execution(t_elem_cmd *actual, int pid)
 		free(g_all.buff);
 		exit(0);
 	}
-	g_all.child = 0;
-	g_all.dad = 0;
-	g_all.block_cmd = 0;
+	reset_var();
+}
+
+void	ft_start_execution(t_elem_cmd *actual, int pid)
+{
+	execution_first(actual, pid);
 	while (actual && actual->next)
 	{
 		actual = actual->next;
@@ -69,9 +79,7 @@ void	ft_start_execution(t_elem_cmd *actual, int pid)
 				free(g_all.buff);
 				exit(0);
 			}
-			g_all.child = 0;
-			g_all.dad = 0;
-			g_all.block_cmd = 0;
+			reset_var();
 		}
 	}
 }

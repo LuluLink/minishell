@@ -62,6 +62,14 @@ void	quit_minishell(void)
 	exit(g_all.exit_code);
 }
 
+void	no_arg_exit(void)
+{
+	printf("exit\n");
+	ft_putstr_fd("argument numerique necessaire", 2);
+	g_all.exit_code = 2;
+	quit_minishell();
+}
+
 void	ft_exit(t_elem_cmd *actual)
 {
 	int	i;
@@ -78,12 +86,7 @@ void	ft_exit(t_elem_cmd *actual)
 		return ;
 	}
 	if (verif_arg == -1)
-	{
-		printf("exit\n");
-		ft_putstr_fd("argument numerique necessaire", 2);
-		g_all.exit_code = 2;
-		quit_minishell();
-	}
+		no_arg_exit();
 	g_all.exit_code = ft_atoi(actual->next->cmd);
 	while (g_all.exit_code < 0)
 		g_all.exit_code = g_all.exit_code + 256;

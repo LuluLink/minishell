@@ -12,46 +12,6 @@
 
 #include "../include/minishell.h"
 
-void	print_liste_env(void)
-{
-	t_elem_env *actuel;
-
-	actuel = g_all.first_env;
-	while (actuel != NULL)
-	{
-		printf("%s\n", actuel->env);
-		actuel = actuel->next;
-	}
-}
-
-void	free_list_env_sort(t_elem_env *lst)
-{
-	t_elem_env *tmp;
-
-	tmp = lst;
-	while (tmp)
-	{
-		free(tmp->env);
-		lst = lst->next;
-		free(tmp);
-		tmp = lst;
-	}
-}
-
-void	free_list_env(void)
-{
-	t_elem_env *tmp;
-
-	tmp = g_all.first_env;
-	while (tmp != NULL)
-	{
-		free(tmp->env);
-		g_all.first_env = g_all.first_env->next;
-		free(tmp);
-		tmp = g_all.first_env;
-	}
-}
-
 void	insertion_end_env(char *str)
 {
 	t_elem_env *nouveau;

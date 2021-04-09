@@ -1,38 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_signal.c                                        :+:      :+:    :+:   */
+/*   env_list2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/07 15:41:26 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/07 15:41:27 by macbookpro       ###   ########.fr       */
+/*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
+/*   Updated: 2021/04/07 15:41:06 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ft_signal_hander_c(int signal)
+void	free_list_env_sort(t_elem_env *lst)
 {
-	if (signal == SIGINT)
+	t_elem_env *tmp;
+
+	tmp = lst;
+	while (tmp)
 	{
-		if (g_all.child == 0)
-		{
-			write(STDERR_FILENO, "\n", 1);
-			//write(STDIN_FILENO, "\n", 1);
-            //write(STDOUT_FILENO, "\n", 1);
-			write(1, NEWLINE, ft_strlen(NEWLINE));
-			g_all.ctrl_c = 1;
-			//write(0, "\n", 1);
-			//write(STDIN_FILENO, "a", 1);
-		}
+		free(tmp->env);
+		lst = lst->next;
+		free(tmp);
+		tmp = lst;
 	}
 }
 
-void	ft_signal_hander_backslash(int signal)
+void	free_list_env(void)
 {
-	if (signal == SIGQUIT)
+	t_elem_env *tmp;
+
+	tmp = g_all.first_env;
+	while (tmp != NULL)
 	{
-		write(STDERR_FILENO, "\b\b  ", 4);
+		free(tmp->env);
+		g_all.first_env = g_all.first_env->next;
+		free(tmp);
+		tmp = g_all.first_env;
 	}
 }

@@ -1,53 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   ft_export_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/04/07 15:41:16 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/07 15:22:05 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	print_env_builtins(t_elem_env *tmp)
+int			print_env(t_elem_env *tmp, int i, int verif_quote)
 {
-	int			verif;
-	int			i;
-
-	verif = 0;
-	i = 0;
-	while (tmp != NULL)
+	ft_putchar(tmp->env[i]);
+	if (tmp->env[i] == '=' && verif_quote == 0)
 	{
-		while (tmp->env[i] != '\0')
-		{
-			if (tmp->env[i] == '=')
-				verif = 1;
-			i++;
-		}
-		if (verif == 1)
-		{
-			ft_putstr(tmp->env);
-			ft_putchar('\n');
-		}
-		i = 0;
-		verif = 0;
-		tmp = tmp->next;
+		ft_putchar('\"');
+		verif_quote = 1;
 	}
+	if (tmp->env[i + 1] == '\0' && verif_quote == 1)
+		ft_putchar('\"');
+	return (verif_quote);
 }
 
-int		ft_env(t_elem_cmd *actual)
+int			remplace_env(char *str)
 {
+	int			i;
 	t_elem_env	*tmp;
 
+	i = 0;
 	tmp = g_all.first_env;
-	if (actual->next != NULL && actual->next->token == ARG)
+	while (str[i] != '\0' && str[i] != '=')
+		i++;
+	while (tmp != NULL)
 	{
-		ft_putstr_fd("Wrong argument\n", 2);
-		return (1);
+		if ((ft_strncmp(tmp->env, str, i) == 0))
+		{
+			free(tmp->env);
+			tmp->env = str;
+			return (1);
+		}
+		tmp = tmp->next;
 	}
-	print_env_builtins(tmp);
 	return (0);
 }
