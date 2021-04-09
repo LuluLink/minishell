@@ -76,7 +76,7 @@ int			ft_echo(t_elem_cmd *actual)
 	int			verif;
 
 	verif = 0;
-	if (actual->next == NULL)
+	if (actual->next == NULL || actual->next->cmd == NULL)
 	{
 		putchar('\n');
 		return (0);

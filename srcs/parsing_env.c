@@ -87,9 +87,11 @@ char	*chrenv(char *str)
 	i = 0;
 	tmp = g_all.first_env;
 	dest = NULL;
-	while (tmp != NULL)
+	size = ft_strlen(str);
+	if	((ft_strncmp("?", str, size) == 0))
+		dest = ft_itoa(g_all.exit_code);
+	while (tmp != NULL && dest == NULL)
 	{
-		size = ft_strlen(str);
 		if ((ft_strncmp(tmp->env, str, size) == 0))
 		{
 			i = len_value(tmp->env);

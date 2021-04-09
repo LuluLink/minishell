@@ -149,5 +149,6 @@ int			check_last(void);
 int			check_dollar(char *str, t_elem_cmd *tmp);
 void		check_env(void);
 int			check_backslash(char *str, int i);
+char		*ft_itoa(int n);
 
 #endif
