@@ -69,6 +69,7 @@ typedef struct  s_struct_all
     char        *str;
 	int			i;
 	int			j;
+	char		a;
     t_elem_env  *cmd_lst;
     t_elem_env  *first_env;
     t_elem_cmd  *first_cmd;
@@ -139,5 +140,14 @@ char		*str_to_env(char *str);
 int			print_env(t_elem_env *tmp, int i, int verif_quote);
 int			remplace_env(char *str);
 char		*check_cmd(t_elem_cmd *tmp);
+char		*free_last(void);
+void		aff_lst_cmd(void);
+char		*keep_printable(char *str);
+void		ft_supp(char *str);
+void		if_arrow(char **line);
+int			check_last(void);
+int			check_dollar(char *str, t_elem_cmd *tmp);
+void		check_env(void);
+int			check_backslash(char *str, int i);
 
 #endif

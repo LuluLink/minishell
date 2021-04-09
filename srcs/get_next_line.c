@@ -6,11 +6,21 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/04/07 15:40:40 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/09 16:22:05 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+void	check_cmd_c(char *buff)
+{
+	if (g_all.ctrl_c == 1)
+	{
+		g_all.a = buff[0];
+		buff[0] = '\n';
+	}
+	check_arrow(&buff[0]);
+}
 
 char	*recurs(int index, int *ret, int fd)
 {
@@ -18,18 +28,8 @@ char	*recurs(int index, int *ret, int fd)
 	char	*str;
 	int		test;
 
-	//signal(SIGINT, ft_signal_hander_c);
-	//signal(SIGQUIT, ft_signal_hander_backslash);
-	//printf("av ctrl c : %d\n", g_all.ctrl_c);
-	//if (g_all.ctrl_c == 0)
-		test = read(fd, buff, 1);
-	/*else
-	{
-		test = 1;
-		buff[0] = '\n';
-	}*/
-	//printf("\nap ctrl c : %d\n", g_all.ctrl_c);
-	check_arrow(&buff[0]);
+	test = read(fd, buff, 1);
+	check_cmd_c(&buff[0]);
 	if (test == 0)
 		buff[0] = 0;
 	if (buff[0] == '\n' || buff[0] == 0 || g_all.ctrl_c != 0)
@@ -51,74 +51,30 @@ char	*recurs(int index, int *ret, int fd)
 	return (str);
 }
 
-void	aff_lst_cmd(void)
-{
-	t_elem_env *tmp;
-
-	tmp = g_all.cmd_lst;
-	while (tmp)
-	{
-		printf("tmp->env : %s\n", tmp->env);
-		tmp = tmp->next;
-	}
-}
-
-char	*keep_printable(char *str)
-{
-	char *a;
-
-	if (g_all.arrow == 1 || g_all.arrow == 2)
-	{
-		a = ft_strndup(str, ft_strlen(str) - 2);
-		free(str);
-	}
-	else
-		a = str;
-	return (a);
-}
-
-void	ft_supp(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	if (i > 0)
-		i -= 1;
-	str[i] = '\0';
-}
-
 void	init_gnl(char **line)
 {
 	g_all.arrow = 1;
 	g_all.cursor = 0;
-	*line = NULL;
+	if (g_all.a)
+	{
+		check_arrow(&g_all.a);
+		*line = free_last();
+	}
+	else
+		*line = NULL;
 	insertion_end_lst("");
+	g_all.index = lst_len() - 1;
 }
 
-void	if_arrow(char **line)
+void	end_gnl(char **line)
 {
-	if (g_all.arrow == 3)
-		ft_supp(*line);
-	if (g_all.arrow == 0 && ft_strlen(*line) > 0)
-	{
+	if (g_all.ctrl_c == 1)
 		cmd_rm_last();
-		insertion_end_lst(*line);
-	}
-	if (g_all.arrow == 1 || g_all.arrow == 2)
-	{
-		if (g_all.index == lst_len() - 1)
-		{
-			cmd_rm_last();
-			insertion_end_lst(*line);
-		}
-		free(*line);
-		*line = NULL;
-		cmd_histo();
-	}
-	else if (g_all.arrow == 0)
-		g_all.index = lst_len();
+	if (g_all.str)
+		free(g_all.str);
+	g_all.str = NULL;
+	if (ft_strcmp(*line, "") == 0 || ft_strcmp(*line, "\n") == 0)
+		cmd_rm_last();
 }
 
 int		get_next_line(char **line)
@@ -127,25 +83,20 @@ int		get_next_line(char **line)
 
 	ret = 1;
 	init_gnl(line);
-	while (g_all.arrow != 0 && g_all.ctrl_c == 0)
-	{
-		g_all.arrow = 0;
-		if (!*line)
-			*line = keep_printable(recurs(0, &ret, 0));
-		else
-			*line = ft_strjoin(*line, keep_printable(recurs(0, &ret, 0)));
-		if (g_all.str)
+	if (!(*line && *line[0] == '\n'))
+		while (g_all.arrow != 0 && g_all.ctrl_c == 0)
 		{
-			*line = ft_strjoin(g_all.str, *line);
-			g_all.str = NULL;
+			g_all.arrow = 0;
+			if (!*line)
+				*line = keep_printable(recurs(0, &ret, 0));
+			else
+				*line = ft_strjoin(*line, keep_printable(recurs(0, &ret, 0)));
+			if (g_all.str)
+				*line = ft_strjoin(g_all.str, *line);
+			if (g_all.str)
+				g_all.str = NULL;
+			if_arrow(line);
 		}
-		if_arrow(line);
-	}
-	//printf("ctrl c : %d, line : |%s|\n", g_all.ctrl_c, *line);
-	//if (g_all.ctrl_c != 0)
-	//	free(*line);
-	if (g_all.str)
-		free(g_all.str);
-	g_all.str = NULL;
+	end_gnl(line);
 	return (ret);
 }

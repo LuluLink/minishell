@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/04/07 15:22:05 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/09 16:07:26 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,31 @@ void	init_term(void)
 	tcsetattr(0, 0, &term);
 }
 
+char	*free_last(void)
+{
+	char	*str;
+
+	str = malloc(sizeof(char) * 2);
+	str[0] = g_all.a;
+	str[1] = '\0';
+	g_all.a = 0;
+	return (str);
+}
+
+void	minishell_parsing(void)
+{
+	write(1, COLORSTART, ft_strlen(COLORSTART));
+	if (((verif_quote(g_all.buff) == 0)) &&
+		(verif_end_backslash(g_all.buff) == 0))
+		start_parsing(g_all.buff);
+	else if ((verif_quote(g_all.buff) == -1))
+		ft_putstr_fd("Error : quote not closed\n", 2);
+	else if ((verif_end_backslash(g_all.buff) == -1))
+		ft_putstr_fd("Error : multiligne with '\\' \n", 2);
+	write(1, NEWLINE, ft_strlen(NEWLINE));
+	free_list_cmd();
+}
+
 int		main(int ac, char **av, char **envp)
 {
 	(void)ac;
@@ -38,20 +63,9 @@ int		main(int ac, char **av, char **envp)
 	while (get_next_line(&g_all.buff) > 0)
 	{
 		if (g_all.ctrl_c == 0)
-		{
-			write(1, COLORSTART, ft_strlen(COLORSTART));
-			if (((verif_quote(g_all.buff) == 0)) &&
-				(verif_end_backslash(g_all.buff) == 0))
-				start_parsing(g_all.buff);
-			else if ((verif_quote(g_all.buff) == -1))
-				ft_putstr_fd("Error : quote not closed\n", 2);
-			else if ((verif_end_backslash(g_all.buff) == -1))
-				ft_putstr_fd("Error : multiligne with '\\' \n", 2);
-			write(1, NEWLINE, ft_strlen(NEWLINE));
-			free_list_cmd();
-		}
-		g_all.ctrl_c = 0;
+			minishell_parsing();
 		free(g_all.buff);
+		g_all.ctrl_c = 0;
 	}
 	return (0);
 }
