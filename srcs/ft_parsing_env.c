@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_env.c                                      :+:      :+:    :+:   */
+/*   ft_parsing_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 15:41:36 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/07 15:41:37 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/09 17:58:10 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ char	*chrenv(char *str)
 	tmp = g_all.first_env;
 	dest = NULL;
 	size = ft_strlen(str);
-	if	((ft_strncmp("?", str, size) == 0))
+	if ((ft_strncmp("?", str, size) == 0))
 		dest = ft_itoa(g_all.exit_code);
-	while (tmp != NULL && dest == NULL)
+	while (tmp && !dest)
 	{
 		if ((ft_strncmp(tmp->env, str, size) == 0))
 		{
@@ -101,8 +101,9 @@ char	*chrenv(char *str)
 		}
 		tmp = tmp->next;
 	}
-	if (str[0] >= '0' && str[0] <= '9')
-		dest = first_is_nbr(str);
+	//if (str[0] >= '0' && str[0] <= '9')
+	//	dest = first_is_nbr(str);
+	dest = (str[0] >= '0' && str[0] <= '9') ? first_is_nbr(str) : dest;
 	free(str);
 	return (dest);
 }
