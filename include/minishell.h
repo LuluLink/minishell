@@ -139,5 +139,6 @@ char		*str_to_env(char *str);
 int			print_env(t_elem_env *tmp, int i, int verif_quote);
 int			remplace_env(char *str);
 char		*check_cmd(t_elem_cmd *tmp);
+char		*ft_itoa(int n);
 
 #endif
