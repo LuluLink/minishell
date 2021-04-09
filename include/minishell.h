@@ -59,13 +59,9 @@ typedef struct  s_struct_all
     int			exit_code;
     int			fdin;
     int			fdout;
-    int         index;
+    int			index;
     int			pipefdin;
 	int			pipefdout;
-    int			child;
-	int			dad;
-	int 		block_cmd;
-	int			exit_code;
 	int			ctrl_c;
     int			quote;
     int			standardin;

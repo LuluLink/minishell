@@ -39,7 +39,7 @@ int		main(int ac, char **av, char **envp)
 	{
 		signal(SIGINT, ft_signal_hander_c);
 		signal(SIGQUIT, ft_signal_hander_backslash);
-		if (g_all.arrow == 0)
+		if (g_all.arrow == 0/* && g_all.ctrl_c == 0*/)
 		{
 			write(1, COLORSTART, ft_strlen(COLORSTART));
 			if (((verif_quote(g_all.buff) == 0)) &&
