@@ -101,8 +101,6 @@ char	*chrenv(char *str)
 		}
 		tmp = tmp->next;
 	}
-	//if (str[0] >= '0' && str[0] <= '9')
-	//	dest = first_is_nbr(str);
 	dest = (str[0] >= '0' && str[0] <= '9') ? first_is_nbr(str) : dest;
 	free(str);
 	return (dest);

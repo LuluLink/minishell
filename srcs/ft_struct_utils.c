@@ -32,5 +32,6 @@ void	initialisation_struct(void)
 	g_all.index = 0;
 	g_all.cursor = 0;
 	g_all.ctrl_c = 0;
+	g_all.in_loop = 0;
 	ft_aff_minishell();
 }

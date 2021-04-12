@@ -35,6 +35,7 @@ void	reset_var(void)
 	g_all.child = 0;
 	g_all.dad = 0;
 	g_all.block_cmd = 0;
+	g_all.in_loop = 0;
 }
 
 void	execution_first(t_elem_cmd *actual, int pid)
@@ -89,6 +90,7 @@ void	ft_execution(t_elem_cmd *actual)
 	int ret;
 
 	ret = 0;
+	g_all.in_loop = 1;
 	if (!actual || g_all.exit == 1)
 		return ;
 	if (actual->prev && actual->prev->token == DOUBLERIGHT)

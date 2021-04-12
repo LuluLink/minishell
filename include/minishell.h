@@ -81,6 +81,7 @@ typedef struct			s_struct_all
 	int					i;
 	int					j;
 	char				a;
+	int					in_loop;
 	t_elem_env			*cmd_lst;
 	t_elem_env			*first_env;
 	t_elem_cmd			*first_cmd;
