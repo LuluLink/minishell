@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 16:24:17 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/09 17:50:28 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/12 11:40:32 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*check_dollar_next(int quote, char *str, int *i, char *str2)
 	return (str2);
 }
 
-int		check_dollar(char *str, t_elem_cmd *tmp)
+char	*check_dollar(char *str)
 {
 	int		i;
 	int		quote;
@@ -86,22 +86,6 @@ int		check_dollar(char *str, t_elem_cmd *tmp)
 	str2 = ft_strdup("");
 	while (str[i])
 		str2 = check_dollar_next(quote, str, &i, str2);
-	free(tmp->cmd);
-	tmp->cmd = str2;
-	return (0);
-}
-
-void	check_env(void)
-{
-	t_elem_cmd *tmp;
-
-	tmp = g_all.first_cmd;
-	while (tmp)
-	{
-		if (tmp->token == ARG || tmp->token == CMD)
-		{
-			check_dollar(tmp->cmd, tmp);
-		}
-		tmp = tmp->next;
-	}
+	free(str);
+	return (str2);
 }

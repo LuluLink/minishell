@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 15:41:32 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/09 16:33:51 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/12 11:38:06 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,12 @@ void	start_parsing(char *buff)
 
 	i = 0;
 	pid = 0;
-	while (buff[i])
+	g_all.buff = check_dollar(buff);
+	while (g_all.buff[i])
 	{
-		i = check_str(buff, i);
+		i = check_str(g_all.buff, i);
 		if (i == -1)
 			return ;
 	}
-	check_env();
 	ft_start_execution(g_all.first_cmd, pid);
 }

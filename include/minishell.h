@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:30 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/09 18:11:21 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/12 11:37:54 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ char					*keep_printable(char *str);
 void					ft_supp(char *str);
 void					if_arrow(char **line);
 int						check_last(void);
-int						check_dollar(char *str, t_elem_cmd *tmp);
+char					*check_dollar(char *str);
 void					check_env(void);
 int						check_backslash(char *str, int i);
 char					*ft_itoa(int n);
