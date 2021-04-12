@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 16:24:17 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/12 11:40:32 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/12 13:42:56 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,13 @@ int		check_last(void)
 	return (0);
 }
 
+char	*check_dollar_two(char *str, char *str2, int *i, int j)
+{
+	str2 = ft_strjoin(str2, ft_strndup(&str[i[0]], j));
+	i[0] += j;
+	return (str2);
+}
+
 char	*check_dollar_next(int quote, char *str, int *i, char *str2)
 {
 	int		j;
@@ -59,10 +66,10 @@ char	*check_dollar_next(int quote, char *str, int *i, char *str2)
 		if (str[i[0] + j] == '\"' && check_backslash(str, i[0] + j)
 		&& quote != 1)
 			quote = (quote == 0) ? 2 : 0;
-		j++;
+		j = (str[i[0] + j + 1] == '$' && quote != 1 && !check_backslash(str,
+		i[0] + j + 1)) ? j + 2 : j + 1;
 	}
-	str2 = ft_strjoin(str2, ft_strndup(&str[i[0]], j));
-	i[0] += j;
+	str2 = check_dollar_two(str, str2, i, j);
 	j = 1;
 	if (str[i[0]] == '$' && quote != 1 && check_backslash(str, i[0]))
 	{

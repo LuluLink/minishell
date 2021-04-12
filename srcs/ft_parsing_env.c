@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 15:41:36 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/09 17:58:10 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/12 13:28:56 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,6 @@ char	*chrenv(char *str)
 		}
 		tmp = tmp->next;
 	}
-	//if (str[0] >= '0' && str[0] <= '9')
-	//	dest = first_is_nbr(str);
 	dest = (str[0] >= '0' && str[0] <= '9') ? first_is_nbr(str) : dest;
 	free(str);
 	return (dest);
