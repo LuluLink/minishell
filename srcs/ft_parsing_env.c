@@ -77,6 +77,13 @@ char	*first_is_nbr(char *str)
 	return (dest);
 }
 
+char	*verif_dest_null(char *dest)
+{
+	if (dest == NULL)
+		return (ft_strdup(""));
+	return (dest);
+}
+
 char	*chrenv(char *str)
 {
 	int			i;
@@ -103,5 +110,6 @@ char	*chrenv(char *str)
 	}
 	dest = (str[0] >= '0' && str[0] <= '9') ? first_is_nbr(str) : dest;
 	free(str);
+	dest = verif_dest_null(dest);
 	return (dest);
 }
