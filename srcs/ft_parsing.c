@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 15:41:32 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/12 13:22:37 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/12 17:27:41 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	start_parsing(char *buff)
 	i = 0;
 	pid = 0;
 	g_all.buff = check_dollar(buff);
-	while (g_all.buff[i])
+	while (g_all.buff && g_all.buff[i])
 	{
 		i = check_str(g_all.buff, i);
 		if (i == -1)

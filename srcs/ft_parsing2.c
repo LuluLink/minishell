@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 16:24:17 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/12 13:42:56 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/12 17:37:39 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ char	*check_dollar_next(int quote, char *str, int *i, char *str2)
 	j = 1;
 	if (str[i[0]] == '$' && quote != 1 && check_backslash(str, i[0]))
 	{
-		while (str[i[0] + j] && (ft_isalnum(str[i[0] + j]) || str[i[0]
-		+ j] == '_' || str[i[0] == '?']) && !(j >= 2 && str[i[0] + 1] == '?'))
+		while (str[i[0] + j] && (ft_isalnum(str[i[0] + j]) || str[i[0] + j]
+		== '_' || str[i[0] + j] == '?') && !(j >= 2 && str[i[0] + 1] == '?'))
 			j++;
 		str2 = ft_strjoin(str2, chrenv(ft_strndup(&str[i[0] + 1], j - 1)));
 		i[0] += j;

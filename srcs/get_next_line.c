@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/04/09 16:22:05 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/12 15:27:31 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	init_gnl(char **line)
 {
 	g_all.arrow = 1;
 	g_all.cursor = 0;
+	g_all.cursor_x = 3;
 	if (g_all.a)
 	{
 		check_arrow(&g_all.a);

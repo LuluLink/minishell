@@ -1,22 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_histo.c                                        :+:      :+:    :+:   */
+/*   ft_cmd_histo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 15:40:57 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/09 16:47:11 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/12 17:19:36 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-int		ft_myputchar(int a)
-{
-	write(1, &a, 1);
-	return (0);
-}
 
 void	ft_aff_index(void)
 {
@@ -28,11 +22,19 @@ void	ft_aff_index(void)
 	tmp = g_all.cmd_lst;
 	while (tmp && i++ < g_all.index)
 		tmp = tmp->next;
-	cl_cap = tgetstr("dl", NULL);
-	tputs(cl_cap, 1, ft_myputchar);
+	tputs(tgetstr("cr", NULL), 1, ft_mypc);
+	cl_cap = tgetstr("up", NULL);
+	while (g_all.cursor_x > g_all.term_x)
+	{
+		g_all.cursor_x -= g_all.term_x;
+		tputs(cl_cap, 1, ft_mypc);
+	}
+	cl_cap = tgetstr("cd", NULL);
+	tputs(cl_cap, 1, ft_mypc);
 	write(1, NEWLINE, ft_strlen(NEWLINE));
 	write(1, tmp->env, ft_strlen(tmp->env));
 	g_all.cursor = ft_strlen(tmp->env);
+	g_all.cursor_x = g_all.cursor + 3;
 	if (g_all.str)
 		free(g_all.str);
 	g_all.str = ft_strdup(tmp->env);
@@ -59,16 +61,39 @@ void	cmd_histo(void)
 **             3 -> del
 */
 
+void	rm_del2(void)
+{
+	tputs(tgetstr("le", NULL), 1, ft_mypc);
+	tputs(tgetstr("le", NULL), 1, ft_mypc);
+	tputs(tgetstr("cd", NULL), 1, ft_mypc);
+}
+
 void	rm_del(char *a)
 {
 	a[0] = '\n';
 	g_all.arrow = 3;
 	if (g_all.cursor > 0)
-		tputs(tgetstr("le", NULL), 1, ft_myputchar);
+	{
+		if (g_all.cursor_x % g_all.term_x == 0 ||
+		g_all.cursor_x % g_all.term_x == g_all.term_x - 1)
+		{
+			tputs(tgetstr("up", NULL), 1, ft_mypc);
+			tputs(tgoto(tgetstr("ch", NULL), g_all.cursor_x,
+			g_all.cursor_x), 1, ft_mypc);
+			if (g_all.cursor_x % g_all.term_x == g_all.term_x - 1)
+				tputs(tgetstr("le", NULL), 1, ft_mypc);
+			tputs(tgetstr("cd", NULL), 1, ft_mypc);
+			g_all.cursor = (g_all.cursor > 0) ? g_all.cursor - 1 : g_all.cursor;
+			g_all.cursor_x = (g_all.cursor_x > 0) ?
+			g_all.cursor_x - 1 : g_all.cursor_x;
+			return ;
+		}
+		else if (g_all.cursor_x % g_all.term_x != g_all.term_x - 2)
+			tputs(tgetstr("le", NULL), 1, ft_mypc);
+	}
+	rm_del2();
 	g_all.cursor = (g_all.cursor > 0) ? g_all.cursor - 1 : g_all.cursor;
-	tputs(tgetstr("le", NULL), 1, ft_myputchar);
-	tputs(tgetstr("le", NULL), 1, ft_myputchar);
-	tputs(tgetstr("ce", NULL), 1, ft_myputchar);
+	g_all.cursor_x = (g_all.cursor_x > 0) ? g_all.cursor_x - 1 : g_all.cursor_x;
 }
 
 void	check_arrow(char *a)
@@ -78,18 +103,22 @@ void	check_arrow(char *a)
 	if (a[0] == 127)
 		rm_del(a);
 	else if (i == 0 && a[0] == 27)
+	{
 		i = 1;
+		g_all.cursor_x += 2;
+	}
 	else if (i == 1 && a[0] == '[')
-		i = 2;
+		i = (++g_all.cursor_x) ? 2 : 2;
 	else if (i == 2 && (a[0] == 'A' || a[0] == 'B'))
 	{
 		g_all.arrow = a[0] - 64;
+		i = (++g_all.cursor_x) ? 0 : 0;
 		a[0] = '\n';
-		i = 0;
 	}
 	else
 	{
 		i = 0;
 		g_all.cursor++;
+		g_all.cursor_x++;
 	}
 }
