@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 15:34:23 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/13 15:35:27 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/13 16:57:53 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,28 @@ void	reset_var(void)
 	g_all.dad = 0;
 	g_all.block_cmd = 0;
 	g_all.in_loop = 0;
+}
+
+void	check_multiple_words(t_elem_cmd *tmp)
+{
+	t_elem_cmd	*last;
+	t_elem_cmd	*prev;
+	char		**mytab;
+	int			i;
+
+	i = 0;
+	mytab = ft_split(tmp->cmd, ' ');
+	free(tmp->cmd);
+	tmp->cmd = mytab[i];
+	last = tmp->next;
+	while (mytab[++i])
+	{
+		tmp->next = malloc(sizeof(t_elem_cmd));
+		prev = tmp;
+		tmp = tmp->next;
+		tmp->prev = prev;
+		tmp->cmd = mytab[i];
+	}
+	tmp->next = last;
+	give_list_token();
 }

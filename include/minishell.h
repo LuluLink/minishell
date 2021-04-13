@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:30 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/13 15:36:00 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/13 16:38:27 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,5 +169,6 @@ void					ft_bs_alone(void);
 void					ft_quote_for_dollar(int *quote,
 char *str, int *j, int *i);
 void					reset_var(void);
+void					check_multiple_words(t_elem_cmd *tmp);
 
 #endif

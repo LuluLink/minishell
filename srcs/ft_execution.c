@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/04/13 15:33:48 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/13 16:57:06 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ void	ft_reset_fd(void)
 	dup2(g_all.standardout, 1);
 }
 
-void	test(int j)
+void	replace_env(int j)
 {
 	static int	i;
 	int			k;
 	t_elem_cmd	*tmp;
+	char		*str;
 
-	if (j == 0)
-		i = 0;
-	k = i;
+	i = (j == 0) ? 0 : i;
+	k = i++;
 	tmp = g_all.first_cmd;
 	while (k > 0 && tmp && tmp->next)
 	{
@@ -50,15 +50,18 @@ void	test(int j)
 	}
 	while (tmp && tmp->token != SEMICOLON)
 	{
+		str = ft_strdup(tmp->cmd);
 		tmp->cmd = check_dollar(tmp->cmd);
+		if (ft_strcmp(str, tmp->cmd) != 0)
+			check_multiple_words(tmp);
+		free(str);
 		tmp = tmp->next;
 	}
-	i++;
 }
 
 void	execution_first(t_elem_cmd *actual, int pid)
 {
-	test(0);
+	replace_env(0);
 	ft_execution(actual);
 	ft_reset_fd();
 	waitpid(-1, &pid, 0);
@@ -84,7 +87,7 @@ void	ft_start_execution(t_elem_cmd *actual, int pid)
 		actual = actual->next;
 		if (actual && actual->next && actual->token == SEMICOLON)
 		{
-			test(1);
+			replace_env(1);
 			actual = actual->next;
 			ft_execution(actual);
 			ft_reset_fd();

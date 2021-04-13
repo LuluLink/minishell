@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/04/07 15:22:05 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/13 16:58:35 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ int			verif_arg_export(t_elem_cmd *actual)
 			return (-1);
 		if (tmp->cmd[i] == '\"')
 		{
-			i++;
-			if (tmp->cmd[i] == '\0' || tmp->cmd[i] == '=')
+			if (tmp->cmd[++i] == '\0' || tmp->cmd[i] == '=')
 				return (0);
 		}
 		i++;

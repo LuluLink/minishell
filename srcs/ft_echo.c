@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/04/07 15:41:14 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/13 16:55:50 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void		print_echo_arg(char *str)
 		{
 			i++;
 			while (str[i] != '\"' && str[i] != '\0')
-			i = backslash_in_quote(str, i);
+				i = backslash_in_quote(str, i);
 			i++;
 		}
 		if (str[i] == '\'')
