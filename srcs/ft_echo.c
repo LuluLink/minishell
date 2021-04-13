@@ -19,6 +19,15 @@ int			print_backslash(char *str, int i)
 	return (i);
 }
 
+int			backslash_in_quote(char *str, int i)
+{
+	if (str[i] == '\\' && str[i + 1] == '$')
+		i++;
+	ft_putchar(str[i]);
+	i++;
+	return (i);
+}
+
 void		print_echo_arg(char *str)
 {
 	int i;
@@ -30,7 +39,7 @@ void		print_echo_arg(char *str)
 		{
 			i++;
 			while (str[i] != '\"' && str[i] != '\0')
-				ft_putchar(str[i++]);
+			i = backslash_in_quote(str, i);
 			i++;
 		}
 		if (str[i] == '\'')
