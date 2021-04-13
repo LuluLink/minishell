@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 15:41:36 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/12 13:28:56 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/13 13:06:13 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,10 @@ char	*verif_dest_null(char *dest)
 
 char	*chrenv(char *str)
 {
-	int			i;
 	int			size;
 	char		*dest;
 	t_elem_env	*tmp;
 
-	i = 0;
 	tmp = g_all.first_env;
 	dest = NULL;
 	size = ft_strlen(str);
@@ -101,8 +99,7 @@ char	*chrenv(char *str)
 	{
 		if ((ft_strncmp(tmp->env, str, size) == 0))
 		{
-			i = len_value(tmp->env);
-			dest = fill_with_env_value(i, tmp->env);
+			dest = fill_with_env_value(len_value(tmp->env), tmp->env);
 			free(str);
 			return (dest);
 		}
