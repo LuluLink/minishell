@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:30 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/13 13:25:37 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/13 15:36:00 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void					print_liste_env();
 void					init_liste_env(char **envp);
 int						ft_strcmp(char *s1, char *s2);
 char					*chrenv(char *str);
-void					start_parsing(char *buff);
+void					start_parsing(void);
 char					*ft_strndup(const char *src, int n);
 void					give_list_token();
 void					ft_putchar(char c);
@@ -166,6 +166,8 @@ int						check_backslash(char *str, int i);
 char					*ft_itoa(int n);
 int						ft_mypc(int a);
 void					ft_bs_alone(void);
-void					ft_quote_for_dollar(int *quote, char *str, int *j, int *i);
+void					ft_quote_for_dollar(int *quote,
+char *str, int *j, int *i);
+void					reset_var(void);
 
 #endif

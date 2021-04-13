@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/04/12 15:33:50 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/13 15:32:27 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	minishell_parsing(void)
 	write(1, COLORSTART, ft_strlen(COLORSTART));
 	if (((verif_quote(g_all.buff) == 0)) &&
 		(verif_end_backslash(g_all.buff) == 0))
-		start_parsing(g_all.buff);
+		start_parsing();
 	else if ((verif_quote(g_all.buff) == -1))
 		ft_putstr_fd("Error : quote not closed\n", 2);
 	else if ((verif_end_backslash(g_all.buff) == -1))

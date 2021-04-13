@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   ft_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/04/07 15:41:08 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/13 15:33:48 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,35 @@ void	ft_reset_fd(void)
 	dup2(g_all.standardout, 1);
 }
 
-void	reset_var(void)
+void	test(int j)
 {
-	g_all.child = 0;
-	g_all.dad = 0;
-	g_all.block_cmd = 0;
-	g_all.in_loop = 0;
+	static int	i;
+	int			k;
+	t_elem_cmd	*tmp;
+
+	if (j == 0)
+		i = 0;
+	k = i;
+	tmp = g_all.first_cmd;
+	while (k > 0 && tmp && tmp->next)
+	{
+		while (tmp && tmp->token != SEMICOLON)
+			tmp = tmp->next;
+		if (tmp->token == SEMICOLON && tmp->next)
+			tmp = tmp->next;
+		k--;
+	}
+	while (tmp && tmp->token != SEMICOLON)
+	{
+		tmp->cmd = check_dollar(tmp->cmd);
+		tmp = tmp->next;
+	}
+	i++;
 }
 
 void	execution_first(t_elem_cmd *actual, int pid)
 {
+	test(0);
 	ft_execution(actual);
 	ft_reset_fd();
 	waitpid(-1, &pid, 0);
@@ -65,6 +84,7 @@ void	ft_start_execution(t_elem_cmd *actual, int pid)
 		actual = actual->next;
 		if (actual && actual->next && actual->token == SEMICOLON)
 		{
+			test(1);
 			actual = actual->next;
 			ft_execution(actual);
 			ft_reset_fd();
