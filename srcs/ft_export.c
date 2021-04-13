@@ -19,6 +19,8 @@ int			verif_arg_export(t_elem_cmd *actual)
 
 	i = 0;
 	tmp = actual->next;
+	if (tmp->cmd[0] == '=')
+		return (-1);
 	while (tmp->cmd[i] != '\0' && tmp->cmd[i] != '=')
 	{
 		if ((tmp->cmd[i] >= '0' && tmp->cmd[i] <= '9') && i == 0)
