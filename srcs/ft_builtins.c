@@ -41,7 +41,10 @@ void	ft_send_error(void)
 	error = strerror(errno);
 	ft_putstr_fd(error, 2);
 	ft_putstr_fd("\n", 2);
-	exit(0);
+	if (errno == EAGAIN)
+		exit(126);
+	else
+		exit(127);
 }
 
 void	ft_execve(char *path, char **cmd, char **env)

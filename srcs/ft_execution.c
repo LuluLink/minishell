@@ -74,7 +74,7 @@ void	execution_first(t_elem_cmd *actual, int pid)
 		free_list_cmd();
 		free_list_env();
 		free(g_all.buff);
-		exit(0);
+		exit(g_all.exit_code);
 	}
 	reset_var();
 }
@@ -101,7 +101,7 @@ void	ft_start_execution(t_elem_cmd *actual, int pid)
 				free_list_cmd();
 				free_list_env();
 				free(g_all.buff);
-				exit(0);
+				exit(g_all.exit_code);
 			}
 			reset_var();
 		}
