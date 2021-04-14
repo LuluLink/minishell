@@ -55,6 +55,19 @@ char		*init_dest(char *str)
 	return (tmp);
 }
 
+int			backslash_export(char *str, char *dest, int i, int *j)
+{
+	if (str[i] == '\\' && str[i + 1] != '\0' && str[i + 1] == '\"')
+	{
+		dest[j[0]++] = str[i++];
+		dest[j[0]++] = str[i++];
+		return (i);
+	}
+	else
+		dest[j[0]++] = str[i++];
+	return(i);
+}
+
 char		*copy_without_quote(char *str, char *dest)
 {
 	int i;
@@ -68,7 +81,7 @@ char		*copy_without_quote(char *str, char *dest)
 		{
 			i++;
 			while (str[i] != '\"' && str[i] != '\0')
-				dest[j++] = str[i++];
+				i = backslash_export(str, dest, i, &j);
 			i++;
 		}
 		if (str[i] == '\'')
