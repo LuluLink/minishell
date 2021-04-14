@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/04/13 16:57:06 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/14 15:58:19 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	ft_execution(t_elem_cmd *actual)
 
 	ret = 0;
 	g_all.in_loop = 1;
-	if (!actual || g_all.exit == 1)
+	if (!actual || g_all.exit == 1 || !ft_check_sep())
 		return ;
 	if (actual->prev && actual->prev->token == DOUBLERIGHT)
 		ft_doubleright(actual);

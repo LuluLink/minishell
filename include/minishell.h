@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:30 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/14 14:56:04 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/14 15:52:48 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,5 +172,6 @@ void					reset_var(void);
 void					check_multiple_words(t_elem_cmd *tmp);
 void					search_token(char *str, t_elem_cmd *tmp,
 t_elem_cmd *prev);
+int						ft_check_sep(void);
 
 #endif
