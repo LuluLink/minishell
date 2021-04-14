@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 15:34:23 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/14 16:22:19 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/14 16:26:56 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,16 @@ int		ft_check_sep(void)
 	while (tmp)
 	{
 		if (ft_is_token(tmp->token))
-			if (!tmp->prev || (!tmp->next && tmp->token != SEMICOLON) || (tmp->next && ft_is_token(tmp->next->token)))
-				{
-					g_all.exit_code = 2;
-					ft_putstr_fd("Minishell: syntax error near unexpected \
+			if (!tmp->prev || (!tmp->next && tmp->token != SEMICOLON) ||
+			(tmp->next && ft_is_token(tmp->next->token)))
+			{
+				g_all.exit_code = 2;
+				ft_putstr_fd("Minishell: syntax error near unexpected \
 token `", 2);
-					ft_putstr_fd(tmp->cmd, 2);
-					ft_putstr_fd("'\n", 2);
-					return (0);
-				}
+				ft_putstr_fd(tmp->cmd, 2);
+				ft_putstr_fd("'\n", 2);
+				return (0);
+			}
 		tmp = tmp->next;
 	}
 	return (1);
