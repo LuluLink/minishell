@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 15:34:23 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/13 16:57:53 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/14 15:01:28 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	check_multiple_words(t_elem_cmd *tmp)
 		tmp = tmp->next;
 		tmp->prev = prev;
 		tmp->cmd = mytab[i];
+		search_token(tmp->cmd, tmp, prev);
 	}
 	tmp->next = last;
-	give_list_token();
+	free(mytab);
 }
