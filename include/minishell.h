@@ -173,5 +173,6 @@ void					check_multiple_words(t_elem_cmd *tmp);
 void					search_token(char *str, t_elem_cmd *tmp,
 t_elem_cmd *prev);
 int						ft_check_sep(void);
+void					inc_i_j(void);
 
 #endif

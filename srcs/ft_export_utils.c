@@ -12,12 +12,6 @@
 
 #include "../include/minishell.h"
 
-void		inc_i_j(void)
-{
-	g_all.i++;
-	g_all.j++;
-}
-
 int			count_without_quote(char *str)
 {
 	g_all.i = 0;
@@ -65,7 +59,7 @@ int			backslash_export(char *str, char *dest, int i, int *j)
 	}
 	else
 		dest[j[0]++] = str[i++];
-	return(i);
+	return (i);
 }
 
 char		*copy_without_quote(char *str, char *dest)

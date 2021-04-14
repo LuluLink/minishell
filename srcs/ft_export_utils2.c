@@ -46,3 +46,9 @@ int			remplace_env(char *str)
 	}
 	return (0);
 }
+
+void		inc_i_j(void)
+{
+	g_all.i++;
+	g_all.j++;
+}

@@ -21,7 +21,8 @@ int			print_backslash(char *str, int i)
 
 int			backslash_in_quote(char *str, int i)
 {
-	if ((str[i] == '\\' && str[i + 1] == '$') || (str[i] == '\\' && str[i + 1] == '\"'))
+	if ((str[i] == '\\' && str[i + 1] == '$') ||
+	(str[i] == '\\' && str[i + 1] == '\"'))
 		i++;
 	ft_putchar(str[i]);
 	i++;
