@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:30 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/15 15:21:45 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/15 15:50:45 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct			s_struct_all
 	int					term_x;
 	int					cursor_x;
 	int					sep;
+	int					error;
 	t_elem_env			*cmd_lst;
 	t_elem_env			*first_env;
 	t_elem_cmd			*first_cmd;
