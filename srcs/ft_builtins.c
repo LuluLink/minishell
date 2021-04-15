@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   ft_builtins.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/04/07 15:40:55 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/15 16:06:35 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,25 @@ int		builtins_cmd(t_elem_cmd *tmp)
 	return (1);
 }
 
-void	ft_send_error(void)
+void	ft_send_error(char *str)
 {
 	char	*error;
 
-	error = strerror(errno);
-	ft_putstr_fd(error, 2);
-	ft_putstr_fd("\n", 2);
-	if (errno == EAGAIN)
-		exit(126);
+	if (g_all.error == 0)
+	{
+		error = strerror(errno);
+		ft_putstr_fd(error, 2);
+		ft_putstr_fd("\n", 2);
+		if (errno == EAGAIN)
+			exit(126);
+	}
 	else
-		exit(127);
+	{
+		ft_putstr_fd("Minishell: ", 2);
+		ft_putstr_fd(str, 2);
+		ft_putstr_fd(": command not found\n", 2);
+	}
+	exit(127);
 }
 
 void	ft_execve(char *path, char **cmd, char **env)
@@ -57,10 +65,10 @@ void	ft_execve(char *path, char **cmd, char **env)
 	if (pid == 0)
 	{
 		if (execve(path, cmd, env) == -1)
-			ft_send_error();
+			ft_send_error(cmd[0]);
 	}
 	else if (pid == -1)
-		ft_send_error();
+		ft_send_error(cmd[0]);
 	else if (pid > 0)
 		waitpid(pid, &status, 0);
 	g_all.exit_code = status / 256;
@@ -101,6 +109,7 @@ void	launch_cmd(t_elem_cmd *tmp)
 	if (!builtins_cmd(tmp))
 	{
 		path = check_cmd(tmp);
+		g_all.error = (path) ? 0 : 1;
 		if (path)
 			ft_create_path(path, tmp, tmp);
 		else
