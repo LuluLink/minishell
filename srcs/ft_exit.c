@@ -82,7 +82,9 @@ void	ft_exit(t_elem_cmd *actual)
 	if (i > 1 && verif_arg == 0)
 	{
 		printf("exit\n");
-		ft_putstr_fd("trop d'argument", 2);
+		ft_putstr_fd("trop d'argument\n", 2);
+		if (g_all.exit_code != 2)
+			g_all.exit_code = 1;
 		return ;
 	}
 	if (verif_arg == -1)
