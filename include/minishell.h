@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:30 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/15 18:25:39 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/15 18:31:50 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,5 +182,6 @@ void					rm_del2(void);
 void					ctrl_d(char *a);
 void					ft_cd2(char *str, char *error, int tofree, char *path);
 void					print_error_export(char *str);
+void					modif_pwd(char *path);
 
 #endif
