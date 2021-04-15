@@ -18,6 +18,7 @@ void	reset_var(void)
 	g_all.dad = 0;
 	g_all.block_cmd = 0;
 	g_all.in_loop = 0;
+	g_all.exit = 0;
 }
 
 void	check_multiple_words(t_elem_cmd *tmp)

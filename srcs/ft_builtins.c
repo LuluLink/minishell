@@ -54,17 +54,16 @@ void	ft_execve(char *path, char **cmd, char **env)
 
 	status = 0;
 	pid = fork();
-	if (pid == -1)
+	if (pid == 0)
+	{
+		if (execve(path, cmd, env) == -1)
+			ft_send_error();
+	}
+	else if (pid == -1)
 		ft_send_error();
 	else if (pid > 0)
-	{
 		waitpid(pid, &status, 0);
-		kill(pid, SIGTERM);
-	}
-	else if (execve(path, cmd, env) == -1)
-		ft_send_error();
-	else if (WIFEXITED(pid))
-		g_all.exit_code = WEXITSTATUS(pid);
+	g_all.exit_code = status / 256;
 }
 
 void	ft_create_path(char *path, t_elem_cmd *lst, t_elem_cmd *tmp)

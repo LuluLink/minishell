@@ -22,6 +22,7 @@ void	ft_right(t_elem_cmd *actual)
 		ft_putstr_fd(actual->cmd, 2);
 		ft_putstr_fd("\n", 2);
 		g_all.exit = 1;
+		g_all.block_cmd = 1;
 	}
 	dup2(g_all.fdout, STDOUT_FILENO);
 }
@@ -36,6 +37,7 @@ void	ft_doubleright(t_elem_cmd *actual)
 		ft_putstr_fd(actual->cmd, 2);
 		ft_putstr_fd("\n", 2);
 		g_all.exit = 1;
+		g_all.block_cmd = 1;
 	}
 	dup2(g_all.fdout, STDOUT_FILENO);
 }
@@ -50,6 +52,7 @@ void	ft_left(t_elem_cmd *actual)
 		ft_putstr_fd(actual->cmd, 2);
 		ft_putstr_fd("\n", 2);
 		g_all.exit = 1;
+		g_all.block_cmd = 1;
 	}
 	dup2(g_all.fdin, STDIN_FILENO);
 }
