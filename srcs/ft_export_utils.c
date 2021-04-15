@@ -57,6 +57,14 @@ int			backslash_export(char *str, char *dest, int i, int *j)
 		dest[j[0]++] = str[i++];
 		return (i);
 	}
+	else if (str[i] == '\\' && str[i + 1] != '\0' && str[i + 1] != '\"'
+	&& str[i + 1] != '$')
+	{
+		dest[j[0]++] = str[i++];
+		dest[j[0]++] = '\\';
+		dest[j[0]++] = str[i++];
+		return (i);
+	}
 	else
 		dest[j[0]++] = str[i++];
 	return (i);
