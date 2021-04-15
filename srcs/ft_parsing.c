@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 15:41:32 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/14 15:55:48 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/15 13:20:27 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,8 @@ int		check_str(char *buff, int i)
 		insertion_end_cmd(ft_strndup(&buff[i], j), 0);
 	i += j + ft_skipspaces(&buff[i + j]);
 	j = 0;
-	while (buff[i + j] && check_token(buff, i + j, 1)
-	&& !ft_isspace(buff[i + j]))
-		j++;
+	if (buff[i] && check_token(buff, i, 1))
+		j = (buff[i] == '>' && buff[i + 1] == '>') ? j + 2 : j + 1;
 	if (j > 0)
 	{
 		insertion_end_cmd(ft_strndup(&buff[i], j), 0);

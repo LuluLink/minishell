@@ -6,11 +6,23 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 15:34:23 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/14 16:26:56 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/15 13:25:48 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+void        aff_lst_cmd(void)
+{
+    t_elem_cmd  *tmp;
+
+    tmp = g_all.first_cmd;
+    while (tmp)
+    {
+        printf("token : %d, str : %s\n", tmp->token, tmp->cmd);
+        tmp = tmp->next;
+    }
+}
 
 void	reset_var(void)
 {
@@ -61,7 +73,7 @@ int		ft_check_sep(void)
 	while (tmp)
 	{
 		if (ft_is_token(tmp->token))
-			if (!tmp->prev || (!tmp->next && tmp->token != SEMICOLON) ||
+			if ((!tmp->prev && tmp->token != RIGHT && tmp->token != LEFT) || (!tmp->next && tmp->token != SEMICOLON) ||
 			(tmp->next && ft_is_token(tmp->next->token)))
 			{
 				g_all.exit_code = 2;
