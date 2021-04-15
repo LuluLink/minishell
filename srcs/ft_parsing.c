@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 15:41:32 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/15 13:20:27 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/15 14:46:26 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,6 @@ void	start_parsing(void)
 			return ;
 	}
 	ft_bs_alone();
+	g_all.sep = 0;
 	ft_start_execution(g_all.first_cmd, pid);
 }

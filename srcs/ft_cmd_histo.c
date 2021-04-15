@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 15:40:57 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/12 17:19:36 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/15 15:20:55 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ void	check_arrow(char *a)
 
 	if (a[0] == 127)
 		rm_del(a);
+	else if (a[0] == 4)
+		ctrl_d(a);
 	else if (i == 0 && a[0] == 27)
 	{
 		i = 1;
@@ -117,8 +119,7 @@ void	check_arrow(char *a)
 	}
 	else
 	{
+		check_arrow2(i, a);
 		i = 0;
-		g_all.cursor++;
-		g_all.cursor_x++;
 	}
 }

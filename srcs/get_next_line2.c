@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 16:02:08 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/09 16:22:11 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/15 15:20:16 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,29 @@ char	*keep_printable(char *str)
 	return (a);
 }
 
-void	ft_supp(char *str)
+void	ft_supp(char *str, int j)
 {
 	int i;
 
-	i = 0;
-	while (str[i])
-		i++;
-	if (i > 0)
-		i -= 1;
-	str[i] = '\0';
+	while (j-- > 0)
+	{
+		i = 0;
+		while (str[i])
+			i++;
+		if (i > 0)
+			i -= 1;
+		str[i] = '\0';
+	}
 }
 
 void	if_arrow(char **line)
 {
-	if (g_all.arrow == 3)
-		ft_supp(*line);
+	if (g_all.arrow == 3 || g_all.arrow == 4)
+		ft_supp(*line, ((g_all.arrow == 4) ? 2 : 1));
+	if (g_all.ctrl_d == 1 && !ft_strlen(*line))
+		ft_exit(NULL);
+	else
+		g_all.ctrl_d = 0;
 	if (g_all.arrow == 0 && ft_strlen(*line) > 0)
 	{
 		cmd_rm_last();

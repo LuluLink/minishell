@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_histo2.c                                       :+:      :+:    :+:   */
+/*   ft_cmd_histo2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 16:47:13 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/09 16:47:25 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/15 14:38:12 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,19 @@ int		lst_len(void)
 		i++;
 	}
 	return (i);
+}
+
+void	check_arrow2(int i, char *a)
+{
+	g_all.cursor = (i == 2 && (a[0] == 'C' || a[0] == 'D')) ? g_all.cursor
+	: g_all.cursor + 1;
+	g_all.cursor_x = (i == 2 && (a[0] == 'C' || a[0] == 'D')) ?
+	g_all.cursor_x : g_all.cursor_x + 1;
+	if (i == 2 && (a[0] == 'C' || a[0] == 'D'))
+	{
+		rm_del2();
+		rm_del2();
+		a[0] = '\n';
+		g_all.arrow = 4;
+	}
 }

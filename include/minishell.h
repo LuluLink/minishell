@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:30 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/14 15:52:48 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/15 15:21:45 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct			s_struct_all
 	int					pipefdout;
 	int					dad;
 	int					ctrl_c;
+	int					ctrl_d;
 	int					quote;
 	int					standardin;
 	int					standardout;
@@ -84,6 +85,7 @@ typedef struct			s_struct_all
 	int					in_loop;
 	int					term_x;
 	int					cursor_x;
+	int					sep;
 	t_elem_env			*cmd_lst;
 	t_elem_env			*first_env;
 	t_elem_cmd			*first_cmd;
@@ -157,7 +159,7 @@ char					*check_cmd(t_elem_cmd *tmp);
 char					*free_last(void);
 void					aff_lst_cmd(void);
 char					*keep_printable(char *str);
-void					ft_supp(char *str);
+void					ft_supp(char *str, int j);
 void					if_arrow(char **line);
 int						check_last(void);
 char					*check_dollar(char *str);
@@ -174,5 +176,8 @@ void					search_token(char *str, t_elem_cmd *tmp,
 t_elem_cmd *prev);
 int						ft_check_sep(void);
 void					inc_i_j(void);
+void					check_arrow2(int i, char *a);
+void					rm_del2(void);
+void					ctrl_d(char *a);
 
 #endif
