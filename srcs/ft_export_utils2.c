@@ -52,3 +52,10 @@ void		inc_i_j(void)
 	g_all.i++;
 	g_all.j++;
 }
+
+void		print_error_export(char *str)
+{
+	ft_putstr_fd("export : ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(" : indentifiant invalide\n", 2);
+}

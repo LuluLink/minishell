@@ -131,7 +131,7 @@ int			ft_export(t_elem_cmd *actual)
 		}
 		else
 		{
-			printf("export : %s : indentifiant invalide\n", actual->next->cmd);
+			print_error_export(actual->next->cmd);
 			ret = 1;
 		}
 		actual = actual->next;

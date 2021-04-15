@@ -180,5 +180,6 @@ void					inc_i_j(void);
 void					check_arrow2(int i, char *a);
 void					rm_del2(void);
 void					ctrl_d(char *a);
+void					print_error_export(char *str);
 
 #endif
