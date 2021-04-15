@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:30 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/15 15:50:45 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/15 18:23:47 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,5 +180,6 @@ void					inc_i_j(void);
 void					check_arrow2(int i, char *a);
 void					rm_del2(void);
 void					ctrl_d(char *a);
+void					ft_cd2(char *str, char *error, int tofree, char *path);
 
 #endif

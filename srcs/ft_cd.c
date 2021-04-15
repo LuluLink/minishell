@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/04/07 15:41:11 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/15 18:24:14 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,48 @@ void	pwd_env(void)
 		free(pwd);
 }
 
+void	pwd_env2(char *str)
+{
+	t_elem_env	*tmp;
+
+	tmp = g_all.first_env;
+	while (tmp->next && ft_strncmp(tmp->env, "PWD=", 4) != 0)
+		tmp = tmp->next;
+	if (ft_strncmp(tmp->env, "PWD=", 4) == 0 && str)
+	{
+		ft_old_pwd(tmp->env);
+		if (tmp->env[ft_strlen(tmp->env) - 1] != '/')
+			tmp->env = ft_strjoin(tmp->env, ft_strdup("/"));
+		tmp->env = ft_strjoin(tmp->env, ft_strdup(str));
+	}
+}
+
+void	modif_pwd(char *path)
+{
+	int i;
+
+	i = 0;
+	if (!path)
+		return ;
+	while (path[i])
+	{
+		if (path[i] && path[i] == '.')
+		{
+			i++;
+			if (path[i] && path[i] == '/')
+				i++;
+		}
+		if (path[i] && path[i] != '.')
+			return ;
+	}
+	pwd_env2(path);
+}
+
 int		ft_cd(char *path)
 {
-	char	*error;
+	int		i;
 	int		tofree;
+	char	*str;
 
 	tofree = 0;
 	if (!path)
@@ -56,17 +94,16 @@ int		ft_cd(char *path)
 		tofree = 1;
 		path = chrenv(ft_strdup("HOME"));
 	}
-	if (chdir(path) == -1)
+	i = chdir(path);
+	if (!(str = getcwd(NULL, 0)) || i == -1)
 	{
-		error = strerror(errno);
-		ft_putstr_fd(error, 2);
-		ft_putstr_fd("\n", 2);
-		if (tofree == 1)
-			free(path);
+		ft_cd2(str, strerror(errno), tofree, path);
 		return (1);
 	}
 	pwd_env();
 	if (tofree == 1)
 		free(path);
+	if (str)
+		free(str);
 	return (0);
 }
