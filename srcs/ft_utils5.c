@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 15:34:23 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/15 14:47:10 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/16 16:49:51 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,13 @@ void	check_multiple_words(t_elem_cmd *tmp)
 
 	i = 0;
 	mytab = ft_split(tmp->cmd, ' ');
-	free(tmp->cmd);
-	tmp->cmd = mytab[i];
+	if (mytab && mytab[i])
+	{
+		free(tmp->cmd);
+		tmp->cmd = mytab[i];
+	}
 	last = tmp->next;
-	while (mytab[++i])
+	while (mytab && mytab[i] && mytab[++i])
 	{
 		tmp->next = malloc(sizeof(t_elem_cmd));
 		prev = tmp;
@@ -52,6 +55,18 @@ int		ft_is_token(int i)
 		LEFT || i == PIPE || i == SEMICOLON)
 		return (1);
 	return (0);
+}
+
+void	aff_lst_cmd(void)
+{
+	t_elem_cmd	*tmp;
+
+	tmp = g_all.first_cmd;
+	while (tmp)
+	{
+		printf("tmp->env : |%s|\n", tmp->cmd);
+		tmp = tmp->next;
+	}
 }
 
 int		ft_check_sep(void)
