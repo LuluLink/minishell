@@ -61,14 +61,16 @@ char	*first_is_nbr(char *str)
 {
 	int		i;
 	int		j;
+	int		tmp;
 	char	*dest;
 
 	j = 1;
 	i = ft_strlen(str) - 1;
-	dest = malloc(sizeof(char) * i + 1);
+	tmp = i;
+	dest = malloc(sizeof(char) * (i + 1));
 	dest[i] = '\0';
 	i = 0;
-	while (dest[i] != '\0')
+	while (i <= tmp)
 	{
 		dest[i] = str[j];
 		i++;

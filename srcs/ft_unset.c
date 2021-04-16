@@ -17,17 +17,16 @@ int		ft_unset(t_elem_cmd *actual)
 	int			ret;
 	t_elem_env	*tmp;
 
-	while (actual != NULL && actual->token != ARG)
+	if (actual != NULL && actual->next != NULL)
+		actual = actual->next;
+	while (actual != NULL && actual->token == ARG)
 	{
 		ret = ft_strlen(actual->cmd);
 		tmp = g_all.first_env;
 		while (tmp != NULL)
 		{
 			if ((ft_strncmp(tmp->env, actual->cmd, ret) == 0))
-			{
 				suppression_middle_env(tmp);
-				return (0);
-			}
 			tmp = tmp->next;
 		}
 		actual = actual->next;
