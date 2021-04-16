@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:30 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/15 18:31:50 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/16 19:35:19 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct			s_struct_all
 	int					cursor_x;
 	int					sep;
 	int					error;
+	char				*err_tmp;
 	t_elem_env			*cmd_lst;
 	t_elem_env			*first_env;
 	t_elem_cmd			*first_cmd;
@@ -180,8 +181,10 @@ void					inc_i_j(void);
 void					check_arrow2(int i, char *a);
 void					rm_del2(void);
 void					ctrl_d(char *a);
-void					ft_cd2(char *str, char *error, int tofree, char *path);
+int						ft_cd2(char *str, char *error, int tofree, char *path);
 void					print_error_export(char *str);
 void					modif_pwd(char *path);
+int						check_old(void);
+void					cd_free(int tofree, char *path, char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/04/15 18:24:14 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/16 19:35:05 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,21 +89,23 @@ int		ft_cd(char *path)
 	char	*str;
 
 	tofree = 0;
-	if (!path)
+	if (!path || path[0] == '~')
 	{
 		tofree = 1;
-		path = chrenv(ft_strdup("HOME"));
+		if (path && path[0] == '~')
+			path = ft_strjoin(chrenv(ft_strdup("HOME")), ft_strdup(&path[1]));
+		else
+			path = chrenv(ft_strdup("HOME"));
 	}
-	i = chdir(path);
+	if (ft_strcmp(path, "-") == 0)
+		i = check_old();
+	else
+		i = chdir(path);
+	if (i != 0)
+		g_all.err_tmp = strerror(errno);
 	if (!(str = getcwd(NULL, 0)) || i == -1)
-	{
-		ft_cd2(str, strerror(errno), tofree, path);
-		return (1);
-	}
+		return (ft_cd2(str, strerror(errno), tofree, path));
 	pwd_env();
-	if (tofree == 1)
-		free(path);
-	if (str)
-		free(str);
+	cd_free(tofree, path, str);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 15:34:23 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/16 16:49:51 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/16 17:12:46 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	aff_lst_cmd(void)
 	tmp = g_all.first_cmd;
 	while (tmp)
 	{
-		printf("tmp->env : |%s|\n", tmp->cmd);
+		printf("token : %d, tmp->env : |%s|\n", tmp->token, tmp->cmd);
 		tmp = tmp->next;
 	}
 }

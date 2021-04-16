@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils3.c                                           :+:      :+:    :+:   */
+/*   ft_utils3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 15:41:44 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/07 15:41:45 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/16 19:10:38 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void		ft_putstr_fd(char *s, int fd)
 		i++;
 	}
 	if (fd == 2)
-		write(2, COLOREND, ft_strlen(COLOREND));
+		write(2, COLORSTART, ft_strlen(COLORSTART));
 }
 
 void		ft_putstr(char *str)
