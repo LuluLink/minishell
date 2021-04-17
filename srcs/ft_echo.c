@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/04/13 16:55:50 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/17 16:13:54 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,8 @@ int			ft_echo(t_elem_cmd *actual)
 	while (actual != NULL && actual->token == ARG)
 	{
 		print_echo_arg(actual->cmd);
-		if (actual->next != NULL && actual->next->token == ARG &&
-		actual->cmd[0] != '\0' &&
-		actual->cmd[ft_strlen(actual->cmd) - 1] != ' ')
+		if (actual->next != NULL && actual->next->token == ARG && actual->cmd[0]
+		!= '\0' && actual->cmd[ft_strlen(actual->cmd) - 1] != ' ')
 			ft_putchar(' ');
 		actual = actual->next;
 	}
