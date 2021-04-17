@@ -26,7 +26,11 @@ int		ft_unset(t_elem_cmd *actual)
 		while (tmp != NULL)
 		{
 			if ((ft_strncmp(tmp->env, actual->cmd, ret) == 0))
+			{
 				suppression_middle_env(tmp);
+				ft_unset(actual);
+				return (0);
+			}
 			tmp = tmp->next;
 		}
 		actual = actual->next;
