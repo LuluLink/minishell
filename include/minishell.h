@@ -186,5 +186,6 @@ void					print_error_export(char *str);
 void					modif_pwd(char *path);
 int						check_old(void);
 void					cd_free(int tofree, char *path, char *str);
+void					change_token(void);
 
 #endif
