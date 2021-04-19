@@ -100,9 +100,7 @@ int			ft_echo(t_elem_cmd *actual)
 	while (actual != NULL && actual->token == ARG)
 	{
 		print_echo_arg(actual->cmd);
-		if (actual->next != NULL && actual->next->token == ARG && actual->cmd[0]
-		!= '\0' && actual->cmd[ft_strlen(actual->cmd) - 1] != ' ')
-			ft_putchar(' ');
+		print_space(actual);
 		actual = actual->next;
 	}
 	if (verif == 0)

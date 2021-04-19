@@ -39,7 +39,7 @@ char	*free_last(void)
 
 void	minishell_parsing(void)
 {
-	write(1, COLORSTART, ft_strlen(COLORSTART));
+	write(2, COLORSTART, ft_strlen(COLORSTART));
 	if (((verif_quote(g_all.buff) == 0)) &&
 		(verif_end_backslash(g_all.buff) == 0))
 		start_parsing();
@@ -47,7 +47,7 @@ void	minishell_parsing(void)
 		ft_putstr_fd("Error : quote not closed\n", 2);
 	else if ((verif_end_backslash(g_all.buff) == -1))
 		ft_putstr_fd("Error : multiligne with '\\' \n", 2);
-	write(1, NEWLINE, ft_strlen(NEWLINE));
+	write(2, NEWLINE, ft_strlen(NEWLINE));
 	free_list_cmd();
 }
 
@@ -58,7 +58,7 @@ int		main(int ac, char **av, char **envp)
 	initialisation_struct();
 	init_term();
 	init_liste_env(envp);
-	write(1, NEWLINE, ft_strlen(NEWLINE));
+	write(2, NEWLINE, ft_strlen(NEWLINE));
 	signal(SIGINT, ft_signal_hander_c);
 	signal(SIGQUIT, ft_signal_hander_backslash);
 	while (get_next_line(&g_all.buff) > 0)

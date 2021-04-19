@@ -64,7 +64,6 @@ void	quit_minishell(void)
 
 void	no_arg_exit(void)
 {
-	printf("exit\n");
 	ft_putstr_fd("argument numerique necessaire", 2);
 	g_all.exit_code = 2;
 	quit_minishell();

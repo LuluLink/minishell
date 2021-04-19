@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:30 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/19 17:30:13 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/19 17:36:22 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,5 +197,7 @@ void					initialisation_wild(char *str, int token);
 void					last_wc(t_elem_cmd *next);
 void					ft_list_sort(t_elem_cmd **begin_list, int (*cmp)());
 char					**ft_split_slash(char **str);
+void					change_token(void);
+void					print_space(t_elem_cmd *actual);
 
 #endif

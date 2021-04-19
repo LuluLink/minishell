@@ -107,5 +107,8 @@ void	start_parsing(void)
 	g_all.sep = 0;
 	check_wild();
 	if (ft_check_sep())
+	{
+		change_token();
 		ft_start_execution(g_all.first_cmd, pid);
+	}
 }
