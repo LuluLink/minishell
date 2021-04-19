@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:30 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/16 19:35:19 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/19 17:30:13 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct			s_struct_all
 	t_elem_env			*cmd_lst;
 	t_elem_env			*first_env;
 	t_elem_cmd			*first_cmd;
+	t_elem_cmd			*wildcard;
 }						t_struct_all;
 
 t_struct_all			g_all;
@@ -186,5 +187,15 @@ void					print_error_export(char *str);
 void					modif_pwd(char *path);
 int						check_old(void);
 void					cd_free(int tofree, char *path, char *str);
+void					is_wildcard(char *path);
+void					insertion_end_wild(char *str);
+int						is_asterix(char *str);
+void					ft_add_back(t_elem_cmd *tmp, t_elem_cmd *nouveau);
+void					aff_dir(char **mytab, char *str, char *name, int index);
+void					check_wild(void);
+void					initialisation_wild(char *str, int token);
+void					last_wc(t_elem_cmd *next);
+void					ft_list_sort(t_elem_cmd **begin_list, int (*cmp)());
+char					**ft_split_slash(char **str);
 
 #endif
