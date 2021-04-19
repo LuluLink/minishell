@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 16:56:39 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/19 17:34:44 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/19 17:44:53 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	check_wild(void)
 	t_elem_cmd	*next;
 
 	tmp = g_all.first_cmd;
+	if (!tmp)
+		return ;
 	prev = tmp;
 	next = tmp->next;
 	while (tmp && tmp->cmd)
