@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/04/15 18:35:26 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/17 16:08:09 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,19 @@ void	replace_env(int j)
 	i = (j == 0) ? 0 : i;
 	k = i++;
 	tmp = g_all.first_cmd;
-	while (k > 0 && tmp && tmp->next)
+	while (k-- > 0 && tmp && tmp->next)
 	{
 		while (tmp && tmp->token != SEMICOLON)
 			tmp = tmp->next;
 		if (tmp->token == SEMICOLON && tmp->next)
 			tmp = tmp->next;
-		k--;
 	}
 	while (tmp && tmp->token != SEMICOLON)
 	{
 		str = ft_strdup(tmp->cmd);
 		tmp->cmd = check_dollar(tmp->cmd);
-		if (ft_strcmp(str, tmp->cmd) != 0)
+		if (ft_strcmp(str, tmp->cmd) != 0 && tmp->cmd && tmp->cmd[0] != '\"' &&
+tmp->cmd[(ft_strlen(tmp->cmd) - 1 < 0) ? 0 : ft_strlen(tmp->cmd) - 1] != '\"')
 			check_multiple_words(tmp);
 		free(str);
 		tmp = tmp->next;
