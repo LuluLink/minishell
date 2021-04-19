@@ -29,7 +29,6 @@ void	check_multiple_words(t_elem_cmd *tmp)
 	int			i;
 
 	i = 0;
-
 	mytab = ft_split(tmp->cmd, ' ');
 	if (mytab && mytab[i])
 	{

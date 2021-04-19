@@ -187,5 +187,6 @@ void					modif_pwd(char *path);
 int						check_old(void);
 void					cd_free(int tofree, char *path, char *str);
 void					change_token(void);
+void					print_space(t_elem_cmd *actual);
 
 #endif

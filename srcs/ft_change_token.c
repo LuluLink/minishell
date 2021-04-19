@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../include/minishell.h"
 
 void	insert_after_null(t_elem_cmd *tocopy)
@@ -25,7 +24,8 @@ void	insert_after_null(t_elem_cmd *tocopy)
 	tocopy->token = CMD;
 }
 
-void	insert_after_cmd(t_elem_cmd *tocopy, t_elem_cmd *before, t_elem_cmd *after)
+void	insert_after_cmd(t_elem_cmd *tocopy, t_elem_cmd *before,
+t_elem_cmd *after)
 {
 	tocopy->next = after;
 	tocopy->prev = before;
@@ -33,7 +33,8 @@ void	insert_after_cmd(t_elem_cmd *tocopy, t_elem_cmd *before, t_elem_cmd *after)
 	after->prev = tocopy;
 }
 
-void	delete_arg(t_elem_cmd *todel, t_elem_cmd *after, t_elem_cmd *before)
+void	delete_arg(t_elem_cmd *todel, t_elem_cmd *after,
+t_elem_cmd *before)
 {
 	todel->next = NULL;
 	todel->prev = NULL;
@@ -76,7 +77,8 @@ void	change_token(void)
 	{
 		if (tmp->token != CMD && tmp->token != ARG)
 			prev_token = tmp->token;
-		if ((prev_token == RIGHT || prev_token == LEFT || prev_token == DOUBLERIGHT)
+		if ((prev_token == RIGHT || prev_token == LEFT ||
+		prev_token == DOUBLERIGHT)
 		&& tmp->token == ARG && tmp->prev != NULL && tmp->prev->token == ARG)
 			move_to_beginning(tmp);
 		tmp = tmp->next;
