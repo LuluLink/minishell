@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/04/15 14:40:16 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/19 17:51:35 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ char	*recurs(int index, int *ret, int fd)
 
 void	init_gnl(char **line)
 {
+	struct termios	term;
+
 	g_all.arrow = 1;
 	g_all.cursor = 0;
 	g_all.cursor_x = 3;
@@ -65,6 +67,9 @@ void	init_gnl(char **line)
 		*line = NULL;
 	insertion_end_lst("");
 	g_all.index = lst_len() - 1;
+	tcgetattr(0, &term);
+	term.c_lflag |= ~(ICANON);
+	tcsetattr(0, 0, &term);
 }
 
 void	end_gnl(char **line)
@@ -80,7 +85,8 @@ void	end_gnl(char **line)
 
 int		get_next_line(char **line)
 {
-	int ret;
+	int				ret;
+	struct termios	term;
 
 	ret = 1;
 	init_gnl(line);
@@ -99,5 +105,8 @@ int		get_next_line(char **line)
 			if_arrow(line);
 		}
 	end_gnl(line);
+	tcgetattr(0, &term);
+	term.c_lflag |= (ICANON);
+	tcsetattr(0, 0, &term);
 	return (ret);
 }

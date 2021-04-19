@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/04/19 17:41:51 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/19 17:46:47 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_term(void)
 	tgetent(NULL, getenv("TERM"));
 	setupterm(NULL, STDOUT_FILENO, NULL);
 	tcgetattr(0, &term);
-	term.c_lflag &= ~(ICANON);
+	term.c_lflag &= (ICANON);
 	term.c_cc[VMIN] = 1;
 	term.c_cc[VTIME] = 0;
 	tcsetattr(0, 0, &term);
