@@ -20,7 +20,7 @@ void	ft_signal_hander_c(int signal)
 		{
 			write(STDERR_FILENO, "\n", 1);
 			if (g_all.in_loop == 0)
-				write(1, NEWLINE, ft_strlen(NEWLINE));
+				write(2, NEWLINE, ft_strlen(NEWLINE));
 			g_all.ctrl_c = 1;
 		}
 	}
