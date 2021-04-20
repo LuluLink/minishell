@@ -6,9 +6,17 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:30 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/19 17:36:22 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/20 15:27:05 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef ENABLE_CANON
+# define ENABLE_CANON |
+#endif
+
+#ifndef DISABLE_CANON
+# define DISABLE_CANON &
+#endif
 
 #ifndef MINISHELL_H
 # define MINISHELL_H

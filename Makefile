@@ -8,12 +8,18 @@ HEAD = -I include/
 
 FLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
 
+MY_VAR = $(shell if [ `uname -s` = "Linux" ]; then echo "$(Linux)"; else echo "$(OTHER)"; fi)
+
 all: ${NAME}
 
 $(NAME):
 	@echo "Création de l'executable..."
-	@gcc $(FLAGS) $(HEAD) $(DIR)/$(SRCS) -o $(NAME) -lncurses
+	@gcc $(FLAGS) $(HEAD) ${MY_VAR} $(DIR)/$(SRCS) -o $(NAME) -lncurses
 	@echo "Compilation terminée !"
+
+LINUX = -D ENABLE_CANON=\|\= -D DISABLE_CANON=\&\=
+
+OTHER = -D ENABLE_CANON=\|\= -D DISABLE_CANON=\=
 
 clean:
 	@echo "Clean..."

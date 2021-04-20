@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/04/19 17:51:35 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/20 12:45:07 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	init_gnl(char **line)
 	insertion_end_lst("");
 	g_all.index = lst_len() - 1;
 	tcgetattr(0, &term);
-	term.c_lflag |= ~(ICANON);
+	term.c_lflag DISABLE_CANON ~(ICANON);
 	tcsetattr(0, 0, &term);
 }
 
@@ -106,7 +106,7 @@ int		get_next_line(char **line)
 		}
 	end_gnl(line);
 	tcgetattr(0, &term);
-	term.c_lflag |= (ICANON);
+	term.c_lflag ENABLE_CANON (ICANON);
 	tcsetattr(0, 0, &term);
 	return (ret);
 }
