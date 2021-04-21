@@ -95,6 +95,7 @@ typedef struct			s_struct_all
 	int					cursor_x;
 	int					sep;
 	int					error;
+	int					execute;
 	char				*err_tmp;
 	t_elem_env			*cmd_lst;
 	t_elem_env			*first_env;

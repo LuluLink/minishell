@@ -22,6 +22,7 @@ void	ft_signal_hander_c(int signal)
 			if (g_all.in_loop == 0)
 				write(2, NEWLINE, ft_strlen(NEWLINE));
 			g_all.ctrl_c = 1;
+			g_all.exit_code = 130;
 		}
 	}
 }
@@ -30,6 +31,7 @@ void	ft_signal_hander_backslash(int signal)
 {
 	if (signal == SIGQUIT)
 	{
-		write(STDERR_FILENO, "\b\b  ", 4);
+		if (g_all.execute == 0)
+			rm_del2();
 	}
 }
