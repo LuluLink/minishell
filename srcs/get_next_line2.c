@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 16:02:08 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/15 15:29:11 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/21 20:37:02 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	if_arrow(char **line)
 {
 	if (g_all.arrow == 3 || g_all.arrow == 4)
 		ft_supp(*line, ((g_all.arrow == 4) ? 2 : 1));
-	if (g_all.ctrl_d == 1 && !ft_strlen(*line))
+	if (g_all.ctrl_d == 1 && ft_strlen(*line) == 0)
 		quit_minishell();
 	else
 		g_all.ctrl_d = 0;
