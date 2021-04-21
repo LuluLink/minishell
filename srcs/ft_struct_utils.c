@@ -33,5 +33,6 @@ void	initialisation_struct(void)
 	g_all.cursor = 0;
 	g_all.ctrl_c = 0;
 	g_all.in_loop = 0;
+	g_all.execute = 0;
 	ft_aff_minishell();
 }

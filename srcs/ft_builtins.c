@@ -61,6 +61,7 @@ void	ft_execve(char *path, char **cmd, char **env)
 	int		status;
 
 	status = 0;
+	g_all.execute = 1;
 	pid = fork();
 	if (pid == 0)
 	{
@@ -72,6 +73,7 @@ void	ft_execve(char *path, char **cmd, char **env)
 	else if (pid > 0)
 		waitpid(pid, &status, 0);
 	g_all.exit_code = status / 256;
+	g_all.execute = 0;
 }
 
 void	ft_create_path(char *path, t_elem_cmd *lst, t_elem_cmd *tmp)
