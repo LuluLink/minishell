@@ -8,7 +8,7 @@ HEAD = -I include/
 
 FLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
 
-MY_VAR = $(shell if [ `uname -s` = "Linux" ]; then echo "$(Linux)"; else echo "$(OTHER)"; fi)
+MY_VAR = $(shell if [ `uname -s` = "Linux" ]; then echo "$(LINUX)"; else echo "$(OTHER)"; fi)
 
 all: ${NAME}
 
