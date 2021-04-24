@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 15:40:57 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/15 15:20:55 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/21 20:36:31 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	check_arrow(char *a)
 
 	if (a[0] == 127)
 		rm_del(a);
-	else if (a[0] == 4)
+	else if (a[0] == 4 || (g_all.ctrl_c == 1 && g_all.a == 4))
 		ctrl_d(a);
 	else if (i == 0 && a[0] == 27)
 	{
