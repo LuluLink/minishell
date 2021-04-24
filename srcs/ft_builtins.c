@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/04/15 16:06:35 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/24 14:47:54 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	ft_create_path(char *path, t_elem_cmd *lst, t_elem_cmd *tmp)
 	j = 0;
 	while (i-- > 0)
 	{
-		mytab[j++] = ft_strdup(lst->cmd);
+		mytab[j++] = char_without_quote(lst->cmd);
 		lst = lst->next;
 	}
 	mytab[j] = NULL;

@@ -17,9 +17,9 @@ $(NAME):
 	@gcc $(FLAGS) $(HEAD) ${MY_VAR} $(DIR)/$(SRCS) -o $(NAME) -lncurses
 	@echo "Compilation terminée !"
 
-LINUX = -D ENABLE_CANON=\|\= -D DISABLE_CANON=\&\=
+LINUX = -D ENABLE_CANON=1
 
-OTHER = -D ENABLE_CANON=\|\= -D DISABLE_CANON=\=
+OTHER = -D ENABLE_CANON=2
 
 clean:
 	@echo "Clean..."

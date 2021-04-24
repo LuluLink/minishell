@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/04/21 20:42:22 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/24 15:01:37 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,11 @@ int		verif_first_arg(t_elem_cmd *actual)
 
 void	quit_minishell(void)
 {
-	struct termios term;
-
 	free_list_cmd();
 	free_list_env();
 	free(g_all.buff);
 	printf("exit\n");
-	tcgetattr(0, &term);
-	term.c_lflag ENABLE_CANON (ICANON);
-	tcsetattr(0, 0, &term);
+	enable_canon();
 	exit(g_all.exit_code);
 }
 

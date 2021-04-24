@@ -6,7 +6,7 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/28 12:04:36 by pacorrei          #+#    #+#             */
-/*   Updated: 2021/04/15 16:06:39 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/24 14:47:07 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,17 @@ char	*check_cmd(t_elem_cmd *tmp)
 	free_double_char(files);
 	free(path);
 	return (NULL);
+}
+
+char	*char_without_quote(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] != '\'' && str[i] != '\"')
+		return (ft_strdup(str));
+	i = ft_strlen(str) - 2;
+	if (i <= 0)
+		return (ft_strdup(""));
+	return (ft_strndup(&str[1], i));
 }

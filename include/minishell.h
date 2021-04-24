@@ -6,20 +6,16 @@
 /*   By: macbookpro <macbookpro@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 18:05:30 by macbookpro        #+#    #+#             */
-/*   Updated: 2021/04/20 15:27:05 by macbookpro       ###   ########.fr       */
+/*   Updated: 2021/04/24 15:03:21 by macbookpro       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENABLE_CANON
-# define ENABLE_CANON |
-#endif
-
-#ifndef DISABLE_CANON
-# define DISABLE_CANON &
-#endif
-
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# ifndef ENABLE_CANON
+#  define ENABLE_CANON 1
+# endif
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -208,5 +204,8 @@ void					ft_list_sort(t_elem_cmd **begin_list, int (*cmp)());
 char					**ft_split_slash(char **str);
 void					change_token(void);
 void					print_space(t_elem_cmd *actual);
+char					*char_without_quote(char *str);
+void					enable_canon(void);
+void					disable_canon(void);
 
 #endif
