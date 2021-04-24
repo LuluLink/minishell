@@ -38,7 +38,8 @@ t_elem_cmd *before)
 {
 	todel->next = NULL;
 	todel->prev = NULL;
-	after->prev = before;
+	if (after != NULL)
+		after->prev = before;
 	before->next = after;
 }
 
